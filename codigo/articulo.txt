@@ -1,0 +1,8 @@
+<section>        
+    <div class="col-xs-12 col-sm-6 col-md-4">
+        <h2>Titulo del articulo</h2>
+        <figure></figure>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat distinctio illo rerum atque ducimus, laboriosam debitis eum deserunt ab libero quis voluptas, illum, perferendis numquam aut aliquam itaque qui magnam!</p>
+        <a href="" class="btn btn-success">Leer mas</a>
+    </div>       
+</section>

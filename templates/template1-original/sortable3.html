@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+  <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+  <script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+  <script type="text/javascript" src="http://www.pureexample.com/js/lib/jquery.ui.touch-punch.min.js"></script>
+
+  <!-- CSS -->
+<style type="text/css">
+.list {
+    background-color: lightblue;
+    border: 1px solid gray;
+}
+ 
+.items .ui-selected {
+    background: red;
+    color: white;
+    font-weight: bold;
+}
+ 
+.items {
+    list-style-type: none;
+    margin-left: 10px;
+    padding: 0;
+    width: 100px;
+    float: left;
+}
+ 
+.items li {
+    margin: 2px;
+    padding: 2px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+ 
+.g {
+    background-color: lightgreen;
+}
+ 
+.o {
+    background-color: orange;
+}
+ 
+.highlight {
+    border: 2px solid red;
+    font-weight: bold;
+}
+</style>
+ 
+ 
+<!-- Javascript -->
+<script>
+  $(function () {
+          $("#items1,#items2,#items3, .jumbotron,.row,.container, .jumbotron1,.row1,.container1").sortable({
+                  connectWith: "#items1,#items2,#items3, .jumbotron,.row,.container, .jumbotron1,.row1,.container1",
+                  start: function (event, ui) {
+                          ui.item.toggleClass("highlight");
+                  },
+                  stop: function (event, ui) {
+                          ui.item.toggleClass("highlight");
+                  }
+          });
+          $("#items1,#items2,#items3").disableSelection();
+  });
+</script>
+ 
+
+</head>
+<body>
+
+
+
+
+<object data="http://developer.mozilla.org/wiki-images/es/3/39/Firefoxlogo.png" 
+         usemap="#map1" type="image/png" 
+         width="135" height="155">
+
+   <map name="map1">
+     <area href="http://www.mozilla.com/firefox/" 
+       alt="El navegador" 
+       shape="rect" 
+       coords="0,0,60,155">
+
+     <area href="http://www.mozilla.com/thunderbird/" 
+       alt="El gestor de correo" 
+       shape="rect" 
+       coords="75,0,135,155">
+   </map>
+ </object>
+
+
+
+
+ 
+  <div class="container">
+    <div class="row">
+      <div class="jumbotron">
+        <h1 contenteditable="true">
+        Articulo destacado de la semana</h1>
+        <p contenteditable="true">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus dolorem ad officiis nihil delectus quidem animi rerum, molestias sint natus ducimus quod, unde molestiae dolores laboriosam error facilis odio doloremque.</p>
+        <p><a contenteditable="true" class="btn btn-primary btn-lg" role="button">Leer mas</a></p>
+      </div>
+    </div>
+  </div>
+
+
+<br><br><br><br>
+
+
+  <div class="container1">
+    <div class="row1">
+      <div class="jumbotron1">
+        <h1 contenteditable="true">
+        Articulo destacado de la semana</h1>
+        <p contenteditable="true">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus dolorem ad officiis nihil delectus quidem animi rerum, molestias sint natus ducimus quod, unde molestiae dolores laboriosam error facilis odio doloremque.</p>
+        <p><a contenteditable="true" class="btn btn-primary btn-lg" role="button">Leer mas</a></p>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- HTML -->
+  <ul id="items1" class="items">
+      <li class="list">Item 1-1</li>
+      <li class="list">Item 1-2</li>
+      <li class="list">Item 1-3</li>
+      <li class="list">Item 1-4</li>
+      <li class="list">Item 1-5</li>
+      <li class="list">Item 1-6</li>    
+  </ul>
+  <ul id="items2" class="items">
+      <li class="list g">Item 2-1</li>
+      <li class="list g">Item 2-2</li>
+      <li class="list g">Item 2-3</li>
+      <li class="list g">Item 2-4</li>
+      <li class="list g">Item 2-5</li>
+      <li class="list g">Item 2-6</li>    
+  </ul>
+  <ul id="items3" class="items">
+      <li class="list o">Item 3-1</li>
+      <li class="list o">Item 3-2</li>
+      <li class="list o">Item 3-3</li>
+      <li class="list o">Item 3-4</li>
+      <li class="list o">Item 3-5</li>
+      <li class="list o">Item 3-6</li>    
+  </ul>
+
+</body>
+</html>

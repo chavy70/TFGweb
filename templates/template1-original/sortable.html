@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Template 1</title>
+ 
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <style>
+      .seleccionado { border: 2px solid #F48024; position: relative; }
+      .eliminarElemento {color: red; font-size: 16px;position: absolute;right: 5px;top: 5px;cursor: pointer; }
+      .moverElemento { font-size: 16px;position: absolute;right: 22px;top: 5px;cursor: pointer; }
+      .segunda-seleccion {border: dotted 1px #286090;}
+
+
+
+      .nested_with_switch {
+    border: solid 1px;
+    padding: 10px;
+}
+.nested_with_switch div {
+    border: solid 1px cyan;
+}
+
+    </style>
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body id="cuerpo">
+ 
+
+
+
+<!-- Sortable ------------------------------------ -->
+ <div id="nested">
+          <h2>Toggable nested lists</h2>
+          <div class="row">
+            
+          
+            <div class="span4">
+              <div class="switch-container">
+                <div data-toggle="switch" data-on="ON" data-off="OFF" class="switch active"><span class="switch-track"></span><span class="switch-thumb" data-on="ON" data-off="OFF"></span></div>
+              </div>
+              <ol class="nested_with_switch vertical">
+                <li>
+                  Item 1
+                </li>
+                <li>
+                  Item 2
+                </li>
+                <li>
+                  Item 3
+                </li>
+                <li>
+                  Item 4
+                  <ol class="">
+                    <li>Item 3.1</li>
+                    <li class="">Item 3.1</li><li>Item 3.2</li>
+                    <li>Item 3.3</li>
+                    <li>Item 3.4</li>
+                    <li>Item 3.5</li>
+                    <li>Item 3.6</li>
+                  </ol>
+                </li>
+                <li>
+                  Item 5
+                </li>
+                <li>
+                  Item 6
+                </li>
+              </ol>
+            </div>
+            <div class="span4">
+              <div class="switch-container">
+                <div data-toggle="switch" data-on="ON" data-off="OFF" class="switch active"><span class="switch-track"></span><span class="switch-thumb" data-on="ON" data-off="OFF"></span></div>
+              </div>
+              
+              <div class="nested_with_switch vertical">
+                  <div>Hola 1</div>
+                  <div>Hola 2</div>
+                  <div>Hola 3</div>
+                  <div>Hola 4</div>
+              </div>
+
+              <ol class="nested_with_switch vertical">
+                <li>
+                  Item 1
+                </li>
+                <li>
+                  Item 2
+                </li>
+                <li>
+                  Item 3
+                </li>
+                <li>
+                  Item 4
+                  <ol class="">
+                    
+                    <li>Item 3.2</li>
+                    <li>Item 3.3</li>
+                    <li>Item 3.4</li>
+                    <li>Item 3.5</li>
+                    <li>Item 3.6</li>
+                  </ol>
+                </li>
+                <li>
+                  Item 5
+                </li>
+                <li>
+                  Item 6
+                </li>
+              </ol>
+
+
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+<div class="jumbotron movimiento ui-sortable segunda-seleccion seleccionado">
+                  
+                  <h1 contenteditable="true" class="" style="">
+                    
+                    Articulo destacado de la semana</h1><p contenteditable="true" class="">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus dolorem ad officiis nihil delectus quidem animi rerum, molestias sint natus ducimus quod, unde molestiae dolores laboriosam error facilis odio doloremque.</p>
+                  <p class=""><a contenteditable="true" role="button" class="btn btn-primary btn-lg">Leer mas</a></p>
+            </div>
+
+
+
+
+        
+<!-- Sortable end ------------------------------------ -->
+
+
+
+
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Utilizado para sortable y draggable -->
+    <script type="text/javascript" src="https://googledrive.com/host/0BygD_wcLS3rmSENDOURWVEZSZW8/jqueryui.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Javascript -->
+    <script src="../../js/jquery-sortable.js"></script>
+   
+
+
+
+
+
+    <script type="text/javascript">
+
+
+var oldContainer;
+/*$("ol.nested_with_switch").sortable({
+  group: 'nested',
+  afterMove: function (placeholder, container) {
+    if(oldContainer != container){
+      if(oldContainer)
+        oldContainer.el.removeClass("active");
+      container.el.addClass("active");
+
+      oldContainer = container;
+    }
+  },
+  onDrop: function ($item, container, _super) {
+    container.el.removeClass("active");
+    _super($item, container);
+  }
+});*/
+$(document).ready(function () {
+  $(".nested_with_switch").sortable({
+    group: 'cuerpo'
+  });
+  $('.seleccionado').sortable();
+  $(document).on('click', '.nested_with_switch', function(e) {
+
+    alert('Hola mundo');
+  });
+});
+/*$(".nested_with_switch").sortable({
+  group: 'nested',
+  afterMove: function (placeholder, container) {
+    if(oldContainer != container){
+      if(oldContainer)
+        oldContainer.el.removeClass("active");
+      container.el.addClass("active");
+
+      oldContainer = container;
+    }
+  },
+  onDrop: function ($item, container, _super) {
+    container.el.removeClass("active");
+    _super($item, container);
+  }
+});
+
+$(".switch-container").on("click", ".switch", function  (e) {
+  var method = $(this).hasClass("active") ? "enable" : "disable";
+  $(e.delegateTarget).next().sortable(method);
+});*/
+
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,9 @@
+http://demos.jquerymobile.com/1.4.5/popup/#&ui-state=dialog
+descargue y use de 
+http://www.jqueryscript.net/lightbox/Simple-jQuery-Plugin-for-Popup-Window.html
+
+Descargue realperson.js de
+http://keith-wood.name/realPerson.html
+
+Descargue el dashboard 
+https://github.com/bopoda/ace/tree/master/assets

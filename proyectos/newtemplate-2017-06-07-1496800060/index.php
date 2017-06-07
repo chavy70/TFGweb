@@ -85,7 +85,7 @@
 	  <menuitem label="Editar H" id="editarh" icon="../../img/MenuDerecho/editar.png"/></menuitem>
 	  <menuitem label="Color H" id="colorh" icon="../../img/MenuDerecho/color.png"/></menuitem>
 	  <menuitem label="Eliminar H" id="eliminarh" icon="../../img/MenuDerecho/eliminar.png"/></menuitem>
-	  <menuitem label="Propiedades H" id="propiedadesh" onclick="editarElemento();" icon="../../img/MenuDerecho/propiedades.png"/></menuitem>
+	  <menuitem label="Propiedades H" id="propiedadesh" onclick="alert(this); jQueryPopup('#propiedades').dialog();" icon="../../img/MenuDerecho/propiedades.png"/></menuitem>
 	</menu>
 
 </div>

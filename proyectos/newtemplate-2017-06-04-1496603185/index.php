@@ -85,7 +85,7 @@
 	  <menuitem label="Editar H" id="editarh" icon="../../img/MenuDerecho/editar.png"/></menuitem>
 	  <menuitem label="Color H" id="colorh" icon="../../img/MenuDerecho/color.png"/></menuitem>
 	  <menuitem label="Eliminar H" id="eliminarh" icon="../../img/MenuDerecho/eliminar.png"/></menuitem>
-	  <menuitem label="Propiedades H" id="propiedadesh" onclick="editarElemento();" icon="../../img/MenuDerecho/propiedades.png"/></menuitem>
+	  <menuitem label="Propiedades H" id="propiedadesh" onclick="jQueryPopup('#propiedades').dialog();" icon="../../img/MenuDerecho/propiedades.png"/></menuitem>
 	</menu>
 
 </div>
@@ -102,15 +102,10 @@
         <div id="propiedades" style="font-size: 80%;" title="Titulo">
             <div class="formPopUp">
                 Eventos
-
-
-                <div class="row">
-  <div class="col-md-12">
-  		<select id='ddlEvento'>
-                	<option value="selecciona">Selecciona el evento</option>
+                <select id='ddlEvento'>
 					<option value="blur">blur()</option>
 					<option value="change">change()</option>
-					<option value="click">click()</option>
+					<option value="Click">click()</option>
 					<option value="fadeIn">fadeIn()</option>
 					<option value="faceOut">fadeOut()</option>
 					<option value="focus">focus()</option>
@@ -123,15 +118,7 @@
 					<option value="dialog">dialog()</option>
 					<option value="validate">validate()</option>
 				</select>
-  </div>
-  <div class="col-md-12">
-  	<textarea id='txtCodigo'></textarea>
-  </div>
-</div>
-
-
-                
-				
+				<textarea id='txtCodigo'></textarea>
             </div>
         </div>
     </div>

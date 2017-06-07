@@ -16,6 +16,24 @@ jQueryPopup(document).ready(function () {
 	DraggEdit();
 	//jQueryPopup("#confirmEliminar").dialog();
 	editarElemento(1, 'Hola');
+
+
+
+	// Evento que carga el campo con los eventos seleccionados
+	$('select[id*=ddlEvento]').on('change', function() {
+	  	var eventoTexto = this.value;
+	  	//
+	  	//Códigos de los eventos
+	  	var blurCode = "$('#"+idElementoSeleccionado+"').blur(function(){ \n\n\n\n});"
+	  	switch (eventoTexto) {
+		    case 'blur':
+		    	$('textarea[id*=txtCodigo]').text(blurCode);
+		    case 'change':
+
+		    case 'click':
+
+		}
+	})
 });
 
 
@@ -71,7 +89,7 @@ return '&lt;li&gt;' + jQueryPopup('&lt;div /&gt;').text(jQueryPopup(this).text()
             idOrigen = ui.sender.attr("id")
         },
         stop: function(event, ui) {
-        	//alert('3')
+        	alert('3 idOrigen '+idOrigen)
         	//Según sea el elemento seleccionado, aqui se asigna el codigo de dicho elemento y se agrega a la página con su respectivo id
     		switch(idOrigen) {
 			    case 'h1':
@@ -181,18 +199,17 @@ return '&lt;li&gt;' + jQueryPopup('&lt;div /&gt;').text(jQueryPopup(this).text()
 
 
 //jQueryPopup('div').mousedown(function(event) {
+//FUNCIONA
 jQueryPopup(document).on("mousedown",".draggable-box",function(event){
     switch (event.which) {
-        case 1:
+        case 1: // Boton izquierdo
             //alert('Left mouse button pressed');
             jQueryPopup("[contenteditable]",this).focus();
 			jQueryPopup('#'+event.target.id).attr('contenteditable','true'); 
 			jQueryPopup("h1, h2, h3, h4, h5, h6, div, p, ol li, ul li, blockquote, sup, sub,i,u,a,strong, img, map").removeClass("seleccionado");//Sacar todas las clases select antes de asignar el nuevo elemento seleccionado
 			jQueryPopup("h1.editable, h2.editable, h3.editable, h4.editable, h5.editable, h6.editable, div.editable, p.editable, ol.editable, ul.editable, blockquote.editable, sup.editable, sub.editable,i.editable,u.editable,a.editable,strong.editable, img.editable, map.editable").removeAttr("contentEditable");//agregar todos los elementos
 			jQueryPopup('#'+event.target.id).attr('contenteditable','true');//esto no funca
-			/*
-			jQueryPopup('#'+event.target.id+' li').attr('contenteditable','true');//esto no funca
-			jQueryPopup('#'+event.target.id+' li').attr('contenteditable','true');//esto no funca*/
+			
 
 			jQueryPopup('#'+event.target.id).addClass("seleccionado");
 			//alert('holaaa '+event.target.id)
@@ -200,19 +217,41 @@ jQueryPopup(document).on("mousedown",".draggable-box",function(event){
 			jQueryPopup('#'+event.target.id).click(document.execCommand('selectAll',false,null));
 
 			idElemento = event.target.id;
-
 			//document.getElementById(idElemento).click(document.execCommand('selectAll',false,null));
             break;
-        case 2:
-            alert('Middle mouse button pressed');
+        case 2: // Boton del medio
+
             break;
-        case 3:
-            //alert('Right mouse button pressed');
+        case 3: // Boton Derecho
+        	idElementoSeleccionado = event.target.id; // Elemento seleccionado
             break;
         default:
             alert('You have a strange mouse');
+
     }
 });
+
+
+/*$(document).on("click",".draggable-box",function(event){//Fuciona con doble click
+	//$(document).on("dblclick",".draggable-box",function(event){//Fuciona con doble click
+		$("[contenteditable]",this).focus();
+		$('#'+event.target.id).attr('contenteditable','true');
+		$("h1, h2, h3, h4, h5, h6, div").removeClass("seleccionado");//Sacar todas las clases select antes de asignar el nuevo elemento seleccionado
+		$("h1.editable, h2.editable, h3.editable, h4.editable, h5.editable, h6.editable, div.editable").removeAttr("contentEditable");//agregar todos los elementos
+		$('#'+event.target.id).attr('contenteditable','true');//esto no funca
+		$('#'+event.target.id).addClass("seleccionado");
+		//alert('holaaa '+event.target.id)
+		//Agrego un evento onclick que afecta solo al id seleccionado actualmente, esto permite seleccionar todo el texto con doble click
+		$('#'+event.target.id).click(document.execCommand('selectAll',false,null));
+		idElemento = event.target.id;
+	})
+
+	$('#'+idElemento).click(document.execCommand('selectAll',false,null));*/
+
+
+
+
+
 
 	/*jQueryPopup(document).on("click",".draggable-box",function(event){//Fuciona con doble click
 	//jQueryPopup(document).on("dblclick",".draggable-box",function(event){//Fuciona con doble click
@@ -240,9 +279,9 @@ jQueryPopup(document).on("mousedown",".draggable-box",function(event){
  /*
   * Función que edita contenido del elemento
   */
-  function editarElemento(idElemento, titulo){
+  function editarElemento(titulo){
   	//jQueryPopup("#confirmEliminar").dialog();
-
+  	titulo = 'Editar Eventos para '+idElementoSeleccionado
   	jQueryPopup("div[id*=propiedades]").dialog({
         bgiframe: true,
         resizable: false,

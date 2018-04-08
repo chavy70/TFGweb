@@ -188,6 +188,85 @@
 				</div>
 			</div>
 		</section>
+		<!-- REGISTRO Y LOGIN -->
+		<!-- https://bootsnipp.com/snippets/80gpb -->
+		<!-- https://bootsnipp.com/license -->
+		<section id="registro">
+			<div class="container">
+		    	<div class="row">
+					<div class="col-md-6 col-md-offset-3">
+						<div class="panel panel-login">
+							<div class="panel-heading">
+								<div class="row">
+									<div class="col-xs-6">
+										<a href="#" class="active" id="login-form-link">Iniciar sesión</a>
+									</div>
+									<div class="col-xs-6">
+										<a href="#" id="register-form-link">Regístrate ahora</a>
+									</div>
+								</div>
+								<hr>
+							</div>
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-lg-12">
+										<form id="login-form" action="http://phpoll.com/login/process" method="post" role="form" style="display: block;">
+											<div class="form-group">
+												<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Usuario" value="">
+											</div>
+											<div class="form-group">
+												<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Contraseña">
+											</div>
+											<div class="form-group text-center">
+												<input type="checkbox" tabindex="3" class="" name="remember" id="remember">
+												<label for="remember"> Recordarme</label>
+											</div>
+											<div class="form-group">
+												<div class="row">
+													<div class="col-sm-6 col-sm-offset-3">
+														<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Iniciar sesión">
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<div class="row">
+													<div class="col-lg-12">
+														<div class="text-center">
+															<a href="http://phpoll.com/recover" tabindex="5" class="forgot-password">¿Has olvidado tu contraseña?</a>
+														</div>
+													</div>
+												</div>
+											</div>
+										</form>
+										<form id="register-form" action="http://phpoll.com/register/process" method="post" role="form" style="display: none;">
+											<div class="form-group">
+												<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Usuario" value="">
+											</div>
+											<div class="form-group">
+												<input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Correo electronico" value="">
+											</div>
+											<div class="form-group">
+												<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Contraseña">
+											</div>
+											<div class="form-group">
+												<input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirmar contraseña">
+											</div>
+											<div class="form-group">
+												<div class="row">
+													<div class="col-sm-6 col-sm-offset-3">
+														<input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Crear cuenta">
+													</div>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+	</div>
+		</section>
 
 		
 		<footer>
@@ -201,10 +280,10 @@
 					</div>
 					<div class="col-md-7">
 						<ul class="footer-nav">
-							<li><a href="#acercaDe">Acerca de</a></li>
+							<li><a href="#about">Acerca de</a></li>
 							<li><a href="#caracteristicas">Caracter&iacute;sticas</a></li>
 							<li><a href="#galeria">Galer&iacute;a</a></li>
-							<li><a href="#descarga">Descargar</a></li>
+							<li><a href="#registro">Registro</a></li>
 						</ul>
 					</div>
 				</div>
@@ -213,12 +292,12 @@
 		<div class="overlay overlay-boxify">
 			<nav>
 				<ul>
-					<li><a href="#acercaDe"><i class="fa fa-heart"></i>Acerca de</a></li>
+					<li><a href="#about"><i class="fa fa-heart"></i>Acerca de</a></li>
 					<li><a href="#caracteristicas"><i class="fa fa-flash"></i>Caracter&iacute;sticas</a></li>
 				</ul>
 				<ul>
 					<li><a href="#galeria"><i class="fa fa-desktop"></i>Galer&iacute;a</a></li>
-					<li><a href="#descarga"><i class="fa fa-download"></i>Descargar</a></li>
+					<li><a href="#registro"><i class="fa fa-download"></i>Registro</a></li>
 				</ul>
 			</nav>
 		</div>
@@ -243,156 +322,3 @@
 		</script>
 	</body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-			<div class="blog-left">
-
-				<div class="blog-left-title">
-
-					<?php the_title(); ?>
-
-				</div>
-				<!--/.blog-left-title-->
-
-
-
-				<?php
-
-
-
-				$args = array(
-
-					'post_type'  => 'post',
-					'pagination' => true,
-					'paged'      => $paged,
-
-				);
-
-
-				$wp_query = new WP_Query( $args );
-
-
-				if ( $wp_query->have_posts() ) {
-
-					while ( $wp_query->have_posts() ) {
-
-						$wp_query->the_post();
-
-						$featured_image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' ); ?>
-
-
-
-						<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-
-							<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" class="post-title">
-
-								<?php the_title(); ?>
-
-							</a><!--/.post-title-->
-
-							<div class="post-meta">
-
-								<?php _e( 'Posted by', 'constructzine-lite' ); ?> <?php the_author_posts_link(); ?> <?php _e( 'in', 'constructzine-lite' ); ?> <?php the_category( ', ' ); ?>
-								, <?php _e( 'on', 'constructzine-lite' ); ?> <?php echo the_time( get_option( 'date_format' ) ); ?>
-
-							</div>
-							<!--/.post-meta-->
-
-							<div class="post-image">
-
-								<?php
-
-								if ( $featured_image != null ) {
-									?>
-
-									<img src="<?php echo $featured_image[0]; ?>" alt="<?php the_title(); ?>"
-									     title="<?php the_title(); ?>"/>
-
-								<?php
-								}
-
-								?>
-
-							</div>
-							<!--/.post-image-->
-
-							<div class="post-entry">
-
-								<?php the_excerpt(); ?>
-
-							</div>
-							<!--/.post-entry-->
-
-							<div class="post-footer">
-
-								<ul>
-
-									<li class="comments-icon">
-
-										<a href="<?php the_permalink(); ?>#comments"
-										   title="<?php comments_number( 'No Comments', 'One Comment', '% Comments' ); ?>">
-
-											<?php comments_number( 'No Comments', 'One Comment', '% Comments' ); ?>
-
-										</a>
-
-									</li>
-
-									<li><a href="<?php the_permalink(); ?>"
-									       title="<?php _e( 'Read more...', 'constructzine-lite' ); ?>"><?php _e( 'Read more...', 'constructzine-lite' ); ?></a>
-									</li>
-
-								</ul>
-
-							</div>
-							<!--/.post-footer-->
-
-						</article><!--/article-->
-
-
-
-					<?php
-					}
-
-				} else {
-
-					echo __( 'No posts found', 'constructzine-lite' );
-
-				}
-
-				wp_reset_postdata();
-
-				?>
-
-
-
-				<?php
-
-
-				ti_constructzine_pagination();
-
-
-
-				?>
-
-			</div>
-			<!--/.blog-left-->

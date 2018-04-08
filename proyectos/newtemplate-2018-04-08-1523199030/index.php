@@ -9,7 +9,7 @@
 		<!-- CSS Personal -->
 		<link rel="stylesheet" href="css/styles.css" >
 		<!-- Jquery JS -->
-		<!-- <script src="js/jquery-3.2.1.js" ></script> -->
+		<script src="js/jquery-3.2.1.js" ></script>
 		<!-- Bootstrap JS -->
 		<script src="js/bootstrap.js" ></script>	
 

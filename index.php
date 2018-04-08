@@ -8,8 +8,8 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		
-		<link rel="stylesheet/less" href="css/styles.less" type="text/css">
-        <script src="js/less.min.js"></script>
+		<!-- <link rel="stylesheet/less" href="css/styles.less" type="text/css">
+        <script src="js/less.min.js"></script> -->
 
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Generador de c&oacute;digo para desarrollo de P&aacute;ginas Web</title>
@@ -18,6 +18,7 @@
 		<meta name="author" content="Gabriela Paredes" />
 		<!-- Bootstrap -->
 		<script src="js/modernizr.custom.js"></script>
+
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/jquery.fancybox.css" rel="stylesheet">
 		<link href="css/flickity.css" rel="stylesheet" >
@@ -42,8 +43,38 @@
 		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
+
+<!-- Libreria jQuery principal -->
+<script src="js/jquery-1.4.1.min.js" ></script>
+<!-- Funciones utilizadas en la web -->
+<script src="js/herramienta/funciones.js"></script>
+
+
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+	$(document).ready(function () {
+
+});
+</script>
+
+
+
+
 	</head>
 	<body>
+
+
+			<!-- https://inspirationalpixels.com/tutorials/custom-popup-modal#step-html -->
+<?php 
+include("popUps/registro-login.php");
+?> 
+
+
+
+
+
 		<!--[if lt IE 7]>
 		<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 		<![endif]-->
@@ -68,6 +99,10 @@
 					</div>
 				</div>
 			</section>
+
+
+
+
 		</header>
 		<section class="video" id="about">
 			<div class="container">
@@ -188,85 +223,7 @@
 				</div>
 			</div>
 		</section>
-		<!-- REGISTRO Y LOGIN -->
-		<!-- https://bootsnipp.com/snippets/80gpb -->
-		<!-- https://bootsnipp.com/license -->
-		<section id="registro">
-			<div class="container">
-		    	<div class="row">
-					<div class="col-md-6 col-md-offset-3">
-						<div class="panel panel-login">
-							<div class="panel-heading">
-								<div class="row">
-									<div class="col-xs-6">
-										<a href="#" class="active" id="login-form-link">Iniciar sesión</a>
-									</div>
-									<div class="col-xs-6">
-										<a href="#" id="register-form-link">Regístrate ahora</a>
-									</div>
-								</div>
-								<hr>
-							</div>
-							<div class="panel-body">
-								<div class="row">
-									<div class="col-lg-12">
-										<form id="login-form" action="http://phpoll.com/login/process" method="post" role="form" style="display: block;">
-											<div class="form-group">
-												<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Usuario" value="">
-											</div>
-											<div class="form-group">
-												<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Contraseña">
-											</div>
-											<div class="form-group text-center">
-												<input type="checkbox" tabindex="3" class="" name="remember" id="remember">
-												<label for="remember"> Recordarme</label>
-											</div>
-											<div class="form-group">
-												<div class="row">
-													<div class="col-sm-6 col-sm-offset-3">
-														<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Iniciar sesión">
-													</div>
-												</div>
-											</div>
-											<div class="form-group">
-												<div class="row">
-													<div class="col-lg-12">
-														<div class="text-center">
-															<a href="http://phpoll.com/recover" tabindex="5" class="forgot-password">¿Has olvidado tu contraseña?</a>
-														</div>
-													</div>
-												</div>
-											</div>
-										</form>
-										<form id="register-form" action="http://phpoll.com/register/process" method="post" role="form" style="display: none;">
-											<div class="form-group">
-												<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Usuario" value="">
-											</div>
-											<div class="form-group">
-												<input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Correo electronico" value="">
-											</div>
-											<div class="form-group">
-												<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Contraseña">
-											</div>
-											<div class="form-group">
-												<input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirmar contraseña">
-											</div>
-											<div class="form-group">
-												<div class="row">
-													<div class="col-sm-6 col-sm-offset-3">
-														<input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Crear cuenta">
-													</div>
-												</div>
-											</div>
-										</form>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-	</div>
-		</section>
+		
 
 		
 		<footer>
@@ -307,7 +264,7 @@
 		<script src="js/flickity.pkgd.min.js"></script>
 		<script src="js/jquery.fancybox.pack.js"></script>
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
-		<script src="js/retina.js"></script>
+		<!-- <script src="js/retina.js"></script> -->
 		<script src="js/waypoints.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/min/scripts-min.js"></script>
@@ -320,5 +277,24 @@
 		r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
 		ga('create','UA-XXXXX-X');ga('send','pageview');
 		</script>
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
 	</body>
 </html>

@@ -9,31 +9,73 @@ var idH3 = 0;
 var idH4 = 0;
 var idH5 = 0;
 var idH6 = 0;
-var idP = 0;
+var idP  = 0;
+var eventoTexto = ""; 
+var idElementoSeleccionado = 0;
 var jQueryPopup = jQuery.noConflict();
 jQueryPopup(document).ready(function () {
+	ocultarSolapas();
+	$('#cpestana1').css("display", "inline");
+	$('#cpestana1').addClass("dest");
+	//Cambiar el tamanho del panel principal segun el panel de herramienta
+	var NombreClass = jQueryPopup('#sidebar-collapse .ace-icon').attr('class').split(' ')[2];
+		if(NombreClass == 'fa-angle-double-left'){
+			jQueryPopup('.panel-der').width('88%');
+		}
+		if(NombreClass == 'fa-angle-double-right'){
+			jQueryPopup('.panel-der').width('80%');
+		}
+	jQueryPopup(".ace-icon").click(function() { // Boton de desplegar
+		var NombreClass = jQueryPopup('#sidebar-collapse .ace-icon').attr('class').split(' ')[2];
+		if(NombreClass == 'fa-angle-double-left'){
+			jQueryPopup('.panel-der').width('88%');
+		}
+		if(NombreClass == 'fa-angle-double-right'){
+			jQueryPopup('.panel-der').width('80%');
+		}
+	});
+
+	$('.textoCod textarea').css('display', 'none');
 	//Llama a la funcion que se encarga de la edicion/dragg/drop de elementos dentro de la página
 	DraggEdit();
-	//jQueryPopup("#confirmEliminar").dialog();
-	editarElemento(1, 'Hola');
-
-
-
 	// Evento que carga el campo con los eventos seleccionados
 	$('select[id*=ddlEvento]').on('change', function() {
-	  	var eventoTexto = this.value;
-	  	//
-	  	//Códigos de los eventos
-	  	var blurCode = "$('#"+idElementoSeleccionado+"').blur(function(){ \n\n\n\n});"
-	  	switch (eventoTexto) {
-		    case 'blur':
-		    	$('textarea[id*=txtCodigo]').text(blurCode);
-		    case 'change':
-
-		    case 'click':
-
-		}
+	  	eventoTexto = this.value;
+	  	//alert('eventoTexto '+eventoTexto)
+	  	$('.textoCod textarea').css('display', 'none');
+	  	$('textarea[id*=txtCodigo'+eventoTexto+']').css('display', 'inline');
+	  	/* 
+		fadeInCode
+		fadeOutCode
+		animateCode
+		dialogCode
+		validateCode
+		datatablesCode
+	  	*/
+	  	if ($('textarea[id*=txtCodigo'+eventoTexto+']').val() == ""){
+		  	//Códigos de los eventos
+		  	var blurCode = "$('#"+idElementoSeleccionado+"')."+eventoTexto+"(function(){ \n\n\n\n});"
+		  	$('textarea[id*=txtCodigo'+eventoTexto+']').val(blurCode);
+	  	}
 	})
+
+	//Evento que controla cuando el user presiona la tecla '.' (Punto)
+	jQueryPopup('textarea[id*=txtCodigo'+eventoTexto+']').on('keydown', function(event) {//.keydown(function( event ) {
+		if(event.which == 190){ // Si el user presiona la tecla '.' (punto)
+			//alert('desplegar los eventos')
+			selectSubEvento("Selecciona el Sub-Evento");
+		}		
+	});
+
+	
+	//DESCOMENTAR
+	/*$('#selMulSubEvent').on('change', function (e) {
+	    var optionSelected = $("option:selected", this);
+	    var valueSelected = this.value;
+	    alert(valueSelected);
+	    //jQueryPopup('#eventosPunto').dialog('destroy');
+	});*/
+
 });
 
 
@@ -79,7 +121,9 @@ return '&lt;li&gt;' + jQueryPopup('&lt;div /&gt;').text(jQueryPopup(this).text()
  	var idOrigen;
  	var idElemento;
  	//Contenedor destino donde serán soltadas los elementos
- 	jQueryPopup('.dest').sortable({
+ 	jQueryPopup('.dest').sortable({ // ESTE FUNCIONA
+ 	//jQueryPopup(document).on("sortable",".dest",function(event){
+ 	//$(document).on("click",".draggable-box",function(event){
 	    revert: true,
 	    //http://jsfiddle.net/yeyene/7fEQs/8/
 	    receive: function(event, ui) {
@@ -87,13 +131,17 @@ return '&lt;li&gt;' + jQueryPopup('&lt;div /&gt;').text(jQueryPopup(this).text()
             //Obtendo el id de item del menu seleccionado, que indica que elemento se selecciono
             var widget = jQueryPopup(this).attr("id");
             idOrigen = ui.sender.attr("id")
+            classOrigen = ui.sender.attr("class")
+            //alert('2 idOrigen '+idOrigen+' classOrigen '+classOrigen)
         },
         stop: function(event, ui) {
-        	alert('3 idOrigen '+idOrigen)
+        	alert('1 idOrigen '+idOrigen+' classOrigen '+classOrigen)
+        	//alert('3 idOrigen '+idOrigen)
         	//Según sea el elemento seleccionado, aqui se asigna el codigo de dicho elemento y se agrega a la página con su respectivo id
     		switch(idOrigen) {
 			    case 'h1':
 			    	idH1++;
+			    	//alert("holaa!")
 			        //ui.item.replaceWith("<h1 class='editable' id='id1' onclick='document.execCommand(\"selectAll\",false,null)'>Inserte texto H1</h1>");
 			        ui.item.replaceWith("<h1 class='editable' contextmenu='hnMenu' id='h1-"+idH1+"'>Inserte texto H1</h1>");
 			        break;
@@ -209,13 +257,10 @@ jQueryPopup(document).on("mousedown",".draggable-box",function(event){
 			jQueryPopup("h1, h2, h3, h4, h5, h6, div, p, ol li, ul li, blockquote, sup, sub,i,u,a,strong, img, map").removeClass("seleccionado");//Sacar todas las clases select antes de asignar el nuevo elemento seleccionado
 			jQueryPopup("h1.editable, h2.editable, h3.editable, h4.editable, h5.editable, h6.editable, div.editable, p.editable, ol.editable, ul.editable, blockquote.editable, sup.editable, sub.editable,i.editable,u.editable,a.editable,strong.editable, img.editable, map.editable").removeAttr("contentEditable");//agregar todos los elementos
 			jQueryPopup('#'+event.target.id).attr('contenteditable','true');//esto no funca
-			
-
 			jQueryPopup('#'+event.target.id).addClass("seleccionado");
 			//alert('holaaa '+event.target.id)
 			//Agrego un evento onclick que afecta solo al id seleccionado actualmente, esto permite seleccionar todo el texto con doble click
 			jQueryPopup('#'+event.target.id).click(document.execCommand('selectAll',false,null));
-
 			idElemento = event.target.id;
 			//document.getElementById(idElemento).click(document.execCommand('selectAll',false,null));
             break;
@@ -281,14 +326,14 @@ jQueryPopup(document).on("mousedown",".draggable-box",function(event){
   */
   function editarElemento(titulo){
   	//jQueryPopup("#confirmEliminar").dialog();
-  	titulo = 'Editar Eventos para '+idElementoSeleccionado
+  	titulo = 'Editar Eventos para '
   	jQueryPopup("div[id*=propiedades]").dialog({
         bgiframe: true,
         resizable: false,
         modal: true,
         hide: true,
         title: titulo,
-        width: "80%",
+        //width: "40% px",
         //height:"500px",
         overlay: {
             backgroundColor: '#000',
@@ -304,8 +349,123 @@ jQueryPopup(document).on("mousedown",".draggable-box",function(event){
         }
     });
     return false;
-
   }
+
+ /* 
+  * Función que selecciona el sub-evento
+  */
+  function selectSubEvento(titulo){
+  	titulo = 'Editar Eventos para '
+  	jQueryPopup("div[id*=eventosPunto]").dialog({
+        bgiframe: true,
+        resizable: false,
+        modal: true,
+        hide: true,
+        title: titulo,
+        //width: "40% px",
+        //height:"500px",
+        overlay: {
+            backgroundColor: '#000',
+            opacity: 0.5
+        },
+        buttons: {
+            /*Aceptar: function () {
+                $(this).dialog('close');
+            }*/
+        },
+        close: function () {
+            jQueryPopup(this).dialog('destroy');
+        }
+    });
+    return false;
+  }
+
+/*
+ * Guarda los cambios del archivo editado actualmente
+ */
+function guardarCambios(codigoEditado){
+	var cabecera = "<!DOCTYPE html>\n"+"<html lang=\"es\">\n"+"<head><body>"
+	var footer = "</head>\n"+"<body>"
+	var codigoHTML = cabecera+codigoEditado+footer
+	var datos = {
+            "codigoHTML" : codigoHTML,
+            "codigoHTML" : nombreArchivo
+    }
+    //Utilizo ajax para llamar a la funcion PHP copiar template
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        url: 'http://localhost/TFGweb/funciones/GuardarCambios.php',
+        data: datos,
+        success: function (data) {
+        //success: function () {
+            //window.location = '/PRUEBA/proyectos/'+data[1].toString()+'/';
+            //window.location = '/TFGWeb/proyectos/'+data[1].toString()+'/';
+        }
+    });
+}
+
+/*
+ * Genera un archivo .RAR
+ */
+function generaRAR(){
+	var datos = {
+            //"archivozip" : "img2"
+            "archivozip" : "../RAR"
+    }
+    //alert("111");
+    //Utilizo ajax para llamar a la funcion PHP copiar template
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        url: 'http://localhost/TFGweb/funciones/RAR/generarZip.php',
+        data: datos,
+        success: function (data) {
+        //success: function () {
+            //window.location = '/PRUEBA/proyectos/'+data[1].toString()+'/';
+            //window.location = '/TFGWeb/proyectos/'+data[1].toString()+'/';
+        }
+    });
+}
+
+/*
+ * Genera un archivo .RAR
+ */
+function seleccionarSolatas(idPestana){
+	$('.pestanasCode').css("display", "none");
+	$('.pestanasCode').removeClass("dest");	
+	$('#'+idPestana).css("display", "inline");
+	$('#'+idPestana).addClass("dest");
+}
+
+/*
+ * Cambia las solapas en modo invisible
+ */
+ function ocultarSolapas(){
+ 	$('.pestanasCode').css("display", "none");
+	$('.pestanasCode').removeClass("dest");
+ }
+
+/*
+ * Genera nueva pagina
+ */
+function nuevaPagina(){	
+	cont = 0;
+	$("#pestanas #lista li").each(function(){
+		cont = cont + 1;
+	});
+	cont = cont + 1;
+	var nuevoIdPestanha = 'pestana'+cont;
+	var contenidoPest = 'cpestana'+cont;
+	var titSol = 'titSol'+cont;
+
+	pestanaCode = "<li id='"+nuevoIdPestanha+"'><a id='"+titSol+"' onclick='seleccionarSolatas(\""+contenidoPest+"\", 'Nuevo.html');' >Nuevo.html</a></li>";
+	contenidoPest = "<div class='pestanasCode draggable-box wdraggable-box ui-sortable' id='"+contenidoPest+"'> Nueva pagina </div>"
+	$("#lista").append(pestanaCode);
+	$("#contenidopestanas").append(contenidoPest);
+}
 /*
 $( "#dialog" ).dialog({
   dialogClass: "no-close",

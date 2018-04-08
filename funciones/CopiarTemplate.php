@@ -29,7 +29,9 @@
         $archivo_completo=$carpeta_habilitar.'/index.php';
         //El file_put_contents de abajo no funciona por temas de permisos
         //file_put_contents($archivo_completo,str_replace("<head>","<head>\n<script src=\"http://code.jquery.com/jquery-1.9.1.js\"></script>",file_get_contents($archivo_completo)));
-        file_put_contents('d:/index.php',str_replace("<head>","<head>\n<script src=\"http://code.jquery.com/jquery-1.9.1.js\"></script>",file_get_contents('d:/index.php')));
+
+
+        //file_put_contents('d:/index.php',str_replace("<head>","<head>\n<script src=\"http://code.jquery.com/jquery-1.9.1.js\"></script>",file_get_contents('d:/index.php')));
     }
 
     /**

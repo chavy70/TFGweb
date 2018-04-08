@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>jQuery Popup Overlay</title>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.js" ></script>        
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" ></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-1.8.2.min.js"></script>
+
+    <!-- jQuery Popup Overlay -->
+    <script src="jquery.popupoverlay.js"></script>
+
+    
+</head>
+<body>
+
+<div class="ssscontainer">
+    <section class="col-md-10 col-md-offset-1">
+        <p class="lineheight">
+            <button class="initialism standalone_open btn btn-success">Stand alone</button>
+        </p>
+        <!-- Stand alone -->
+        <div id="standalone">
+            <h4>Stand alone example</h4>
+            <iframe class="device" id="device1" src="../templates/template1/index.php" height="780px" width="450px">
+
+                </iframe>
+
+            <button class="standalone_close btn btn-default">Close</button>
+        </div>
+     </section>
+</div>
+
+<script>
+$(document).ready(function () {
+
+    $('#standalone').popup({
+      color: 'white',
+      opacity: 1,
+      transition: '0.3s',
+      scrolllock: true
+    });
+
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

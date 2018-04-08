@@ -198,11 +198,11 @@ th {
     display: inline-block;
     word-wrap:break-word;
 }
-div.dest {
+/*div.dest {
     border:1px solid #808080;
     min-height:300px;
     padding: 30px 0px;
-}
+}*/
 
 
 .barra-estado-pagina {
@@ -212,7 +212,7 @@ div.dest {
 }
 
 .barra-herramienta-pagina {
-    position: fixed;
+    /*position: fixed;*/
     top: 45px;
     z-index: 10;
     color:#C6002E!important;
@@ -226,8 +226,11 @@ div.dest {
   background:#F94D72!important; 
 }
 .dest {
-    margin-left: 43px;
-    margin-top: 6px;
+    /*margin-left: 43px;
+    margin-top: 6px;*/
+    width: 100%;
+    height: 100%;
+    position: absolute;
 }
 
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */

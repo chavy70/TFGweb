@@ -1141,11 +1141,18 @@ Core.js
     width: 100%;
     z-index: 10;
 }
-  .barra-herramienta-pagina {
+/*.barra-herramienta-pagina {
     position: fixed;
     top: 45px;
     z-index: 10;
-}
+}*/
 .seleccionado {
     border: dotted 1px blue;
+}
+.img-barra-herr {
+    width: 44px;
+}
+.menu-level1 {
+  border: solid 3px!important;
+  border-radius: 10px;
 }

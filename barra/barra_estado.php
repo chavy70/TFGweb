@@ -67,6 +67,14 @@
 							</a>
 						</li>
 
+
+						<li>
+							<a onclick="guardarCambios($('.dest').html());" >
+								<i class="ace-icon fa fa-save"></i>
+								Guardar Cambios
+							</a>
+						</li>
+
 						<li class="divider"></li>
 
 						<li>

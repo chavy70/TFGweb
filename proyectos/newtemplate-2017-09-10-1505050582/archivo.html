@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/styles.css" rel="stylesheet">
+	</head>
+	<body>
+		<label for="color" contextmenu="colorMenu" class="ui-sortable-handle">Color:</label>
+		<input id="color" contextmenu="colorMenu" class="ui-sortable-handle" type="text">
+
+
+		<form class="navbar-form navbar-left" role="search">
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Search">
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
+
+
+		<!-- Menu derecho para los elementos html -->
+		<div id="MenuBderecho" class="ui-sortable-handle">
+			<menu type="context" id="colorMenu">
+				<menuitem label="Editar" id="editar" icon="../../img/MenuDerecho/editar.png"></menuitem>
+				<menuitem label="Color" id="color" icon="../../img/MenuDerecho/color.png"></menuitem>
+				<menuitem label="Eliminar" id="eliminar" icon="../../img/MenuDerecho/eliminar.png"></menuitem>
+				<menuitem label="Propiedades" id="propiedades" icon="../../img/MenuDerecho/propiedades.png"></menuitem>
+			</menu>
+			<menu type="context" id="hnMenu">
+				<menuitem label="Editar H" id="editarh" icon="../../img/MenuDerecho/editar.png"></menuitem>
+				<menuitem label="Color H" id="colorh" icon="../../img/MenuDerecho/color.png"></menuitem>
+				<menuitem label="Eliminar H" id="eliminarh" icon="../../img/MenuDerecho/eliminar.png"></menuitem>
+				<menuitem label="Propiedades H" id="propiedadesh" onclick="editarElemento();" icon="../../img/MenuDerecho/propiedades.png"></menuitem>
+			</menu>
+		</div>
+		<h1 class="editable" contextmenu="hnMenu" id="h1-1">Esto es una <br></h1><h2 class="editable" contextmenu="hnMenu" id="h2-1">prueba</h2>
+	</body>
+</html>

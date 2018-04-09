@@ -59,6 +59,12 @@
 												<input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Correo electronico" value="">
 											</div>
 											<div class="form-group">
+												<input type="text" name="nombre" id="nombre" tabindex="1" class="form-control" placeholder="Nombre" value="">
+											</div>
+											<div class="form-group">
+												<input type="text" name="fechaNac" id="fechaNac" tabindex="1" class="form-control" placeholder="Fecha de Nacimiento" value="">
+											</div>
+											<div class="form-group">
 												<input type="password" name="passReg" id="passReg" tabindex="2" class="form-control" placeholder="Contraseña">
 											</div>
 											<div class="form-group">

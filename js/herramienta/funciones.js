@@ -10,17 +10,17 @@ $(document).ready(function () {
     // Login y Registro ----------------------------------------------------------
     // https://bootsnipp.com/snippets/80gpb
     // Función de las pestañas
-    $('#login-form-link').click(function(e) { // Login
-        $("#login-form").delay(100).fadeIn(100);
+    $('#formLoginLink').click(function(e) { // Login
+        $("#formLogin").delay(100).fadeIn(100);
         $("#register-form").fadeOut(100);
-        $('#register-form-link').removeClass('active');
+        $('#formRegLink').removeClass('active');
         $(this).addClass('active');
         e.preventDefault();
     });
-    $('#register-form-link').click(function(e) { // Registro
+    $('#formRegLink').click(function(e) { // Registro
         $("#register-form").delay(100).fadeIn(100);
-        $("#login-form").fadeOut(100);
-        $('#login-form-link').removeClass('active');
+        $("#formLogin").fadeOut(100);
+        $('#formLoginLink').removeClass('active');
         $(this).addClass('active');
         e.preventDefault();
     });

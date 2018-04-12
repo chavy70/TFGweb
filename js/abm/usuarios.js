@@ -1,7 +1,7 @@
 var _idUsuarioAuto = "0";
 $(document).ready(function () {
 	//mascaras
-    $("input[id*=tbNombreEmpleado]").alpha({allow:"., "});
+    /*$("input[id*=tbNombreEmpleado]").alpha({allow:"., "});
     $("input[id*=tbApellidoEmpleado]").alpha({allow:"., "});
     $("input[id*=tbDocEmpleado]").numeric({allow:"-"});
     $("input[id*=tbTelefonoEmpleado]").numeric({allow:"-()"});
@@ -11,9 +11,9 @@ $(document).ready(function () {
     $("input[id*=tbNombre]")
     $("input[id*=tbFechaNac]")
     $("input[id*=tbPassReg]")
-    $("input[id*=tbConfirmPass]")
+    $("input[id*=tbConfirmPass]")*/
 
-    $("#formUsuario").validate({ // Inicio validación
+    $("#formLoginLink").validate({ // Inicio validación
         //definir reglas
         rules: {  
             tbUserReg: { required: true },
@@ -32,8 +32,8 @@ $(document).ready(function () {
         submitHandler: function() {
             if(accion == 'guardar')
             guardarUsuario();
-        else if(accion == 'editar')
-            editarUsuario();
+        else if(accion == 'login')
+            alert('login!');//editarUsuario();
         else if(accion == 'cancelar')
             cancelarUsuario();
         } 

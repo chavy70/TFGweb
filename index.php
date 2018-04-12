@@ -48,6 +48,14 @@
 <script src="js/jquery-1.4.1.min.js" ></script>
 <!-- Funciones utilizadas en la web -->
 <script src="js/herramienta/funciones.js"></script>
+<script src="js/abm/usuarios.js"></script>
+
+
+
+    <script src="js/jquery.validate.js" type="text/javascript"></script>
+
+    <script src="js/jquery.blockUI.js" type="text/javascript"></script>
+
 
 
 <style type="text/css">

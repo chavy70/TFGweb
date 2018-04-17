@@ -12,8 +12,8 @@ $(document).ready(function () {
     $("input[id*=tbFechaNac]")
     $("input[id*=tbPassReg]")
     $("input[id*=tbConfirmPass]")*/
-
-    $("#formLoginLink").validate({ // Inicio validación
+                      
+    $("#register-form").validate({ // Inicio validación
         //definir reglas
         rules: {  
             tbUserReg: { required: true },

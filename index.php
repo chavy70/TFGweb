@@ -48,9 +48,7 @@
 <script src="js/jquery-1.4.1.min.js" ></script>
 <!-- Funciones utilizadas en la web -->
 <script src="js/herramienta/funciones.js"></script>
-<script src="js/abm/usuarios.js"></script>
-
-
+ 
 
     <script src="js/jquery.validate.js" type="text/javascript"></script>
 
@@ -58,12 +56,25 @@
 
 
 
-<style type="text/css">
 
-</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+
+
+
+
+
+
+
+
+
 <script type="text/javascript">
 	$(document).ready(function () {
 
+		//var j = jQuery.noConflict();
+
+alert('op');
+//$("#opop").validate();
 });
 </script>
 
@@ -88,6 +99,7 @@ include("popUps/registro-login.php");
 		<![endif]-->
 		<!-- open/close -->
 		<header>
+			<form id='opop'></form>
 			<section class="hero">
 				<div class="texture-overlay"></div>
 				<div class="container">
@@ -276,6 +288,16 @@ include("popUps/registro-login.php");
 		<script src="js/waypoints.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/min/scripts-min.js"></script>
+
+		<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'
+type='text/javascript'></script>
+ 
+<script src='http://ajax.aspnetcdn.com/ajax/jquery.validate/1.12.0/jquery.validate.min.js'
+type='text/javascript'></script>
+
+<script src="js/abm/usuarios.js"></script>
+
+
 		<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 		<script>
 		(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=

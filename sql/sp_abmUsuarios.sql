@@ -32,7 +32,6 @@ IF _tipo = 'a' THEN
 				_direccion, 
 				_email, 
 				_fecha_nac, 
-				_type, 
 				'miembro', 
 				_fecha_crea, 
 				'activo');
@@ -51,7 +50,7 @@ IF _tipo = 'm' THEN
 				email 		= _email, 
 				fecha_nac 	= _fecha_nac, 
 				type 		= _type, 
-				fecha_crea 	= _fecha_crea, 
+				fecha_crea 	= _fecha_crea 
 	WHERE 	ajapoweb.id 	= _id;
 END IF;
 END$$

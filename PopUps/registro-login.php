@@ -40,7 +40,7 @@
 												<div class="row">
 													<div class="col-sm-6 col-sm-offset-3">
 														<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Iniciar sesión">
-            <input type="submit" value="Iniciar sesión" name="login" id="btnLogin" onclick="accion='login';">
+            <input type="submit" value="Iniciar sesión" name="login" id="btnLogin" class="form-control btn btn-login" onclick="accion='login';">
 
 
 													</div>
@@ -78,7 +78,11 @@
 											<div class="form-group">
 												<div class="row">
 													<div class="col-sm-6 col-sm-offset-3">
-														<input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Crear cuenta">
+						
+														<div class="botonera">
+												            <input type="submit" value="Crear cuenta.-" name="guardar" id="btnGuardar" onclick="accion='guardar';" tabindex="4" class="form-control btn btn-register">
+												        </div>
+
 													</div>
 												</div>
 											</div>

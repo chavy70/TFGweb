@@ -1,23 +1,21 @@
 <?php
+//Para libro
+// http://codular.com/php-mysqli
+
+//https://es.stackoverflow.com/questions/100239/por-qu%C3%A9-me-sale-el-error-call-to-undefined-function-mysql-connect
 function Conectarse()
 {
-	// include("../consultas/conexion.phtml");
-	//if (!($link=mysql_connect("localhost","root","12345")))
-	if (!($link=mysql_connect("localhost","root","")))
-	{
-		echo "Error conectando a la base de datos.";
-		exit();
-	}
-	if (!mysql_select_db("ajapoweb",$link))
-	{
-		echo "Error seleccionando la base de datos.";
-		exit();
-	}
-	return $link;
+    $cons_usuario="root";
+    $cons_contra="";
+    $cons_base_datos="ajapoweb";
+    $cons_equipo="localhost";
+    $obj_conexion = mysqli_connect($cons_equipo,$cons_usuario,$cons_contra,$cons_base_datos);
+    // Check connection
+    if (mysqli_connect_errno())
+    {
+        echo "Error a conectarse a MySQL: " . mysqli_connect_error();
+    }
+    return $obj_conexion;
 }
-
-$link=Conectarse();
-/*echo "Conexión con la base de datos conseguida.<br>";*/
-
-mysql_close($link); //cierra la conexion
 ?>
+

@@ -66,6 +66,8 @@
 
 
 
+
+
 <script type="text/javascript">
 	$(document).ready(function () {
 
@@ -276,27 +278,52 @@ include("popUps/registro-login.php");
 				</ul>
 			</nav>
 		</div>
-<style type="text/css">
-	.error{
-		background-color:  #f9dbdd;
-		border: solid 1px red;
-	}
-</style>
-
-<script src="js/JSON.js" ></script>
-
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="js/min/toucheffects-min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="js/flickity.pkgd.min.js"></script>
+		<script src="js/jquery.fancybox.pack.js"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<!-- <script src="js/retina.js"></script> -->
+		<script src="js/waypoints.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/min/scripts-min.js"></script>
 
 		<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'
 type='text/javascript'></script>
- 
-
- <script src="js/JSON.js" ></script>
-
  
 <script src='http://ajax.aspnetcdn.com/ajax/jquery.validate/1.12.0/jquery.validate.min.js'
 type='text/javascript'></script>
 
 <script src="js/abm/usuarios.js"></script>
+
+
+		<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+		<script>
+		(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+		function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+		e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+		e.src='//www.google-analytics.com/analytics.js';
+		r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+		ga('create','UA-XXXXX-X');ga('send','pageview');
+		</script>
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
 
 
 	</body>

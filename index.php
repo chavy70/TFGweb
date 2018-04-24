@@ -66,19 +66,6 @@
 
 
 
-<script type="text/javascript">
-	$(document).ready(function () {
-
-		//var j = jQuery.noConflict();
-
-alert('op');
-//$("#opop").validate();
-});
-</script>
-
-
-
-
 	</head>
 	<body>
 
@@ -295,7 +282,8 @@ type='text/javascript'></script>
  
 <script src='http://ajax.aspnetcdn.com/ajax/jquery.validate/1.12.0/jquery.validate.min.js'
 type='text/javascript'></script>
-
+<script src="js/jquery-md5.js"></script>
+<script src="js/util.js"></script>
 <script src="js/abm/usuarios.js"></script>
 
 

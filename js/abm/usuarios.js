@@ -1,5 +1,8 @@
 var _idUsuarioAuto = "0";
 $(document).ready(function () {
+    $('.mensaje').css('display','none');
+
+    alert($.md5("I'm Persian."));
 	//mascaras
     /*$("input[id*=tbNombreEmpleado]").alpha({allow:"., "});
     $("input[id*=tbApellidoEmpleado]").alpha({allow:"., "});
@@ -59,7 +62,7 @@ function guardarUsuario(){
             "tipo" : "a",//alta baja
             "id" : "0",
             "usuario" :     $("input[id*=tbUserReg]").val(),
-            "password":     $("input[id*=tbPassReg]").val(),
+            "password":     $.md5($("input[id*=tbPassReg]").val()),
             "nombre" :      $("input[id*=tbNombre]").val(),
             "direccion" :   '', // Obtener pais
             "email" :       $("input[id*=tbEmail]").val(),
@@ -67,23 +70,21 @@ function guardarUsuario(){
             "type" :        'miembro',
             "fecha_crea" :  '2018-04-04'//$.now()
     }
-alert('llllllllll '+datos[9])
         $.ajax({ 
             type: "GET",//dataType: 'json', //type: "POST", //type: "GET" // Choosing a JSON datatype
             data: datos,
             url: 'http://localhost/TFGweb/consultas/users.php',
             success: function(data) {
-                alert('entro en ajax')
+                
                 var res = jQuery.parseJSON(data);
-                /*if(data == false || data == "false"){ 
-                    mensajeError("Ocurrio un error en el proceso"); 
-                }else{
-                    mensajeOk("El registro ha sio guardado");
-                }*/
-                /*
-                mensajeOk("El registro ha sido guardado");
-                auditoria("Se agrego nuevo registro a la tabla Empleado");
-                irArriba();*/
+                idActual = parseInt(res);
+                if idActual = 0 {
+                    mensajeError('mensaje');
+                } else {
+                    mostrarMensaje('mensaje');
+                }
+                ocultaMensaje('mensaje');
+                $('.camposForm').val('');
             },
             error: function(e){ //<!-- Si no ha podido conectar con el servidor --> 
                 mensajeError("Error en el servidor, por favor, intentalo de nuevo mas tarde");

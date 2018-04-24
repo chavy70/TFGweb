@@ -29,7 +29,6 @@
 			$id = trim($row[0]);
 		}*/
 		while($row = $ultimoId->fetch_assoc()){
-	        //echo $row['nombre'] . '<br />';
 	        $id = $row['id'];
 	    }
 	}

@@ -1250,3 +1250,19 @@ Core.js
 .popup{
     z-index: 100;
 }
+
+#mensajeError, #mensaje {
+    padding: 6px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+
+#mensajeError {
+    color: #f97575;
+    border: solid 1px #f97575;
+}
+
+#mensaje {
+    color: #5a9962;
+    border: solid 1px #5a9962;
+}

@@ -2,7 +2,7 @@ var _idUsuarioAuto = "0";
 $(document).ready(function () {
     $('.mensaje').css('display','none');
 
-    alert($.md5("I'm Persian."));
+    //alert($.md5("I'm Persian."));
 	//mascaras
     /*$("input[id*=tbNombreEmpleado]").alpha({allow:"., "});
     $("input[id*=tbApellidoEmpleado]").alpha({allow:"., "});
@@ -78,7 +78,7 @@ function guardarUsuario(){
                 
                 var res = jQuery.parseJSON(data);
                 idActual = parseInt(res);
-                if idActual = 0 {
+                if (idActual = 0) {
                     mensajeError('mensaje');
                 } else {
                     mostrarMensaje('mensaje');

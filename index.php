@@ -43,41 +43,48 @@
 		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
-
-<!-- Libreria jQuery principal -->
-<script src="js/jquery-1.4.1.min.js" ></script>
-<!-- Funciones utilizadas en la web -->
-<script src="js/herramienta/funciones.js"></script>
- 
-
-    <script src="js/jquery.validate.js" type="text/javascript"></script>
-
-    <script src="js/jquery.blockUI.js" type="text/javascript"></script>
-
-
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
-
-
-
-
-
-
-
+		<!-- Libreria jQuery principal -->
+		<script src="js/jquery-1.4.1.min.js" ></script>
+		<!-- Funciones utilizadas en la web -->
+		<script src="js/herramienta/funciones.js"></script>
+	    <script src="js/jquery.validate.js" type="text/javascript"></script>
+	    <script src="js/jquery.blockUI.js" type="text/javascript"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
 	</head>
 	<body>
 
+		<!-- Menu Top -->
+		<?php
+		session_start();
+		if (!isset($_SESSION['idUsuario'])) {
+			echo 'HOOLAAA';
+		  $_SESSION['idUsuario'] = 0;
+		} else {
+		  $_SESSION['idUsuario'] = 3;
+		  $_SESSION['usuario'] = 'Chavy';
+		}
+		$user = 'chavy';//$_SESSION['usuario'];
+		$idUser =  3;//$_SESSION['idUsuario'];
+		?>
 
-			<!-- https://inspirationalpixels.com/tutorials/custom-popup-modal#step-html -->
-<?php 
-include("popUps/registro-login.php");
-?> 
+		<div class="row navbar navbar-inverse menu-logueo">
+			<div class="col-lg-6">
+			</div><!-- /.col-lg-6 -->
+			<div class="col-lg-6">
+				<div class="top-content">
+					<div class="bienvenida text-right"><br>
+						Hola <font color="#D25F67"><label name="lbIdUser" id="lbIdUser" style="display:none;"  value="<?php echo @$user; ?>"><?php echo $_SESSION['idUsuario']; ?></label><b><?php echo $_SESSION['usuario']; ?></b></font> | <a class="salirA" onclick="logout();">Salir      .</a>
+					</div>
+				</div>
+			</div><!-- /.col-lg-6 -->
+		</div><!-- /.row -->
 
-
-
-
+		<!-- Fin Menu Top -->
+		<!-- https://inspirationalpixels.com/tutorials/custom-popup-modal#step-html -->
+		<?php 
+		include("popUps/registro-login.php");
+		?> 
 
 		<!--[if lt IE 7]>
 		<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -104,10 +111,6 @@ include("popUps/registro-login.php");
 					</div>
 				</div>
 			</section>
-
-
-
-
 		</header>
 		<section class="video" id="about">
 			<div class="container">

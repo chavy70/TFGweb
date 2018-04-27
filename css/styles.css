@@ -1266,3 +1266,11 @@ Core.js
     color: #5a9962;
     border: solid 1px #5a9962;
 }
+
+.menu-logueo, .menu-logueo label, .menu-logueo a {
+    color:#fff;
+}
+
+.salirA {
+    cursor: pointer;
+}

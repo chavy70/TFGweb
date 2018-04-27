@@ -1,6 +1,6 @@
 <!-- PopUp Modal -->
 <!-- https://inspirationalpixels.com/tutorials/custom-popup-modal -->
-<a class="btn" data-popup-open="popup-1" href="#">Open Popup #1</a>
+<a class="btn abrePopUp" data-popup-open="popup-1" href="#">Abrir Login/Reg</a>
 <!-- Login y Registro -->
 <!-- https://bootsnipp.com/snippets/80gpb -->
 
@@ -11,6 +11,13 @@
 		    	<div class="row">
 					<div class="col-md-6">
 						<div class="panel panel-login">
+							
+							<div id='mensajeError' class="bg-danger mensaje"> Ocurrio un error en el proceso! </div>
+							<div id='mensaje' class="bg-success mensaje">Su usuario ha sido registrado!</div>
+
+
+
+
 									<div class="panel-heading">
 										<div class="row">
 											<div class="col-xs-6">
@@ -32,14 +39,14 @@
 											<div class="form-group camposForm">
 												<input type="password" name="passLog" id="passLog" tabindex="2" class="form-control" placeholder="Contraseña">
 											</div>
-											<div class="form-group text-center">
+											<div style="display:none;" class="form-group text-center">
 												<input type="checkbox" tabindex="3" class="" name="remember" id="remember">
 												<label for="remember"> Recordarme</label>
 											</div>
 											<div class="form-group">
 												<div class="row">
 													<div class="col-sm-6 col-sm-offset-3">
-														<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Iniciar sesión">
+														
             <input type="submit" value="Iniciar sesión" name="login" id="btnLogin" class="form-control btn btn-login" onclick="accion='login';">
 
 
@@ -57,8 +64,7 @@
 											</div>
 										</form>
 										<form id="register-form" action="http://phpoll.com/register/process" method="post" role="form" style="display: none;">
-											<div id='mensajeError' class="bg-danger mensaje"> Ocurrio un error en el proceso! </div>
-											<div id='mensaje' class="bg-success mensaje">Su usuario ha sido registrado!</div>
+											
 
 											<div class="form-group camposForm">
 												<input type="text" name="tbUserReg" id="tbUserReg" tabindex="1" class="form-control" placeholder="Usuario" value="">
@@ -83,7 +89,7 @@
 													<div class="col-sm-6 col-sm-offset-3">
 						
 														<div class="botonera">
-												            <input type="submit" value="Crear cuenta.-" name="guardar" id="btnGuardar" onclick="accion='guardar';" tabindex="4" class="form-control btn btn-register">
+												            <input type="submit" value="Crear cuenta" name="guardar" id="btnGuardar" onclick="accion='guardar';" tabindex="4" class="form-control btn btn-register">
 												        </div>
 
 													</div>

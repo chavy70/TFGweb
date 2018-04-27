@@ -14,7 +14,10 @@ $(document).ready(function () {
         //llamar a funcion guardar en caso que se hallan validados
         //los campos requeridos
         submitHandler: function() {
-            login();
+            alert('accion '+accion);
+            if(accion == 'login'){
+                login(); 
+            }
         } 
     }); //validador fin
 });
@@ -29,7 +32,7 @@ function login(){
             "usuario" : $("input[id*=userLog]").val(),
             "password" : $("input[id*=passLog]").val()
     }
-    
+alert('dsds')    
     $.ajax({ 
         type: "GET",//dataType: 'json', //type: "POST", //type: "GET" // Choosing a JSON datatype
         data: datos,
@@ -37,7 +40,15 @@ function login(){
         success: function(data) {
             
             var res = jQuery.parseJSON(data);
-            if(data == 0){
+                idActual = parseInt(res);
+                if (idActual = 0) {
+                    mensajeError('mensaje');
+                } else {
+                    mostrarMensaje('mensaje');
+                }
+                ocultaMensaje('mensaje');
+                $('.camposForm').val('');
+            /*if(data == 0){
                 $("label[id*=lbError]").text("Usuario o contraseña incorrectos");
                 
             }else{
@@ -45,7 +56,9 @@ function login(){
                 //createCookie("log", data.replace('"','').replace('"',''));
                 //location.href = "/Seguros/inicio/index.php";
                 location.href = "index.php";
-            }
+            }*/
+
+
         },
         error: function(e){ <!-- Si no ha podido conectar con el servidor --> 
             mensajeError("Error en el servidor, por favor, intentalo de nuevo mas tarde");

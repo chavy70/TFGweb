@@ -33,3 +33,10 @@ function mensajeError(mensaje) {
     mostrarMensaje("mensajeError");
     ocultaMensaje("mensajeError");
 }
+
+function irUrl(pagina){
+    var url = window.location.href;
+    //window.location(url + "/"+pagina);
+    //window.location(pagina);
+    location.href = pagina;
+}

@@ -32,12 +32,12 @@
 							<div class="panel-body">
 								<div class="row">
 									<div class="col-lg-12">
-										<form id="formLogin" action="http://phpoll.com/login/process" method="post" role="form" style="display: block;">
-											<div class="form-group camposForm">
-												<input type="text" name="userLog" id="userLog" tabindex="1" class="form-control" placeholder="Usuario" value="">
+										<form id="formLogin" method="post" role="form" style="display: block;">
+											<div class="form-group">
+												<input type="text" name="userLog" id="userLog" tabindex="1" class="form-control camposForm" placeholder="Usuario" value="">
 											</div>
-											<div class="form-group camposForm">
-												<input type="password" name="passLog" id="passLog" tabindex="2" class="form-control" placeholder="Contraseña">
+											<div class="form-group">
+												<input type="password" name="passLog" id="passLog" tabindex="2" class="form-control camposForm" placeholder="Contraseña">
 											</div>
 											<div style="display:none;" class="form-group text-center">
 												<input type="checkbox" tabindex="3" class="" name="remember" id="remember">
@@ -47,8 +47,7 @@
 												<div class="row">
 													<div class="col-sm-6 col-sm-offset-3">
 														
-            <input type="submit" value="Iniciar sesión" name="login" id="btnLogin" class="form-control btn btn-login" onclick="accion='login';">
-
+<input type="submit" value="Iniciar sesión" name="login" id="btnLogin" class="form-control btn btn-login" onclick="accion='login';">
 
 													</div>
 												</div>
@@ -57,32 +56,32 @@
 												<div class="row">
 													<div class="col-lg-12">
 														<div class="text-center">
-															<a href="http://phpoll.com/recover" tabindex="5" class="forgot-password">¿Has olvidado tu contraseña?</a>
+															<label id="lbErrorLog" class="errorLog">Usuario y/o contrase&ntilde;a incorrectos</label>
 														</div>
 													</div>
 												</div>
 											</div>
 										</form>
-										<form id="register-form" action="http://phpoll.com/register/process" method="post" role="form" style="display: none;">
+										<form id="register-form" method="post" role="form" style="display: none;">
 											
 
-											<div class="form-group camposForm">
-												<input type="text" name="tbUserReg" id="tbUserReg" tabindex="1" class="form-control" placeholder="Usuario" value="">
+											<div class="form-group">
+												<input type="text" name="tbUserReg" id="tbUserReg" tabindex="1" class="form-control camposForm" placeholder="Usuario" value="">
 											</div>
-											<div class="form-group camposForm">
-												<input type="email" name="tbEmail" id="tbEmail" tabindex="1" class="form-control" placeholder="Correo electronico" value="">
+											<div class="form-group">
+												<input type="email" name="tbEmail" id="tbEmail" tabindex="1" class="form-control camposForm" placeholder="Correo electronico" value="">
 											</div>
-											<div class="form-group camposForm">
-												<input type="text" name="tbNombre" id="tbNombre" tabindex="1" class="form-control" placeholder="Nombre" value="">
+											<div class="form-group">
+												<input type="text" name="tbNombre" id="tbNombre" tabindex="1" class="form-control camposForm" placeholder="Nombre" value="">
 											</div>
-											<div class="form-group camposForm">
-												<input type="text" name="tbFechaNac" id="tbFechaNac" tabindex="1" class="form-control" placeholder="Fecha de Nacimiento" value="">
+											<div class="form-group">
+												<input type="text" name="tbFechaNac" id="tbFechaNac" tabindex="1" class="form-control camposForm" placeholder="Fecha de Nacimiento" value="">
 											</div>
-											<div class="form-group camposForm">
-												<input type="password" name="tbPassReg" id="tbPassReg" tabindex="2" class="form-control" placeholder="Contraseña">
+											<div class="form-group">
+												<input type="password" name="tbPassReg" id="tbPassReg" tabindex="2" class="form-control camposForm" placeholder="Contraseña">
 											</div>
-											<div class="form-group camposForm">
-												<input type="password" name="tbConfirmPass" id="tbConfirmPass" tabindex="2" class="form-control" placeholder="Confirmar contraseña">
+											<div class="form-group">
+												<input type="password" name="tbConfirmPass" id="tbConfirmPass" tabindex="2" class="form-control camposForm" placeholder="Confirmar contraseña">
 											</div>
 											<div class="form-group">
 												<div class="row">

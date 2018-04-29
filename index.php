@@ -53,34 +53,10 @@
 		<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
 	</head>
 	<body>
-
-		<!-- Menu Top -->
-		<?php
-		session_start();
-		if (!isset($_SESSION['idUsuario'])) {
-			echo 'HOOLAAA';
-		  $_SESSION['idUsuario'] = 0;
-		} else {
-		  $_SESSION['idUsuario'] = 3;
-		  $_SESSION['usuario'] = 'Chavy';
-		}
-		$user = 'chavy';//$_SESSION['usuario'];
-		$idUser =  3;//$_SESSION['idUsuario'];
-		?>
-
-		<div class="row navbar navbar-inverse menu-logueo">
-			<div class="col-lg-6">
-			</div><!-- /.col-lg-6 -->
-			<div class="col-lg-6">
-				<div class="top-content">
-					<div class="bienvenida text-right"><br>
-						Hola <font color="#D25F67"><label name="lbIdUser" id="lbIdUser" style="display:none;"  value="<?php echo @$user; ?>"><?php echo $_SESSION['idUsuario']; ?></label><b><?php echo $_SESSION['usuario']; ?></b></font> | <a class="salirA" onclick="logout();">Salir      .</a>
-					</div>
-				</div>
-			</div><!-- /.col-lg-6 -->
-		</div><!-- /.row -->
-
-		<!-- Fin Menu Top -->
+		<!-- Barra de login -->
+		<?php 
+		include("barra/barraLogin.php");
+		?> 
 		<!-- https://inspirationalpixels.com/tutorials/custom-popup-modal#step-html -->
 		<?php 
 		include("popUps/registro-login.php");
@@ -287,6 +263,7 @@ type='text/javascript'></script>
 type='text/javascript'></script>
 <script src="js/jquery-md5.js"></script>
 <script src="js/util.js"></script>
+<script src="js/abm/login.js"></script>
 <script src="js/abm/usuarios.js"></script>
 
 

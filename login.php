@@ -17,6 +17,7 @@
 		<link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'>
 		<link href="css/styles.css" rel="stylesheet">
 		<link href="css/queries.css" rel="stylesheet">
+		<link href="css/styles.css" rel="stylesheet">
 
 <!-- Libreria jQuery principal -->
 <script src="js/jquery-1.4.1.min.js" ></script>
@@ -69,8 +70,8 @@ type='text/javascript'></script>
 type='text/javascript'></script>
 <script src="js/jquery-md5.js"></script>
 <script src="js/util.js"></script>
+<script src="js/abm/login.js"></script>
 <script src="js/abm/usuarios.js"></script>
-
 
 <script type="text/javascript">
 	//

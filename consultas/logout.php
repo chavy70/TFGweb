@@ -1,13 +1,16 @@
 <?php 
- // you have to open the session to be able to modify or remove it 
+ // Abro la sesion 
  session_start(); 
  
- //you can remove a single variable in the session 
- unset($_SESSION['usuario']); 
+ //para remover una variable a la vez
+ unset($_SESSION['idUsuario']);
+ unset($_SESSION['usuario']);
  
- // or this would remove all the variables in the session, but not the session itself 
+ // elimina todas las sesiones menos en la que se encuentra actualmente 
  session_unset(); 
  
- // this would destroy the session variables 
+ // elimina todas las sesiones
  session_destroy(); 
+
+ header("Location: URL");
  ?> 

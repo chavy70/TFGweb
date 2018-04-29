@@ -4,39 +4,19 @@
 	/*Parametros*/
 	$usuario =$_GET['usuario'];
 	$password =$_GET['password'];
-
-	/*Consulta de mysql con la que indicamos que necesitamos que seleccione
-	**solo los campos que tenga como nombre_administrador el que el formulario
-	**le ha enviado*/
-	$result = mysqli_query("select * from users where usuario = '$usuario'");
-	 
-	//Validamos si el nombre del administrador existe en la base de datos o es correcto
-	//if($row = mysql_fetch_array($result))
-	while($row = $result->fetch_assoc()){
-	{     
-	//Si el usuario es correcto ahora validamos su contraseña
-		 if($row["password"] == $password)
-		 {
-			//Creamos sesión
-			session_start();  
-			//Almacenamos el nombre de usuario en una variable de sesión usuario
-			$_SESSION['usuario'] = $usuario;
-			$_SESSION['idUsuario'] = $row["id"];
-			//Redireccionamos a la pagina: index.php
-			//header("Location: index.php");  
-			
-			echo json_encode($row["usuario"]);
-		 }else{
-		 	
-			echo json_encode(0);
-		 }
-	}else{
-		 	
-			echo json_encode(0);
-		 }
-	//mysql_free_result($result);
-	mysqli_free_result($result);
-	//mysql_close();
+	/* Busco el usuario y contrasenha ingresados por el usuario */
+	$resultado = mysqli_query($link,"select id, usuario from users where usuario = '$usuario' and password = '$password'");
+	 $arrayDatosUser = array();
+	 while ($tareas=$resultado->fetch_assoc()) {
+	 		$arrayDatosUser[] = array_map('utf8_encode', $tareas);
+	 		$idUsuarioSes = $tareas['id'];
+	 		$usuarioSes = $tareas['usuario'];
+	 		session_start();
+			// Guardo las variables de sesion
+			$_SESSION['idUsuario'] = $idUsuarioSes;
+			$_SESSION['usuario'] = $usuarioSes;
+			//header('Location: index.php'); 
+	    }
+	echo json_encode($arrayDatosUser);
 	$link->close();
-	//hasta segundo de haiti - Construction of a warehouse 
 ?>

@@ -1274,3 +1274,7 @@ Core.js
 .salirA {
     cursor: pointer;
 }
+
+.errorLog {
+    color: red;
+}

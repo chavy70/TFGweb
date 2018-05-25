@@ -7,10 +7,6 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		
-		<!-- <link rel="stylesheet/less" href="css/styles.less" type="text/css">
-        <script src="js/less.min.js"></script> -->
-
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Generador de c&oacute;digo para desarrollo de P&aacute;ginas Web</title>
 		<meta name="description" content="Herramienta online para generacion de código html5" />
@@ -28,15 +24,7 @@
 		<link href="css/styles.css" rel="stylesheet">
 		<link href="css/queries.css" rel="stylesheet">
 		<!-- Facebook and Twitter integration -->
-		<meta property="og:title" content=""/>
-		<meta property="og:image" content=""/>
-		<meta property="og:url" content=""/>
-		<meta property="og:site_name" content=""/>
-		<meta property="og:description" content=""/>
-		<meta name="twitter:title" content="" />
-		<meta name="twitter:image" content="" />
-		<meta name="twitter:url" content="" />
-		<meta name="twitter:card" content="" />
+		<meta property="og:title" content="Generador de codigo para desarrollo de Paginas Web"/>
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
@@ -76,7 +64,7 @@
 							<a href="#"><img src="img/logo-white-mini.png" alt="Boxify Logo"></a>
 						</div>
 						<div class="col-md-6 col-sm-6 col-xs-6 text-right navicon">
-							<p>MENU</p><a id="trigger-overlay" class="nav_slide_button nav-toggle" href="#"><span></span></a>
+							<p>MENU</p><a id="trigger-overlay" class="nav_slide_button nav-toggle cerrar-menu" onclick="menuPrincipal();" href="#"><span></span></a>
 						</div>
 					</div>
 					<div class="row hero-content">
@@ -230,7 +218,7 @@
 				</div>
 			</div>
 		</footer>
-		<div class="overlay overlay-boxify">
+		<div class="overlay overlay-boxify menu-home">
 			<nav>
 				<ul>
 					<li><a href="#about"><i class="fa fa-heart"></i>Acerca de</a></li>

@@ -1,3 +1,17 @@
+/**
+*
+* Aqui van todas las funciones utilizzdas en la mayoría de las páginas
+* Gabriela Paredes - 2018
+**/
+$(document).ready(function () {
+    // Oculta la barra de login si el user no esta conectado
+    var idUserLog = parseInt($('#lbIdUser').attr('value'));
+    if (idUserLog === 0){
+        $('#barraMenu').css('display','none');
+        $('.barraEstado').css('display','none');
+    }
+});    
+
 /*******************************************************************************************************************************/
 /************************************************MENSAJES DE ALERTA PARA LOS USUARIOS*******************************************/
 /*******************************************************************************************************************************/
@@ -34,6 +48,24 @@ function mensajeError(mensaje) {
     ocultaMensaje("mensajeError");
 }
 
+/********************************************************************************************************************************/
+/******************************************************** ABRIR/CERRAR MENU ****************************************************/
+/*******************************************************************************************************************************/
+function menuPrincipal(){
+    /*$('.menu-home').addClass('open'); 
+    $('.cerrar-menu').addClass('active');*/
+    if($(".cerrar-menu").hasClass( "active" )){
+        $(".cerrar-menu").removeClass("active");
+        $('.menu-home').removeClass('open'); 
+    }else{
+        $(".cerrar-menu").addClass("active");
+        $('.menu-home').addClass('open'); 
+    }
+}
+
+/*******************************************************************************************************************************/
+/************************************************ FUNCION PARA REDIRECCIONAR A PAGINA ******************************************/
+/*******************************************************************************************************************************/
 function irUrl(pagina){
     var url = window.location.href;
     //window.location(url + "/"+pagina);

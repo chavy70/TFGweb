@@ -1,10 +1,47 @@
 /**
  ** Editar la pagina
  **/
+ //Inicializo en 0 los valores de los id de los elementos
+var idH1 = 0;
+var idH2 = 0;
+var idH3 = 0;
+var idH4 = 0;
+var idH5 = 0;
+var idH6 = 0;
+var idBoton  = 0;
+var idNav = 0;
+var idSection = 0;
+var idArticle = 0;
+var idAside = 0;
+var idHeader = 0;
+var idHgroup = 0;
+var idFooter = 0;
+var idDiv = 0;
+var idForm = 0;
+var idHr // No
+var idI = 0;
+var idStrong = 0;
+var idA = 0;
+var idImg = 0;
+var idU = 0;
+var idSub = 0;
+var idSup = 0;
+var idLegend = 0;
+var idFieldset = 0;
+var idBlockquote = 0;
+var idSelect = 0;
+var idOptgroup = 0;
+var idInput = 0;
+var idTextarea = 0;
+var idAddress = 0;
+var idMap = 0;
+var idCont = 0;
 //var jQ = jQuery.noConflict();
 var anchoDispositivo = 1950
 /*Document ready de la pagina*/	
 $( document ).ready(function() {
+	//$("#test1").attr('contentEditable',true);
+
 	//Obtengo el ancho de la pagina
 	anchoDispositivo = 1950//$(window).width();
 	ocultarTodo();
@@ -13,7 +50,7 @@ $( document ).ready(function() {
 	//$(".soltarEn").mouseup(function(){
 		//alert('Holaaa')
 		soltarEn = $(this).attr("id")
-		alert('soltarEn '+soltarEn)
+		//alert('soltarEn '+soltarEn)
 		$("#"+soltarEn).droppable({
 			accept: ".arrastrar",
 			tolerance: 'pointer',
@@ -36,44 +73,64 @@ $( document ).ready(function() {
 	/*$(".soltarEn").mouseover(function() {
 		$("#"+$(this).attr("id")).css("");
 	});*/
-
+	
 	//Arrastra el elemento seleccionado y lo suelta
 	$(".arrastrar").draggable({
 		//connectToSortable: ".social-msl-group-list",
 		revert: "invalid",
 		helper: function(){ 
+			idCont = 0;
+			idCont++; // Contador utilizado para generar id
+        	existeIdElemento = document.getElementById(elementoActual+'_'+idCont); // Busco si el id generado ya existe dentro del documento
+        	while (existeIdElemento != null) { // Si el id exite, va generando mas id hasta obtener una que no existe
+        		idCont++;
+			    existeIdElemento = document.getElementById(elementoActual+'_'+idCont);			    
+			}
+			nuevoIdElemento = elementoActual+'_'+idCont
+			var botonEdit = "<div class='btn-group configPage noSelect' role='group'>"+
+			"<button id='btnEditConfig' type='button' onclick='alert(\""+nuevoIdElemento+"\"); $(\"#"+nuevoIdElemento+"\").attr(\"contentEditable\",true); $(\"[contenteditable]\",\"#nuevoIdElemento\").focus();' class='btn btn-default noSelect'><img class='noSelect' src='img/edicion/editar.png' alt='Editar'></button>"+
+			"<button type='button' class='btn btn-default noSelect'><img class='noSelect' src='img/edicion/eliminar.png' alt='Eliminar'></button>"+
+			"<button type='button' class='btn btn-default noSelect'><img class='noSelect' src='img/edicion/mover.png' alt='Mover'></button>"+
+			"<button type='button' class='btn btn-default noSelect'><img class='noSelect' src='img/edicion/configurar.png'></button></div>"
+			
 			//elementoActual
 			var htmlSecundario = "";
 			switch (elementoActual) {
                 case 'h1':
-                    htmlSecundario = "<h1 class='textoSecundario'>Elemento H1</h1>";
-                    htmlSoltar = "<h1 class='elementHTML'>Lorem ipsum</h1>";
+                    htmlSecundario = "<h1 class='textoSecundario'>Elemento H1</h1>"; // Texto que se muestra mientras se arrastra
+                    htmlSoltar = "<h1 id='"+nuevoIdElemento+"' class='elementHTML'>Lorem ipsum "+botonEdit+"</h1>"; // HTML generado con su id correspondiente
                     break;
                 case 'h2':
                     htmlSecundario = "<h2 class='textoSecundario'>Elemento H2</h2>";
-                    htmlSoltar = "<h2 class='elementHTML'>Lorem ipsum</h2>";
+                    htmlSoltar = "<h2 id='"+nuevoIdElemento+"' class='elementHTML'>Lorem ipsum"+botonEdit+"</h2>";
                     break;
                 case 'h3':
+                	idH3++;
                 	htmlSecundario = "<h3 class='textoSecundario'>Elemento H3</h3>";
-                	htmlSoltar = "<h3 class='elementHTML'>Lorem ipsum</h3>";
+                	htmlSoltar = "<h3 id='"+nuevoIdElemento+"' class='elementHTML'>Lorem ipsum"+botonEdit+"</h3>";
                     break;
                 case 'h4':
+                	idH4++;
                 	htmlSecundario = "<h4 class='textoSecundario'>Elemento H4</h4>";
-                	htmlSoltar = "<h4 class='elementHTML'>Lorem ipsum</h4>";
+                	htmlSoltar = "<h4 id='"+nuevoIdElemento+"' class='elementHTML'>Lorem ipsum"+botonEdit+"</h4>";
                     break;
                 case 'h5':
+                	idH5++;
                 	htmlSecundario = "<h5 class='textoSecundario'>Elemento H5</h5>";
-                	htmlSoltar = "<h5 class='elementHTML'>Lorem ipsum</h5>";
+                	htmlSoltar = "<h5 id='"+nuevoIdElemento+"' class='elementHTML'>Lorem ipsum"+botonEdit+"</h5>";
                     break;
                 case 'h6':
+                	idH6++;
                 	htmlSecundario = "<h6 class='textoSecundario'>Elemento H6</h6>";
-                	htmlSoltar = "<h6 class='elementHTML'>Lorem ipsum</h6>";
+                	htmlSoltar = "<h6 id='"+nuevoIdElemento+"' class='elementHTML'>Lorem ipsum"+botonEdit+"</h6>";
                     break;
                 case 'boton':
+                	idBoton++;
                 	htmlSecundario = "<a href='#' class='btn btn-primary textoSecundario' role='button'>Button</a>";
-                	htmlSoltar = "<a href='#' class='btn btn-primary elementHTML' role='button'>Button</a>";
+                	htmlSoltar = "<a id='"+nuevoIdElemento+"' href='#' class='btn btn-primary elementHTML' role='button'>Button"+botonEdit+"</a>";
                     break;
                 case 'nav':
+                	idNav++;
                 	// Derecha
                 	htmlSecundario = "<nav class='navbar navbar-default textoSecundario'><div class='container-fluid'><div class='navbar-header'><button type='button' "+
 					"class='navbar-toggle collapsed' data-toggle='collapse' data-target='#bs-example-navbar-collapse-1' aria-expanded='false'>"+
@@ -100,7 +157,7 @@ $( document ).ready(function() {
 					"<ul class='dropdown-menu elementHTML'><li class='elementHTML'><a class='elementHTML' href='#'>Link Sub 1</a></li><li class='elementHTML'><a class='elementHTML' href='#'>Link Sub 2"+
 					"</a></li><li class='elementHTML'><a class='elementHTML' href='#'>Link Sub 3</a></li><li role='separator' class='divider elementHTML'></li>"+
 					"<li class='elementHTML'><a class='elementHTML' href='#'>Link Sub 4</a></li><li role='separator' class='divider elementHTML'></li><li class='elementHTML'>"+
-					"<a class='elementHTML' href='#'>Link Sub 5</a></li></ul></li></ul></div></div></nav>";
+					"<a class='elementHTML' href='#'>Link Sub 5</a></li></ul></li></ul></div></div>"+botonEdit+"</nav>";
 					// izquierda
                 	htmlSecundario = "<nav class='navbar navbar-default textoSecundario'><div class='container-fluid'><div class='navbar-header'><button type='button' "+
 					"class='navbar-toggle collapsed' data-toggle='collapse' data-target='#bs-example-navbar-collapse-1' aria-expanded='false'>"+
@@ -127,51 +184,59 @@ $( document ).ready(function() {
 					"<ul class='dropdown-menu elementHTML'><li class='elementHTML'><a class='elementHTML' href='#'>Link Sub 1</a></li><li class='elementHTML'><a class='elementHTML' href='#'>Link Sub 2"+
 					"</a></li><li class='elementHTML'><a class='elementHTML' href='#'>Link Sub 3</a></li><li role='separator' class='divider elementHTML'></li>"+
 					"<li class='elementHTML'><a class='elementHTML' href='#'>Link Sub 4</a></li><li role='separator' class='divider elementHTML'></li><li class='elementHTML'>"+
-					"<a class='elementHTML' href='#'>Link Sub 5</a></li></ul></li></ul></div></div></nav>";
+					"<a class='elementHTML' href='#'>Link Sub 5</a></li></ul></li></ul></div></div>"+botonEdit+"</nav>";
                     break;
                 case 'section':
+                	idSection++;
                 	htmlSecundario = "<section class='sectionSelect textoSecundario'> </section>";
-                	htmlSoltar = "<section class='sectionSelect elementHTML'> </section>";
+                	htmlSoltar = "<section id='"+nuevoIdElemento+"' class='sectionSelect elementHTML'> Seccion "+botonEdit+"</section>";
                     break;
                 case 'article':
+                	idArticle++;
                 	htmlSecundario = "<article class='textoSecundario'><h1> Titulo del Articulo </h1><p>Lorem ipsum dolor sit amet, consectetur adipiscing" +
 					"elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.</p></section>";
-                	htmlSoltar = "<article id='art' class='soltarEn elementHTML'><h1 class='elementHTML'> Titulo del Articulo </h1><p>Lorem ipsum dolor sit amet, consectetur adipiscing" +
-					"elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.</p></section>";
+                	htmlSoltar = "<article id='"+nuevoIdElemento+"' class='soltarEn elementHTML'><h1 class='elementHTML'> Titulo del Articulo </h1><p>Lorem ipsum dolor sit amet, consectetur adipiscing" +
+					"elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.</p>"+botonEdit+"</section>";
                     break;
                 case 'aside':
+                	idAside++;
                 	htmlSecundario = "<aside class='textoSecundario'><h4 class'elementHTML'>Titulo Aside</h4><p class='elementHTML'>Lorem ipsum dolor "+
 					"sit amet, consectetur adipiscing</p></aside>";
-                	htmlSoltar = "<aside class='asideDer elementHTML'><h4 class='elementHTML'>Titulo Aside</h4><p class='elementHTML'>Lorem ipsum dolor "+
-					"sit amet, consectetur adipiscing</p></aside>";
+                	htmlSoltar = "<aside id='"+nuevoIdElemento+"' class='asideDer elementHTML'><h4 class='elementHTML'>Titulo Aside</h4><p class='elementHTML'>Lorem ipsum dolor "+
+					"sit amet, consectetur adipiscing</p>"+botonEdit+"</aside>";
                     break;
                 case 'header':
+                	idHeader++;
                 	//Cuando únicamente tenemos un titulo dentro de un articulo o sección no debemos utilizar ni header ni <hgroup>.
                 	htmlSecundario = "<header class='headerSelect textoSecundario'> Titulo Header </header>";
-                	htmlSoltar = "<header class='headerSelect elementHTML'> Titulo Header </header>";
+                	htmlSoltar = "<header id='"+nuevoIdElemento+"' class='headerSelect elementHTML'> Titulo Header "+botonEdit+"</header>";
                     break;
                 case 'hgroup':
+                	idHgroup++;
                 	//Cuando únicamente tenemos un titulo dentro de un articulo o sección no debemos utilizar ni header ni <hgroup>.
                 	htmlSecundario = "<hgroup class='headerSelect textoSecundario'> Selecciona las h1-h6 antes de arrastrar </hgroup>";
-                	htmlSoltar = "<hgroup class='headerSelect elementHTML'> Selecciona las h1-h6 antes de arrastrar </hgroup>";
+                	htmlSoltar = "<hgroup id='"+nuevoIdElemento+"' class='headerSelect elementHTML'> Selecciona las h1-h6 antes de arrastrar "+botonEdit+"</hgroup>";
                     break;    
                 case 'footer':
+                	idFooter++;
                 	// Izquierda
                 	htmlSecundario = "<footer class='textoSecundario'> Titulo Footer </footer>";
-                	htmlSoltar = "<footer class='elementHTML'> Titulo Footer </footer>";
+                	htmlSoltar = "<footer id='"+nuevoIdElemento+"' class='elementHTML'> Titulo Footer "+botonEdit+"</footer>";
                 	// Centrado
                 	htmlSecundario = "<footer class='text-center textoSecundario'> Titulo Footer </footer>";
-                	htmlSoltar = "<footer class='text-center elementHTML'> Titulo Footer </footer>";
+                	htmlSoltar = "<footer id='"+nuevoIdElemento+"' class='text-center elementHTML'> Titulo Footer "+botonEdit+"</footer>";
                 	// Derecha
                 	htmlSecundario = "<footer class='text-right textoSecundario'> Titulo Footer </footer>";
-                	htmlSoltar = "<footer class='text-right elementHTML'> Titulo Footer </footer>";                	
+                	htmlSoltar = "<footer id='"+nuevoIdElemento+"' class='text-right elementHTML'> Titulo Footer "+botonEdit+"</footer>";                	
                     break;
                 case 'div':
+                	idDiv++;
                 	//Cuando únicamente tenemos un titulo dentro de un articulo o sección no debemos utilizar ni header ni <hgroup>.
                 	htmlSecundario = "<div class='textoSecundario'> div </div>";
-                	htmlSoltar = "<div class='elementHTML'> div </div>";
+                	htmlSoltar = "<div class='elementHTML'> div "+botonEdit+"</div>";
                     break; 
                 case 'form':
+                	idForm++;
                 	//Cuando únicamente tenemos un titulo dentro de un articulo o sección no debemos utilizar ni header ni <hgroup>.
                 	htmlSecundario = "<form class='textoSecundario' role='form elementHTML'><div class='form-group elementHTML'><label class='elementHTML' for='ejemplo_email_1'>Email</label>"+
 					"<input type='email' class='form-control elementHTML' id='ejemplo_email_1' placeholder='Introduce tu email'></div>"+
@@ -181,14 +246,14 @@ $( document ).ready(function() {
 					"<input class='elementHTML' type='file' id='ejemplo_archivo_1'><p class='help-block elementHTML'>Ejemplo de texto de ayuda.</p></div>"+
 					"<div class='checkbox elementHTML'><label><input type='checkbox elementHTML'> Activa esta casilla"+
 					"</label></div><button type='submit' class='btn btn-default elementHTML'>Enviar</button></form>";
-                	htmlSoltar = "<form role='form elementHTML'><div class='form-group elementHTML'><label class='elementHTML' for='ejemplo_email_1'>Email</label>"+
+                	htmlSoltar = "<form id='"+nuevoIdElemento+"' role='form elementHTML'><div class='form-group elementHTML'><label class='elementHTML' for='ejemplo_email_1'>Email</label>"+
 					"<input type='email' class='form-control elementHTML' id='ejemplo_email_1' placeholder='Introduce tu email'></div>"+
 					"<div class='form-group elementHTML'><label class='elementHTML' for='ejemplo_password_1'>Contraseña</label>"+
 					"<input type='password' class='form-control elementHTML' id='ejemplo_password_1' placeholder='Contraseña'></div>"+
 					"<div class='form-group elementHTML'><label class='elementHTML' for='ejemplo_archivo_1'>Adjuntar un archivo</label>"+
 					"<input class='elementHTML' type='file' id='ejemplo_archivo_1'><p class='help-block elementHTML'>Ejemplo de texto de ayuda.</p></div>"+
 					"<div class='checkbox elementHTML'><label><input type='checkbox elementHTML'> Activa esta casilla"+
-					"</label></div><button type='submit' class='btn btn-default elementHTML'>Enviar</button></form>";
+					"</label></div><button type='submit' class='btn btn-default elementHTML'>Enviar</button>"+botonEdit+"</form>";
                     break; 
                 case 'hr':
                 	//Cuando únicamente tenemos un titulo dentro de un articulo o sección no debemos utilizar ni header ni <hgroup>.
@@ -196,93 +261,109 @@ $( document ).ready(function() {
                 	htmlSoltar = "<hr />";
                     break; 
                 case 'i':
+                	idI++;
                 	//Cuando únicamente tenemos un titulo dentro de un articulo o sección no debemos utilizar ni header ni <hgroup>.
                 	htmlSecundario = "<i class='textoSecundario' > Prueba cursiva</i>";
-                	htmlSoltar = "<i> Prueba cursiva</i>";
+                	htmlSoltar = "<i> Prueba cursiva"+botonEdit+"</i>";
                     break; 
                 case 'strong':
+                	idStrong++;
                 	//Cuando únicamente tenemos un titulo dentro de un articulo o sección no debemos utilizar ni header ni <hgroup>.
                 	htmlSecundario = "<strong class='textoSecundario' > Prueba negrita</strong>";
-                	htmlSoltar = "<strong> Prueba negrita</strong>";
+                	htmlSoltar = "<strong> Prueba negrita"+botonEdit+"</strong>";
                     break;
                 case 'a':
+                	idA++;
                 	//Cuando únicamente tenemos un titulo dentro de un articulo o sección no debemos utilizar ni header ni <hgroup>.
                 	htmlSecundario = "<a href='#' class='textoSecundario' > Link de prueba</a>";
-                	htmlSoltar = "<a href='#'> Link de prueba</a>";
+                	htmlSoltar = "<a id='"+nuevoIdElemento+"' href='#'> Link de prueba"+botonEdit+"</a>";
                     break; 
                 case 'img':
+                	idImg++;
                 	//Cuando únicamente tenemos un titulo dentro de un articulo o sección no debemos utilizar ni header ni <hgroup>.
                 	htmlSecundario = "<img src='img/thumbl_1.jpg' alt='imagen prueba' class='textoSecundario' />";
-                	htmlSoltar = "<img src='img/thumbl_1.jpg' alt='imagen prueba'/>";
+                	htmlSoltar = "<img id='"+nuevoIdElemento+"' src='img/thumbl_1.jpg' alt='imagen prueba' />";
                     break;
                 case 'u':
+                	idU++;
                 	//Cuando únicamente tenemos un titulo dentro de un articulo o sección no debemos utilizar ni header ni <hgroup>.
                 	htmlSecundario = "<u class='textoSecundario'>Subrayado</u>";
-                	htmlSoltar = "<u>Subrayado</u>";
+                	htmlSoltar = "<u>Subrayado"+botonEdit+"</u>";
                     break;
                 case 'sub':
+                	idSub++;
                 	//Cuando únicamente tenemos un titulo dentro de un articulo o sección no debemos utilizar ni header ni <hgroup>.
                 	htmlSecundario = "<sub class='textoSecundario'>Subscript</sub>";
-                	htmlSoltar = "<sub>Subscript</sub>";
+                	htmlSoltar = "<sub>Subscript"+botonEdit+"</sub>";
                     break;
                 case 'sup':
+                	idSup++;
                 	//Cuando únicamente tenemos un titulo dentro de un articulo o sección no debemos utilizar ni header ni <hgroup>.
                 	htmlSecundario = "<sup class='textoSecundario'>Superscript</sup>";
-                	htmlSoltar = "<sup>Superscript</sup>";
+                	htmlSoltar = "<sup>Superscript"+botonEdit+"</sup>";
                     break;
                 case 'legend': // Dentro de Form
+                	idLegend++;
                 	//Cuando únicamente tenemos un titulo dentro de un articulo o sección no debemos utilizar ni header ni <hgroup>.
                 	htmlSecundario = "<legend class='textoSecundario'>legend</legend>";
-                	htmlSoltar = "<legend>legend</legend>";
+                	htmlSoltar = "<legend>legend"+botonEdit+"</legend>";
                     break;
                 case 'fieldset': // Dentro de Form
+                	idFieldset++;
                 	//Cuando únicamente tenemos un titulo dentro de un articulo o sección no debemos utilizar ni header ni <hgroup>.
                 	htmlSecundario = "<fieldset class='textoSecundario'>fieldset</fieldset>";
-                	htmlSoltar = "<fieldset>fieldset</fieldset>";
+                	htmlSoltar = "<fieldset>fieldset"+botonEdit+"</fieldset>";
                     break;
                 case 'blockquote': // Dentro de Form
+                	idBlockquote++;
                 	//Cuando únicamente tenemos un titulo dentro de un articulo o sección no debemos utilizar ni header ni <hgroup>.
                 	htmlSecundario = "<blockquote class='textoSecundario' cite='#'>blockquote</blockquote>";
-                	htmlSoltar = "<blockquote cite='#'>blockquote</blockquote>";
+                	htmlSoltar = "<blockquote cite='#'>blockquote"+botonEdit+"</blockquote>";
                     break;
                 case 'select': // Dentro de Form
+                	idSelect++;
                 	//Cuando únicamente tenemos un titulo dentro de un articulo o sección no debemos utilizar ni header ni <hgroup>.
                 	htmlSecundario = "<select class='textoSecundario'><option value='Opcion1'>Volvo</option><option value='Opcion2'>Volvo</option><option value='Opcion3'>Volvo</option></select>";
-                	htmlSoltar = "<select><option value='Opcion1'>Volvo</option><option value='Opcion2'>Volvo</option><option value='Opcion3'>Volvo</option></select>";
+                	htmlSoltar = "<div id='"+nuevoIdElemento+"' class='select'><select><option value='Opcion1'>Volvo</option><option value='Opcion2'>Volvo</option><option value='Opcion3'>Volvo</option></select>"+botonEdit+"</div>";
                     break;
                 case 'optgroup': // Dentro de Form
+                	idOptgroup++;
                 	//Cuando únicamente tenemos un titulo dentro de un articulo o sección no debemos utilizar ni header ni <hgroup>.
                 	htmlSecundario = "<select class='textoSecundario'><optgroup label='Titulo 1'><option value='opcion1'>Opcion 1</option><option value='opcion3'>Opcion 2</option></optgroup>"+
                 	"<optgroup label='Titulo 2'><option value='opcion3'>Opcion 1</option><option value='opcion4'>Opcion 2</option></optgroup></select>";
-                	htmlSoltar = "<select><optgroup label='Titulo 1'><option value='opcion1'>Opcion 1</option><option value='opcion3'>Opcion 2</option></optgroup>"+
-                	"<optgroup label='Titulo 2'><option value='opcion3'>Opcion 1</option><option value='opcion4'>Opcion 2</option></optgroup></select>";
+                	htmlSoltar = "<div><select id='"+nuevoIdElemento+"'><optgroup label='Titulo 1'><option value='opcion1'>Opcion 1</option><option value='opcion3'>Opcion 2</option></optgroup>"+
+                	"<optgroup label='Titulo 2'><option value='opcion3'>Opcion 1</option><option value='opcion4'>Opcion 2</option></optgroup></select>"+botonEdit+"</div>";
                     break;
                 case 'input': // Dentro de Form
+                	idInput++;
                 	//Cuando únicamente tenemos un titulo dentro de un articulo o sección no debemos utilizar ni header ni <hgroup>.
                 	htmlSecundario = "<input class='textoSecundario' type='text' name='fname' value='Texto'>";
-                	htmlSoltar = "<input type='text' name='fname' value='Texto'>";
+                	htmlSoltar = "<input id='"+nuevoIdElemento+"' type='text' name='fname' value='Texto'>";
                     break;
                 case 'textarea': // Dentro de Form
+                	idTextarea++;
                 	//Cuando únicamente tenemos un titulo dentro de un articulo o sección no debemos utilizar ni header ni <hgroup>.
                 	htmlSecundario = "<textarea class='textoSecundario' rows='4' cols='50'>Textarea</textarea>";
                 	htmlSoltar = "<textarea rows='4' cols='50'>Textarea</textarea>";
                     break;
                 case 'address': // Dentro de Form
+                	idAddress++;
                 	//Cuando únicamente tenemos un titulo dentro de un articulo o sección no debemos utilizar ni header ni <hgroup>.
                 	htmlSecundario = "<address>Escrito por <a href='mailto:webmaster@example.com'>Juan Perez</a>.<br>"+ 
 					"Visitanos:<br>Example.com<br>Casilla 564, Departamento<br>PARAGUAY</address>";
-                	htmlSoltar = "<address>Escrito por <a href='mailto:webmaster@example.com'>Juan Perez</a>.<br>"+ 
-					"Visitanos:<br>Example.com<br>Casilla 564, Departamento<br>PARAGUAY</address>";
+                	htmlSoltar = "<address id='"+nuevoIdElemento+"'>Escrito por <a href='mailto:webmaster@example.com'>Juan Perez</a>.<br>"+ 
+					"Visitanos:<br>Example.com<br>Casilla 564, Departamento<br>PARAGUAY "+botonEdit+"</address>";
 				case 'map': // Dentro de Form
+					idMap++;
                 	//Cuando únicamente tenemos un titulo dentro de un articulo o sección no debemos utilizar ni header ni <hgroup>.
                 	htmlSecundario = "<img src='planets.gif' width='145' height='126' alt='Planets' usemap='#planetmap'>"+
 					"<map name='planetmap'><area shape='rect' coords='0,0,82,126' alt='Sun' href='sun.htm'>"+
 					"<area shape='circle' coords='90,58,3' alt='Mercury' href='mercur.htm'>"+
 					"<area shape='circle' coords='124,58,8' alt='Venus' href='venus.htm'></map>";
                 	htmlSoltar = "<img src='planets.gif' width='145' height='126' alt='Planets' usemap='#planetmap'>"+
-					"<map name='planetmap'><area shape='rect' coords='0,0,82,126' alt='Sun' href='sun.htm'>"+
+					"<map id='"+nuevoIdElemento+"' name='planetmap'><area shape='rect' coords='0,0,82,126' alt='Sun' href='sun.htm'>"+
 					"<area shape='circle' coords='90,58,3' alt='Mercury' href='mercur.htm'>"+
-					"<area shape='circle' coords='124,58,8' alt='Venus' href='venus.htm'></map>";
+					"<area shape='circle' coords='124,58,8' alt='Venus' href='venus.htm'>"+botonEdit+"</map>";
                     break;
                 default:
                     htmlSecundario = "";
@@ -322,14 +403,57 @@ $( document ).ready(function() {
 	$(".elementHTML").mouseover(function() {
 		elementoIdMouse =  $(this).attr('id');
 		elementoNomMouse =  $(this).prop("tagName"); //.tagName();  //$(this).attr('id');
-		alert('3 id '+elementoIdMouse+' tag '+elementoNomMouse);
+
+		var ppp = $('#'+elementoIdMouse).hasClass("noSelect");
+		var clases = $('#'+elementoIdMouse).attr("class").split(' ');
+		alert('1* EL ID '+elementoIdMouse+' TIENE LA CLASE '+clases);
+		//elementoActual = elementoIdMouse
+
+		/*if ( $('#'+elementoIdMouse).hasClass("noSelect") ) {
+
+		}else {
+			//alert('3 id '+elementoIdMouse+' tag '+elementoNomMouse);
+			mostrarEdicion(elementoIdMouse);
+		}*/
+
+		// Sirve ?
+		/*if (elementoActual == elementoIdMouse){
+			
+		}else{
+			mostrarEdicion(elementoIdMouse);
+			elementoActual = elementoIdMouse;
+			alert('2-* EL ID '+elementoActual+' TIENE LA CLASE '+clases);
+		}*/
+	});
+
+	// Eliminar
+	$(".elementHTML").mouseout(function() {
+		//ocultarEdicion();	
+		//elementoActual = '';	
 	});
 });
+
+
+function mostrarEdicion(idSeleccionado){ // FUNCIONO
+	//alert('pruebaaa '+idSeleccionado);
+	//$('.configPage').remove();
+
+	$("#"+idSeleccionado).append( "<div id='id' class='btn-group configPage noSelect elementHTML' role='group'>"+
+	"<button id='btnEditConfig' type='button' onclick='"+'alert($(this).attr("id"));elementoIdMouse=$(this).attr("id");'+"' class='btn btn-default noSelect'><img class='noSelect' src='img/edicion/editar.png' alt='Editar'></button>"+
+	"<button type='button' class='btn btn-default noSelect'><img class='noSelect' src='img/edicion/eliminar.png' alt='Eliminar'></button>"+
+	"<button type='button' class='btn btn-default noSelect'><img class='noSelect' src='img/edicion/mover.png' alt='Mover'></button>"+
+	"<button type='button' class='btn btn-default noSelect'><img class='noSelect' src='img/edicion/configurar.png'></button></div>" );
+}
+
+// Ocultar barra de edicion
+function ocultarEdicion(){
+	$('.configPage').remove();
+	//$('#'+idSeleccionado).remove();
+}
 
 // Vista previa en 2 dispositivos
 function verEnDispositivo(device){
 	if (anchoDispositivo > 803) {
-		alert('op2');
 		ocultarTodo();
 		$('#standalone').css('display','inline-block');
 		$('#standalone').popup({
@@ -341,10 +465,12 @@ function verEnDispositivo(device){
 		switch (device) {
 	        case 's': {
 	            $('.deviceSmartphone1').css('display','block');
+	            alert('1');
 	            break;
 	        }
 	        case 't': {
 	            $('.deviceTablet1').css('display','block');
+	            alert('2');
 	            break;
 	        }
 	    }

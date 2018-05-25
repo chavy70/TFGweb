@@ -119,8 +119,11 @@ div.dest {
 /*BORRAR-------------------------------- */
 #makeMeDraggable { float: left; width: 100px; height: 100px; background: red; }
 #makeMeDroppable { float: right; width: 200px; height: 200px; border: 1px solid #999; }
-
-
+.configPage img{ width: 15px; }
+.configPage { display: none; }
+.elementHTML:hover .configPage { display: inline; }
+.elementHTML { position: relative; }
+.configPage { position: absolute; right: 1px; }
 
 
 /*Collapse*/

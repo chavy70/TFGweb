@@ -48,3 +48,18 @@
   position:fixed; top:0; right:0;
   width:99px; height:99px; background:url(../img/github.png);
 }
+
+.btnTranspRojo {
+    background-color: transparent;
+    border-color: #c6002e;
+    border-radius: 3px;
+    color: #c6002e;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.btnTranspRojo:hover {
+    background-color: #c6002e;
+    color: #fff;
+}

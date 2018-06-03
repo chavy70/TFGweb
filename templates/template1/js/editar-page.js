@@ -36,43 +36,45 @@ var idTextarea = 0;
 var idAddress = 0;
 var idMap = 0;
 var idCont = 0;
+/*
+* elementHTML : Muestra seleccion cuando el mouse esta sobre el objeto
+* sortable : los elementos contenidos dentro de esta clase y todos sus elementos dentro de él pueden moverse libremente, intercambiando lugares con otros elementos
+*/ 
 //var jQ = jQuery.noConflict();
 var anchoDispositivo = 1950
 /*Document ready de la pagina*/	
 $( document ).ready(function() {
-	//$("#test1").attr('contentEditable',true);
+	//$( "#draggable" ).draggable();
 
+	//$( ".sortable" ).sortable();
+	$( ".sortable" ).sortable({
+		connectWith: ".sortable" // Permite mover elementos dentro de otros elementos
+	}).disableSelection();
+	/*
+	$( "#sortable1, #sortable2" ).sortable({
+      connectWith: ".connectedSortable"
+    }).disableSelection();
+	*/
 	//Obtengo el ancho de la pagina
 	anchoDispositivo = 1950//$(window).width();
 	ocultarTodo();
 	// Drop and drag --------------------------------------------------------------------------------------------------
 	$(document).on("mouseup",".soltarEn",function(event){
-	//$(".soltarEn").mouseup(function(){
-		//alert('Holaaa')
 		soltarEn = $(this).attr("id")
-		//alert('soltarEn '+soltarEn)
 		$("#"+soltarEn).droppable({
 			accept: ".arrastrar",
 			tolerance: 'pointer',
 			greedy: true,
 			hoverClass: 'highlight',
 			drop: function(ev, ui) {
-				alert('entra')
 				$(ui.draggable).clone(true).detach().css({
 					position: 'relative',
 					top: 'auto',
 					left: 'auto'
-				//}).appendTo(this).replaceWith( "<h1 id='h1_2'>Texto H1</h1>" );
 				}).appendTo(this).replaceWith(htmlSoltar);
-				//Codigo para agregar  clase
-				//$( this ).addClass( "holaaa" ).find( "#target1" ).html( "Dropped!" );
 			}
 		});
 	});
-	//Se van marcando sobre que panel se encuentra el mouse
-	/*$(".soltarEn").mouseover(function() {
-		$("#"+$(this).attr("id")).css("");
-	});*/
 	
 	//Arrastra el elemento seleccionado y lo suelta
 	$(".arrastrar").draggable({
@@ -88,46 +90,46 @@ $( document ).ready(function() {
 			}
 			nuevoIdElemento = elementoActual+'_'+idCont
 			var botonEdit = "<div class='btn-group configPage noSelect' role='group'>"+
-			"<button id='btnEditConfig' type='button' onclick='alert(\""+nuevoIdElemento+"\"); $(\"#"+nuevoIdElemento+"\").attr(\"contentEditable\",true); $(\"[contenteditable]\",\"#nuevoIdElemento\").focus();' class='btn btn-default noSelect'><img class='noSelect' src='img/edicion/editar.png' alt='Editar'></button>"+
-			"<button type='button' class='btn btn-default noSelect'><img class='noSelect' src='img/edicion/eliminar.png' alt='Eliminar'></button>"+
-			"<button type='button' class='btn btn-default noSelect'><img class='noSelect' src='img/edicion/mover.png' alt='Mover'></button>"+
-			"<button type='button' class='btn btn-default noSelect'><img class='noSelect' src='img/edicion/configurar.png'></button></div>"
+			"<button id='btnEditConfig' contentEditable='false' type='button' onclick='$(\"#"+nuevoIdElemento+"\").attr(\"contentEditable\",true); document.getElementById(\""+nuevoIdElemento+"\").focus();' class='btn btn-default noSelect'><img class='noSelect' src='img/edicion/editar.png' alt='Editar'></button>"+
+			"<button type='button' contentEditable='false' onclick='$(\"#"+nuevoIdElemento+"\").remove();' class='btn btn-default noSelect'><img class='noSelect' src='img/edicion/eliminar.png' alt='Eliminar'></button>"+
+			"<button type='button' contentEditable='false' class='btn btn-default noSelect'><img class='noSelect' src='img/edicion/mover.png' alt='Mover'></button>"+
+			"<button type='button' contentEditable='false' class='btn btn-default noSelect'><img class='noSelect' src='img/edicion/configurar.png'></button></div>"
 			
 			//elementoActual
 			var htmlSecundario = "";
 			switch (elementoActual) {
                 case 'h1':
                     htmlSecundario = "<h1 class='textoSecundario'>Elemento H1</h1>"; // Texto que se muestra mientras se arrastra
-                    htmlSoltar = "<h1 id='"+nuevoIdElemento+"' class='elementHTML'>Lorem ipsum "+botonEdit+"</h1>"; // HTML generado con su id correspondiente
+                    htmlSoltar = "<h1 id='"+nuevoIdElemento+"' class='elementHTML sortable' onfocus=\"document.execCommand('selectAll', false, null);\">Lorem ipsum "+botonEdit+"</h1>"; // HTML generado con su id correspondiente
                     break;
                 case 'h2':
                     htmlSecundario = "<h2 class='textoSecundario'>Elemento H2</h2>";
-                    htmlSoltar = "<h2 id='"+nuevoIdElemento+"' class='elementHTML'>Lorem ipsum"+botonEdit+"</h2>";
+                    htmlSoltar = "<h2 id='"+nuevoIdElemento+"' class='elementHTML sortable' onfocus=\"document.execCommand('selectAll', false, null);\">Lorem ipsum"+botonEdit+"</h2>";
                     break;
                 case 'h3':
                 	idH3++;
                 	htmlSecundario = "<h3 class='textoSecundario'>Elemento H3</h3>";
-                	htmlSoltar = "<h3 id='"+nuevoIdElemento+"' class='elementHTML'>Lorem ipsum"+botonEdit+"</h3>";
+                	htmlSoltar = "<h3 id='"+nuevoIdElemento+"' class='elementHTML sortable' onfocus=\"document.execCommand('selectAll', false, null);\">Lorem ipsum"+botonEdit+"</h3>";
                     break;
                 case 'h4':
                 	idH4++;
                 	htmlSecundario = "<h4 class='textoSecundario'>Elemento H4</h4>";
-                	htmlSoltar = "<h4 id='"+nuevoIdElemento+"' class='elementHTML'>Lorem ipsum"+botonEdit+"</h4>";
+                	htmlSoltar = "<h4 id='"+nuevoIdElemento+"' class='elementHTML sortable' onfocus=\"document.execCommand('selectAll', false, null);\">Lorem ipsum"+botonEdit+"</h4>";
                     break;
                 case 'h5':
                 	idH5++;
                 	htmlSecundario = "<h5 class='textoSecundario'>Elemento H5</h5>";
-                	htmlSoltar = "<h5 id='"+nuevoIdElemento+"' class='elementHTML'>Lorem ipsum"+botonEdit+"</h5>";
+                	htmlSoltar = "<h5 id='"+nuevoIdElemento+"' class='elementHTML sortable' onfocus=\"document.execCommand('selectAll', false, null);\">Lorem ipsum"+botonEdit+"</h5>";
                     break;
                 case 'h6':
                 	idH6++;
                 	htmlSecundario = "<h6 class='textoSecundario'>Elemento H6</h6>";
-                	htmlSoltar = "<h6 id='"+nuevoIdElemento+"' class='elementHTML'>Lorem ipsum"+botonEdit+"</h6>";
+                	htmlSoltar = "<h6 id='"+nuevoIdElemento+"' class='elementHTML sortable' onfocus=\"document.execCommand('selectAll', false, null);\">Lorem ipsum"+botonEdit+"</h6>";
                     break;
                 case 'boton':
                 	idBoton++;
                 	htmlSecundario = "<a href='#' class='btn btn-primary textoSecundario' role='button'>Button</a>";
-                	htmlSoltar = "<a id='"+nuevoIdElemento+"' href='#' class='btn btn-primary elementHTML' role='button'>Button"+botonEdit+"</a>";
+                	htmlSoltar = "<a id='"+nuevoIdElemento+"' href='#' class='btn btn-primary elementHTML sortable' role='button' onfocus=\"document.execCommand('selectAll', false, null);\">Button"+botonEdit+"</a>";
                     break;
                 case 'nav':
                 	idNav++;
@@ -145,12 +147,12 @@ $( document ).ready(function() {
 					"</a></li><li><a href='#'>Link Sub 3</a></li><li role='separator' class='divider'></li>"+
 					"<li><a href='#'>Link Sub 4</a></li><li role='separator' class='divider'></li><li>"+
 					"<a href='#'>Link Sub 5</a></li></ul></li></ul></div></div></nav>";
-					htmlSoltar = "<nav class='navbar navbar-default elementHTML'><div class='container-fluid elementHTML'><div class='navbar-header elementHTML'><button type='button' "+
-					"class='navbar-toggle collapsed elementHTML' data-toggle='collapse' data-target='#bs-example-navbar-collapse-1' aria-expanded='false'>"+
-					"<span class='sr-only elementHTML'>Toggle navigation</span><span class='icon-bar elementHTML'></span><span class='icon-bar elementHTML'>"+
-					"</span><span class='icon-bar elementHTML'></span></button><a class='navbar-brand elementHTML' href='#'>Empresa</a></div>"+
-					"<div class='collapse navbar-collapse elementHTML' id='bs-example-navbar-collapse-1'>"+
-					"<ul class='nav navbar-nav navbar-right elementHTML'><li class='active elementHTML'><a href='#'>Link 1<span "+
+					htmlSoltar = "<nav class='navbar navbar-default elementHTML sortable'><div class='container-fluid elementHTML sortable'><div class='navbar-header elementHTML sortable'><button type='button' "+
+					"class='navbar-toggle collapsed elementHTML sortable' data-toggle='collapse' data-target='#bs-example-navbar-collapse-1' aria-expanded='false'>"+
+					"<span class='sr-only elementHTML sortable'>Toggle navigation</span><span class='icon-bar elementHTML sortable'></span><span class='icon-bar elementHTML sortable'>"+
+					"</span><span class='icon-bar elementHTML sortable'></span></button><a class='navbar-brand elementHTML sortable' href='#'>Empresa</a></div>"+
+					"<div class='collapse navbar-collapse elementHTML sortable' id='bs-example-navbar-collapse-1'>"+
+					"<ul class='nav navbar-nav navbar-right elementHTML sortable'><li class='active elementHTML'><a href='#'>Link 1<span "+
 					"class='sr-only elementHTML'>(current)</span></a></li><li class='elementHTML'><a class='elementHTML' href='#'>Link 2</a></li>"+
 					"<li class='dropdown elementHTML'><a href='#' class='dropdown-toggle elementHTML' data-toggle='dropdown' role='button' "+
 					"aria-haspopup='true' aria-expanded='false'> SubMenu <span class='caret'></span></a>"+
@@ -172,12 +174,12 @@ $( document ).ready(function() {
 					"</a></li><li><a href='#'>Link Sub 3</a></li><li role='separator' class='divider'></li>"+
 					"<li><a href='#'>Link Sub 4</a></li><li role='separator' class='divider'></li><li>"+
 					"<a href='#'>Link Sub 5</a></li></ul></li></ul></div></div></nav>";
-					htmlSoltar = "<nav class='navbar navbar-default elementHTML'><div class='container-fluid elementHTML'><div class='navbar-header elementHTML'><button type='button' "+
-					"class='navbar-toggle collapsed elementHTML' data-toggle='collapse' data-target='#bs-example-navbar-collapse-1' aria-expanded='false'>"+
-					"<span class='sr-only elementHTML'>Toggle navigation</span><span class='icon-bar elementHTML'></span><span class='icon-bar elementHTML'>"+
-					"</span><span class='icon-bar elementHTML'></span></button><a class='navbar-brand elementHTML' href='#'>Empresa</a></div>"+
-					"<div class='collapse navbar-collapse elementHTML' id='bs-example-navbar-collapse-1'>"+
-					"<ul class='nav navbar-nav elementHTML'><li class='active elementHTML'><a href='#'>Link 1<span "+
+					htmlSoltar = "<nav class='navbar navbar-default elementHTML sortable'><div class='container-fluid elementHTML sortable'><div class='navbar-header elementHTML sortable'><button type='button' "+
+					"class='navbar-toggle collapsed elementHTML sortable' data-toggle='collapse' data-target='#bs-example-navbar-collapse-1' aria-expanded='false'>"+
+					"<span class='sr-only elementHTML sortable'>Toggle navigation</span><span class='icon-bar elementHTML sortable'></span><span class='icon-bar elementHTML sortable'>"+
+					"</span><span class='icon-bar elementHTML sortable'></span></button><a class='navbar-brand elementHTML sortable' href='#'>Empresa</a></div>"+
+					"<div class='collapse navbar-collapse elementHTML sortable' id='bs-example-navbar-collapse-1'>"+
+					"<ul class='nav navbar-nav elementHTML sortable'><li class='active elementHTML'><a href='#'>Link 1<span "+
 					"class='sr-only elementHTML'>(current)</span></a></li><li class='elementHTML'><a class='elementHTML' href='#'>Link 2</a></li>"+
 					"<li class='dropdown elementHTML'><a href='#' class='dropdown-toggle elementHTML' data-toggle='dropdown' role='button' "+
 					"aria-haspopup='true' aria-expanded='false'> SubMenu <span class='caret'></span></a>"+
@@ -189,51 +191,51 @@ $( document ).ready(function() {
                 case 'section':
                 	idSection++;
                 	htmlSecundario = "<section class='sectionSelect textoSecundario'> </section>";
-                	htmlSoltar = "<section id='"+nuevoIdElemento+"' class='sectionSelect elementHTML'> Seccion "+botonEdit+"</section>";
+                	htmlSoltar = "<section id='"+nuevoIdElemento+"' class='sectionSelect elementHTML sortable'> Seccion "+botonEdit+"</section>";
                     break;
                 case 'article':
                 	idArticle++;
                 	htmlSecundario = "<article class='textoSecundario'><h1> Titulo del Articulo </h1><p>Lorem ipsum dolor sit amet, consectetur adipiscing" +
 					"elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.</p></section>";
-                	htmlSoltar = "<article id='"+nuevoIdElemento+"' class='soltarEn elementHTML'><h1 class='elementHTML'> Titulo del Articulo </h1><p>Lorem ipsum dolor sit amet, consectetur adipiscing" +
+                	htmlSoltar = "<article id='"+nuevoIdElemento+"' class='soltarEn elementHTML sortable' onfocus=\"document.execCommand('selectAll', false, null);\"><h1 class='elementHTML sortable'> Titulo del Articulo </h1><p>Lorem ipsum dolor sit amet, consectetur adipiscing" +
 					"elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.</p>"+botonEdit+"</section>";
                     break;
                 case 'aside':
                 	idAside++;
                 	htmlSecundario = "<aside class='textoSecundario'><h4 class'elementHTML'>Titulo Aside</h4><p class='elementHTML'>Lorem ipsum dolor "+
 					"sit amet, consectetur adipiscing</p></aside>";
-                	htmlSoltar = "<aside id='"+nuevoIdElemento+"' class='asideDer elementHTML'><h4 class='elementHTML'>Titulo Aside</h4><p class='elementHTML'>Lorem ipsum dolor "+
+                	htmlSoltar = "<aside id='"+nuevoIdElemento+"' class='asideDer elementHTML sortable' onfocus=\"document.execCommand('selectAll', false, null);\"><h4 class='elementHTML sortable'>Titulo Aside</h4><p class='elementHTML sortable'>Lorem ipsum dolor "+
 					"sit amet, consectetur adipiscing</p>"+botonEdit+"</aside>";
                     break;
                 case 'header':
                 	idHeader++;
                 	//Cuando únicamente tenemos un titulo dentro de un articulo o sección no debemos utilizar ni header ni <hgroup>.
                 	htmlSecundario = "<header class='headerSelect textoSecundario'> Titulo Header </header>";
-                	htmlSoltar = "<header id='"+nuevoIdElemento+"' class='headerSelect elementHTML'> Titulo Header "+botonEdit+"</header>";
+                	htmlSoltar = "<header id='"+nuevoIdElemento+"' class='headerSelect elementHTML sortable' onfocus=\"document.execCommand('selectAll', false, null);\"> Titulo Header "+botonEdit+"</header>";
                     break;
                 case 'hgroup':
                 	idHgroup++;
                 	//Cuando únicamente tenemos un titulo dentro de un articulo o sección no debemos utilizar ni header ni <hgroup>.
                 	htmlSecundario = "<hgroup class='headerSelect textoSecundario'> Selecciona las h1-h6 antes de arrastrar </hgroup>";
-                	htmlSoltar = "<hgroup id='"+nuevoIdElemento+"' class='headerSelect elementHTML'> Selecciona las h1-h6 antes de arrastrar "+botonEdit+"</hgroup>";
+                	htmlSoltar = "<hgroup id='"+nuevoIdElemento+"' class='headerSelect elementHTML sortable' onfocus=\"document.execCommand('selectAll', false, null);\"> Selecciona las h1-h6 antes de arrastrar "+botonEdit+"</hgroup>";
                     break;    
                 case 'footer':
                 	idFooter++;
                 	// Izquierda
                 	htmlSecundario = "<footer class='textoSecundario'> Titulo Footer </footer>";
-                	htmlSoltar = "<footer id='"+nuevoIdElemento+"' class='elementHTML'> Titulo Footer "+botonEdit+"</footer>";
+                	htmlSoltar = "<footer id='"+nuevoIdElemento+"' class='elementHTML sortable'> Titulo Footer "+botonEdit+"</footer>";
                 	// Centrado
                 	htmlSecundario = "<footer class='text-center textoSecundario'> Titulo Footer </footer>";
-                	htmlSoltar = "<footer id='"+nuevoIdElemento+"' class='text-center elementHTML'> Titulo Footer "+botonEdit+"</footer>";
+                	htmlSoltar = "<footer id='"+nuevoIdElemento+"' class='text-center elementHTML sortable'> Titulo Footer "+botonEdit+"</footer>";
                 	// Derecha
                 	htmlSecundario = "<footer class='text-right textoSecundario'> Titulo Footer </footer>";
-                	htmlSoltar = "<footer id='"+nuevoIdElemento+"' class='text-right elementHTML'> Titulo Footer "+botonEdit+"</footer>";                	
+                	htmlSoltar = "<footer id='"+nuevoIdElemento+"' class='text-right elementHTML sortable'> Titulo Footer "+botonEdit+"</footer>";                	
                     break;
                 case 'div':
                 	idDiv++;
                 	//Cuando únicamente tenemos un titulo dentro de un articulo o sección no debemos utilizar ni header ni <hgroup>.
                 	htmlSecundario = "<div class='textoSecundario'> div </div>";
-                	htmlSoltar = "<div class='elementHTML'> div "+botonEdit+"</div>";
+                	htmlSoltar = "<div class='elementHTML sortable'> div "+botonEdit+"</div>";
                     break; 
                 case 'form':
                 	idForm++;
@@ -246,14 +248,14 @@ $( document ).ready(function() {
 					"<input class='elementHTML' type='file' id='ejemplo_archivo_1'><p class='help-block elementHTML'>Ejemplo de texto de ayuda.</p></div>"+
 					"<div class='checkbox elementHTML'><label><input type='checkbox elementHTML'> Activa esta casilla"+
 					"</label></div><button type='submit' class='btn btn-default elementHTML'>Enviar</button></form>";
-                	htmlSoltar = "<form id='"+nuevoIdElemento+"' role='form elementHTML'><div class='form-group elementHTML'><label class='elementHTML' for='ejemplo_email_1'>Email</label>"+
-					"<input type='email' class='form-control elementHTML' id='ejemplo_email_1' placeholder='Introduce tu email'></div>"+
-					"<div class='form-group elementHTML'><label class='elementHTML' for='ejemplo_password_1'>Contraseña</label>"+
-					"<input type='password' class='form-control elementHTML' id='ejemplo_password_1' placeholder='Contraseña'></div>"+
-					"<div class='form-group elementHTML'><label class='elementHTML' for='ejemplo_archivo_1'>Adjuntar un archivo</label>"+
-					"<input class='elementHTML' type='file' id='ejemplo_archivo_1'><p class='help-block elementHTML'>Ejemplo de texto de ayuda.</p></div>"+
-					"<div class='checkbox elementHTML'><label><input type='checkbox elementHTML'> Activa esta casilla"+
-					"</label></div><button type='submit' class='btn btn-default elementHTML'>Enviar</button>"+botonEdit+"</form>";
+                	htmlSoltar = "<form id='"+nuevoIdElemento+"' role='form' class='elementHTML sortable'><div class='form-group elementHTML sortable'><label class='elementHTML sortable' for='ejemplo_email_1'>Email</label>"+
+					"<input type='email' class='form-control elementHTML sortable' id='ejemplo_email_1' placeholder='Introduce tu email'></div>"+
+					"<div class='form-group elementHTML sortable'><label class='elementHTML sortable' for='ejemplo_password_1'>Contraseña</label>"+
+					"<input type='password' class='form-control elementHTML sortable' id='ejemplo_password_1' placeholder='Contraseña'></div>"+
+					"<div class='form-group elementHTML sortable'><label class='elementHTML sortable' for='ejemplo_archivo_1'>Adjuntar un archivo</label>"+
+					"<input class='elementHTML sortable' type='file' id='ejemplo_archivo_1'><p class='help-block elementHTML sortable'>Ejemplo de texto de ayuda.</p></div>"+
+					"<div class='checkbox elementHTML sortable'><label><input type='checkbox elementHTML sortable'> Activa esta casilla"+
+					"</label></div><button type='submit' class='btn btn-default elementHTML sortable'>Enviar</button>"+botonEdit+"</form>";
                     break; 
                 case 'hr':
                 	//Cuando únicamente tenemos un titulo dentro de un articulo o sección no debemos utilizar ni header ni <hgroup>.
@@ -324,34 +326,34 @@ $( document ).ready(function() {
                 	idSelect++;
                 	//Cuando únicamente tenemos un titulo dentro de un articulo o sección no debemos utilizar ni header ni <hgroup>.
                 	htmlSecundario = "<select class='textoSecundario'><option value='Opcion1'>Volvo</option><option value='Opcion2'>Volvo</option><option value='Opcion3'>Volvo</option></select>";
-                	htmlSoltar = "<div id='"+nuevoIdElemento+"' class='select'><select><option value='Opcion1'>Volvo</option><option value='Opcion2'>Volvo</option><option value='Opcion3'>Volvo</option></select>"+botonEdit+"</div>";
+                	htmlSoltar = "<div id='"+nuevoIdElemento+"' class='select elementHTML sortable'><select><option value='Opcion1'>Volvo</option><option value='Opcion2'>Volvo</option><option value='Opcion3'>Volvo</option></select>"+botonEdit+"</div>";
                     break;
                 case 'optgroup': // Dentro de Form
                 	idOptgroup++;
                 	//Cuando únicamente tenemos un titulo dentro de un articulo o sección no debemos utilizar ni header ni <hgroup>.
                 	htmlSecundario = "<select class='textoSecundario'><optgroup label='Titulo 1'><option value='opcion1'>Opcion 1</option><option value='opcion3'>Opcion 2</option></optgroup>"+
                 	"<optgroup label='Titulo 2'><option value='opcion3'>Opcion 1</option><option value='opcion4'>Opcion 2</option></optgroup></select>";
-                	htmlSoltar = "<div><select id='"+nuevoIdElemento+"'><optgroup label='Titulo 1'><option value='opcion1'>Opcion 1</option><option value='opcion3'>Opcion 2</option></optgroup>"+
+                	htmlSoltar = "<div class='elementHTML sortable'><select id='"+nuevoIdElemento+"'><optgroup label='Titulo 1'><option value='opcion1'>Opcion 1</option><option value='opcion3'>Opcion 2</option></optgroup>"+
                 	"<optgroup label='Titulo 2'><option value='opcion3'>Opcion 1</option><option value='opcion4'>Opcion 2</option></optgroup></select>"+botonEdit+"</div>";
                     break;
                 case 'input': // Dentro de Form
                 	idInput++;
                 	//Cuando únicamente tenemos un titulo dentro de un articulo o sección no debemos utilizar ni header ni <hgroup>.
                 	htmlSecundario = "<input class='textoSecundario' type='text' name='fname' value='Texto'>";
-                	htmlSoltar = "<input id='"+nuevoIdElemento+"' type='text' name='fname' value='Texto'>";
+                	htmlSoltar = "<input class='elementHTML sortable' id='"+nuevoIdElemento+"' type='text' name='fname' value='Texto'>";
                     break;
                 case 'textarea': // Dentro de Form
                 	idTextarea++;
                 	//Cuando únicamente tenemos un titulo dentro de un articulo o sección no debemos utilizar ni header ni <hgroup>.
                 	htmlSecundario = "<textarea class='textoSecundario' rows='4' cols='50'>Textarea</textarea>";
-                	htmlSoltar = "<textarea rows='4' cols='50'>Textarea</textarea>";
+                	htmlSoltar = "<textarea class='sortable' rows='4' cols='50'>Textarea</textarea>";
                     break;
                 case 'address': // Dentro de Form
                 	idAddress++;
                 	//Cuando únicamente tenemos un titulo dentro de un articulo o sección no debemos utilizar ni header ni <hgroup>.
                 	htmlSecundario = "<address>Escrito por <a href='mailto:webmaster@example.com'>Juan Perez</a>.<br>"+ 
 					"Visitanos:<br>Example.com<br>Casilla 564, Departamento<br>PARAGUAY</address>";
-                	htmlSoltar = "<address id='"+nuevoIdElemento+"'>Escrito por <a href='mailto:webmaster@example.com'>Juan Perez</a>.<br>"+ 
+                	htmlSoltar = "<address class='elementHTML sortable' id='"+nuevoIdElemento+"'>Escrito por <a href='mailto:webmaster@example.com'>Juan Perez</a>.<br>"+ 
 					"Visitanos:<br>Example.com<br>Casilla 564, Departamento<br>PARAGUAY "+botonEdit+"</address>";
 				case 'map': // Dentro de Form
 					idMap++;
@@ -360,7 +362,7 @@ $( document ).ready(function() {
 					"<map name='planetmap'><area shape='rect' coords='0,0,82,126' alt='Sun' href='sun.htm'>"+
 					"<area shape='circle' coords='90,58,3' alt='Mercury' href='mercur.htm'>"+
 					"<area shape='circle' coords='124,58,8' alt='Venus' href='venus.htm'></map>";
-                	htmlSoltar = "<img src='planets.gif' width='145' height='126' alt='Planets' usemap='#planetmap'>"+
+                	htmlSoltar = "<img class='sortable' src='planets.gif' width='145' height='126' alt='Planets' usemap='#planetmap'>"+
 					"<map id='"+nuevoIdElemento+"' name='planetmap'><area shape='rect' coords='0,0,82,126' alt='Sun' href='sun.htm'>"+
 					"<area shape='circle' coords='90,58,3' alt='Mercury' href='mercur.htm'>"+
 					"<area shape='circle' coords='124,58,8' alt='Venus' href='venus.htm'>"+botonEdit+"</map>";
@@ -373,32 +375,11 @@ $( document ).ready(function() {
 		//helper: "clone"
 	});
 
-
-	// Fin Drop and drag --------------------------------------------------------------------------------------------------
-	// Resize
-    //$('.rotator').rotateit(); // Funciona
-    //$(document).on("rotateit",".rotator",function(event){}); // Este no
-	$('.dest').sortable({
-	    revert: true,
-	});
-	// Obtener id -----------------------------------------------------------------------------------
-	/*$(document).on("mouseup","h1",function(event){
-		elementoActual =  $(this).attr('id');
-		alert(elementoActual);
-	});*/
 	//Cuando se presiona el click para comenzar arrastre
 	$(document).on("mousedown",".arrastrar",function(event){
 		elementoActual =  $(this).attr('id');
 		$('#text').text('Se selecciono elemento '+elementoActual);
 	});
-	/*$('h1').click(function(){
-		alert( $(this).attr('id') );
-		$( "li.item-ii" ).find( rotate ).css( "background-color", "red" );
-	});
-	$('nav').click(function(){
-		alert( $(this).attr('id') );
-	});*/
-
 	// Evento onmouseover para ver las opciones que tiene cada elemento pasando el mouse sobre el elemento
 	$(".elementHTML").mouseover(function() {
 		elementoIdMouse =  $(this).attr('id');
@@ -406,50 +387,17 @@ $( document ).ready(function() {
 
 		var ppp = $('#'+elementoIdMouse).hasClass("noSelect");
 		var clases = $('#'+elementoIdMouse).attr("class").split(' ');
-		alert('1* EL ID '+elementoIdMouse+' TIENE LA CLASE '+clases);
-		//elementoActual = elementoIdMouse
-
-		/*if ( $('#'+elementoIdMouse).hasClass("noSelect") ) {
-
-		}else {
-			//alert('3 id '+elementoIdMouse+' tag '+elementoNomMouse);
-			mostrarEdicion(elementoIdMouse);
-		}*/
-
-		// Sirve ?
-		/*if (elementoActual == elementoIdMouse){
-			
-		}else{
-			mostrarEdicion(elementoIdMouse);
-			elementoActual = elementoIdMouse;
-			alert('2-* EL ID '+elementoActual+' TIENE LA CLASE '+clases);
-		}*/
-	});
-
-	// Eliminar
-	$(".elementHTML").mouseout(function() {
-		//ocultarEdicion();	
-		//elementoActual = '';	
+		//alert('1* EL ID '+elementoIdMouse+' TIENE LA CLASE '+clases);
 	});
 });
 
 
-function mostrarEdicion(idSeleccionado){ // FUNCIONO
-	//alert('pruebaaa '+idSeleccionado);
-	//$('.configPage').remove();
+//**************************************************************************************************************************************
+//**************************************************************************************************************************************
+//************************************************************* FUNCIONES **************************************************************
+//**************************************************************************************************************************************
+//**************************************************************************************************************************************
 
-	$("#"+idSeleccionado).append( "<div id='id' class='btn-group configPage noSelect elementHTML' role='group'>"+
-	"<button id='btnEditConfig' type='button' onclick='"+'alert($(this).attr("id"));elementoIdMouse=$(this).attr("id");'+"' class='btn btn-default noSelect'><img class='noSelect' src='img/edicion/editar.png' alt='Editar'></button>"+
-	"<button type='button' class='btn btn-default noSelect'><img class='noSelect' src='img/edicion/eliminar.png' alt='Eliminar'></button>"+
-	"<button type='button' class='btn btn-default noSelect'><img class='noSelect' src='img/edicion/mover.png' alt='Mover'></button>"+
-	"<button type='button' class='btn btn-default noSelect'><img class='noSelect' src='img/edicion/configurar.png'></button></div>" );
-}
-
-// Ocultar barra de edicion
-function ocultarEdicion(){
-	$('.configPage').remove();
-	//$('#'+idSeleccionado).remove();
-}
 
 // Vista previa en 2 dispositivos
 function verEnDispositivo(device){
@@ -540,197 +488,3 @@ function generaRar(){
         }
     });
 }
-
-
-
-
-
-
-// ESTO ES UNA PRUEBA BORRAR ----------------------------------------------------------------------------------------------
-/*
-function init() {
-  $('#makeMeDraggable').draggable({});
-  $('#makeMeDroppable').droppable( {drop: handleDropEvent} );
-}
-
-function handleDropEvent( event, ui ) {
-  var draggable = ui.draggable;
-  var newq = makeNewPosition();
-  ui.draggable.position({ of: $(this), top: newq[0], left: newq[1] });
-  idH1 = 1;
-  ui.draggable.replaceWith("<h1 class='editable' contextmenu='hnMenu' id='h1-"+idH1+"'>Inserte texto H1</h1>");
-  alert('hola')
-}
-
-function makeNewPosition(){
-    
-    var h = $(window).height()- 50;
-    var w = $(window).width()- 50;
-    
-    var nh = Math.floor(Math.random() * h);
-    var nw = Math.floor(Math.random() * w);
-    
-    return [nh,nw];    
-}*/
-
-// FIN ESTO ES UNA PRUEBA BORRAR ------------------------------------------------------------------------------------------
-
-
-
-
-
-
-
-// Este funciona a medias
-// Codigo para drag and drop -----------------------------------------------------------------------------------------------
-/*
- * Funcion encargada de arreastral/soltar/editar elementos dentro de la pagina
- */
-/*function DraggEdit(){
- 	//alert('2')
- 	var idOrigen;
- 	var idElemento;
- 	//Contenedor destino donde serán soltadas los elementos
- 	$('.dest').sortable({ // ESTE FUNCIONA
- 	//$(document).on("sortable",".dest",function(event){
- 	//$(document).on("click",".draggable-box",function(event){
-	    revert: true,
-	    //http://jsfiddle.net/yeyene/7fEQs/8/
-	    receive: function(event, ui) {
-            var html = [];
-            //Obtendo el id de item del menu seleccionado, que indica que elemento se selecciono
-            var widget = $(this).attr("id");
-            idOrigen = ui.sender.attr("id")
-            classOrigen = ui.sender.attr("class")
-            //alert('2 idOrigen '+idOrigen+' classOrigen '+classOrigen)
-        },
-        stop: function(event, ui) {
-        	//alert('1 idOrigen ....'+idOrigen+'... classOrigen '+classOrigen)
-        	//alert('3 idOrigen '+idOrigen)
-        	//Según sea el elemento seleccionado, aqui se asigna el codigo de dicho elemento y se agrega a la página con su respectivo id
-    		switch(idOrigen) {
-			    case 'h1':
-					alert("holaa")
-			    	idH1++;			    	
-			        //ui.item.replaceWith("<h1 class='editable' id='id1' onclick='document.execCommand(\"selectAll\",false,null)'>Inserte texto H1</h1>");
-			        ui.item.replaceWith("<h1 class='editable' contextmenu='hnMenu' id='h1-"+idH1+"'>Inserte texto H1</h1>");
-			        break;
-			    case 'h2':
-			    	idH2++;
-			        ui.item.replaceWith("<h2 class='editable' contextmenu='hnMenu' id='h2-"+idH2+"' contenteditable='true'>Inserte texto H2</h2>");
-			        break;
-			    case 'h3':
-			    	idH3++;
-			        ui.item.replaceWith("<h3 class='editable' contextmenu='hnMenu' id='h3-"+idH3+"'>Inserte texto H3</h3>");
-			        break;
-			    case 'h4':
-			    	idH4++;
-			        ui.item.replaceWith("<h4 class='editable' contextmenu='hnMenu' id='h4-"+idH4+"' contenteditable='true'>Inserte texto H4</h4>");
-			        break;
-			    case 'h5':
-			    	idH5++;
-			        ui.item.replaceWith("<h5 class='editable' contextmenu='hnMenu' id='h5-"+idH5+"' contenteditable='true'>Inserte texto H5</h5>");
-			        break;
-			    case 'h6':
-			    	idH6++;
-			        ui.item.replaceWith("<h6 class='editable' contextmenu='hnMenu' id='h6-"+idH6+"' contenteditable='true'>Inserte texto H6</h6>");
-			        break;
-			    //case 'div':
-			        //ui.item.replaceWith("<div class='editable' id='div' contenteditable='true'>Nuevo div</div>");
-			        //break;
-			    case 'p':
-			    	idP++;
-			        ui.item.replaceWith("<p class='editable' contextmenu='pMenu' id='p-"+idP+"' contenteditable='true'>Nuevo p</p>");
-			        break;
-			    case 'hr':
-			    	idP++;
-			        ui.item.replaceWith("<hr />");
-			        break;
-			    case 'ol':
-			    	idP++;
-			        ui.item.replaceWith("<div id='divol-"+idP+"'><ol id='ol-"+idP+"' contextmenu='olMenu'><li>Item 1</li><li>Item 2</li><li>Item 3</li></ol></div>");
-			        break;
-			    case 'ul':
-			    	idP++;
-			        ui.item.replaceWith("<div id='divul-"+idP+"'><ul id='ul-"+idP+"' contextmenu='ulMenu'><li>Item 1</li><li>Item 2</li><li>Item 3</li></ul></div>");
-			        break;
-			    case 'blockquote':
-			    	idP++;
-			        ui.item.replaceWith("<div id='block-"+idP+"'><blockquote contextmenu='blockMenu' cite=\"#\">Lorem ipsum</blockquote></div>");
-			        break;
-			    case 'sup':
-			    	idP++;
-			        ui.item.replaceWith("<sup contextmenu='supMenu' id='sup-"+idP+"' >Lorem ipsum</sup>");
-			        break;
-			    case 'sub':
-			    	idP++;
-			        ui.item.replaceWith("<sub contextmenu='subMenu' id='sub-"+idP+"' >Lorem ipsum</sub>");
-			        break;
-			    case 'i':
-			    	idP++;
-			        ui.item.replaceWith("<i id='i-"+idP+"' >Lorem ipsum</i>");
-			        break;
-			    case 'u':
-			    	idP++;
-			        ui.item.replaceWith("<u id='u-"+idP+"' >Lorem ipsum</u>");
-			        break;
-			    case 'a':
-			    	idP++;
-			        ui.item.replaceWith("<a contextmenu='aMenu' id='a-"+idP+"' >Lorem ipsum</a>");
-			        break;
-			    case 'strong':
-			    	idP++;
-			        ui.item.replaceWith("<strong id='strong-"+idP+"' >Lorem ipsum</strong>");
-			        break;
-			    case 'img':
-			    	idP++;
-			        ui.item.replaceWith("<img contextmenu='imgMenu' id='img-"+idP+"'  src=\"#\">Lorem ipsum</img>");
-			        break;
-			    case 'map':
-			    	idP++;
-			        ui.item.replaceWith("<map contextmenu='mapMenu' id='map-"+idP+"'  name=\"name"+idP+"\">Lorem ipsum</map>");
-			        break;
-			}
-			idOrigen = '';//Seteo el valor de idOrigen
-    	}
-	});
-
-	//Permite que los elementos se puedan arrastrar a la página
-	$('.draggable-box').draggable({
-	    connectToSortable: '.dest',
-	    helper: 'clone',
-	    revertDuration: 0
-	});
-
-	//FUNCIONA
-	$(document).on("mousedown",".draggable-box",function(event){
-	    switch (event.which) {
-	        case 1: // Boton izquierdo
-	            //alert('Left mouse button pressed');
-	            $("[contenteditable]",this).focus();
-				$('#'+event.target.id).attr('contenteditable','true'); 
-				$("h1, h2, h3, h4, h5, h6, div, p, ol li, ul li, blockquote, sup, sub,i,u,a,strong, img, map").removeClass("seleccionado");//Sacar todas las clases select antes de asignar el nuevo elemento seleccionado
-				$("h1.editable, h2.editable, h3.editable, h4.editable, h5.editable, h6.editable, div.editable, p.editable, ol.editable, ul.editable, blockquote.editable, sup.editable, sub.editable,i.editable,u.editable,a.editable,strong.editable, img.editable, map.editable").removeAttr("contentEditable");//agregar todos los elementos
-				$('#'+event.target.id).attr('contenteditable','true');//esto no funca
-				$('#'+event.target.id).addClass("seleccionado");
-				//alert('holaaa '+event.target.id)
-				//Agrego un evento onclick que afecta solo al id seleccionado actualmente, esto permite seleccionar todo el texto con doble click
-				$('#'+event.target.id).click(document.execCommand('selectAll',false,null));
-				idElemento = event.target.id;
-				//document.getElementById(idElemento).click(document.execCommand('selectAll',false,null));
-	            break;
-	        case 2: // Boton del medio
-
-	            break;
-	        case 3: // Boton Derecho
-	        	idElementoSeleccionado = event.target.id; // Elemento seleccionado
-	            break;
-	        default:
-	            alert('You have a strange mouse');
-
-	    }
-	});
-
- }
- // FIN Codigo para drag and drop -----------------------------------------------------------------------------------------------
- */

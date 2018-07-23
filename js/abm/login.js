@@ -32,12 +32,11 @@ function login(){
     var datos = {
         "usuario" : $("input[id*=userLog]").val(),
         "password" : $.md5($("input[id*=passLog]").val())
-    }  
-
+    }
     $.ajax({
         type: "GET",//dataType: 'json', //type: "POST", //type: "GET" // Choosing a JSON datatype
         data: datos,
-        url: 'http://localhost/TFGweb/consultas/login.php',
+        url: 'http://tfgweb.com.devel/consultas/login.php', //'http://localhost/TFGweb/consultas/login.php',
         success: function(data) {               
             var res = jQuery.parseJSON(data); 
             try {
@@ -54,7 +53,7 @@ function login(){
             }
             $('.camposForm').val('');
         },
-        error: function(e){ <!-- Si no ha podido conectar con el servidor --> 
+        error: function(e){  
             mensajeError("Error en el servidor, por favor, intentalo de nuevo mas tarde");
         }
     });
@@ -68,12 +67,12 @@ function logout(){
     $.ajax({
         type: "GET",//dataType: 'json', //type: "POST", //type: "GET" // Choosing a JSON datatype
         data: '{}',
-        url: 'http://localhost/TFGweb/consultas/logout.php',
+        url: 'http://tfgweb.com.devel/consultas/logout.php',//'http://localhost/TFGweb/consultas/logout.php',
         success: function(data) {
             var res = jQuery.parseJSON(data);           
                 idActual = parseInt(res);
         },
-        error: function(e){ <!-- Si no ha podido conectar con el servidor --> 
+        error: function(e){ 
             mensajeError("Error en el servidor, por favor, intentalo de nuevo mas tarde");
         }
     });

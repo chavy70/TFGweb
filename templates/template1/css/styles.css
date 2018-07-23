@@ -69,11 +69,9 @@ html /*.panel  */
     width: 72px !important;
     cursor:pointer;
 }
-/*.soltarEn:hover{
-  border: dashed 1px red;
-}*/
+
 .elementHTML:hover{
-  border: dashed 1px red;
+  border: dashed 1px red!important;
 }
 .textoSecundario {
   z-index: 10000;
@@ -120,11 +118,11 @@ div.dest {
 #makeMeDraggable { float: left; width: 100px; height: 100px; background: red; }
 #makeMeDroppable { float: right; width: 200px; height: 200px; border: 1px solid #999; }
 .configPage img{ width: 15px; }
-.configPage { display: none; }
-.elementHTML:hover .configPage { display: inline; }
+/*.configPage { display: none; }*/
+/*.elementHTML:hover .configPage { display: inline; }*/
+.elementoEditable:hover .configPage { display: inline; }
 .elementHTML { position: relative; }
-.configPage { position: absolute; right: 1px; }
-
+.configPage { position: absolute; right: 1px;  display: none; z-index: 1000; top: -34px; width: 163px;}
 
 /*Collapse*/
 /*.collapse {

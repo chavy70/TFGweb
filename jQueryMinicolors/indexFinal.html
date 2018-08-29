@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>jQuery Minicolors</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script src="js/jquery.minicolors.js"></script>
+    <link href="css/jquery.minicolors.css" rel="stylesheet" type="text/css" />
+    
+</head>
+<body>
+   <br/>
+    Inline en campo hidden (hex):<br/>
+    <input type="hidden" value="#0088cc" name="color0" id="c0"/>
+    <br/>
+     En campo hidden(hex):<br/>
+    <input type="hidden" value="#0088cc" name="color1" id="c1"/>
+    <br/>
+     En campo texto(hex):<br/>
+    <input type="text" value="#0088cc" name="color2" id="c2"/>
+    <br/>
+    En campo texto(rgb):<br/>
+    <input type="text" value="#0088cc" name="color3" id="c3"/>
+    <br/>
+    <script>
+        $('#c0').minicolors({ inline:true});
+        $('#c1').minicolors();
+        $('#c2').minicolors({ animationEasing: 'swing'});
+        $('#c3').minicolors({format: 'rgb'});
+    </script>
+</body>
+</html>
+
+
+
+

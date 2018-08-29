@@ -4,14 +4,6 @@
 	<head>
 
 
-<link rel="stylesheet" href="../../css/colorpicker/colorpicker.css" type="text/css" />
-<link rel="stylesheet" media="screen" type="text/css" href="../../css/colorpicker/layout.css" />
-<script type="text/javascript" src="../../js/colorpicker/jquery.js"></script>
-<script type="text/javascript" src="../../js/colorpicker/colorpicker.js"></script>
-<script type="text/javascript" src="../../js/colorpicker/eye.js"></script>
-<script type="text/javascript" src="../../js/colorpicker/utils.js"></script>
-<script type="text/javascript" src="../../js/colorpicker/layout.js?ver=1.0.2"></script>
-		
 
 
 
@@ -42,6 +34,15 @@
 		
 		
 
+
+<link rel="stylesheet" href="../../css/codemirror/codemirror.css">
+<script type="text/javascript" src="../../js/codemirror/codemirror.js"></script>
+<script type="text/javascript" src="../../js/codemirror/javascript.js"></script>
+
+
+<script src="../../jQueryMinicolors/js/jquery.minicolors.js"></script>
+		<link href="../../jQueryMinicolors/css/jquery.minicolors.css" rel="stylesheet" type="text/css" />
+
 	</head>
 	<!-- Cuerpo -->
 	<body>
@@ -63,6 +64,18 @@
 				</div>
 			</div>
 
+
+
+
+
+
+<center><display:grid>dsdsdsdsd</center> 
+
+
+
+
+	
+	
 
 
 
@@ -105,6 +118,19 @@
 									</li>
 								</ul>
 								<form class="navbar-form navbar-left elementHTML sortable">
+
+
+
+
+
+
+
+								
+
+
+
+
+
 									<div class="form-group elementHTML sortable">
 										<input type="text" class="form-control" placeholder="Search">
 									</div>
@@ -231,10 +257,17 @@
 						</div>
 					</div>
 				</div>
+
+
+
+				
+
+
+
 				<div class="panel-footer elementHTML elementoEditable">Powered by AjapoWeb - 2017</div>
 			</div> 
 			<!-- ------------------------------------------------- FIN PANEL PRINCIPAL-------------------------------------------------------- -->
-
+			
 			<!-- ------------------------------------------------ POPUP CONFIGURACION ------------------------------------------------ -->
 			<div class="container">
 				<!-- Modal -->
@@ -245,46 +278,80 @@
 						<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 class="modal-title">Configuracion de elemento</h4>
+								
+								<h4 class="titulo-modal"><p class="text-center">Configuracion de elemento</p></h4>
 							</div>
 							<div class="modal-body">
 							<form>
 								<div class="form-group row">
-									
-									<div class="col-sm-4 text-right">
-										<label for="tbElemento" >Elemento:</label>
+									<div class="col-sm-12">
+										<div class="sub-title-modal" role="alert">
+											Informaci&oacute;n
+										</div>
 									</div>
-									<div class="col-sm-8">
+								</div>
+								<div class="form-group row">
+									
+									<div class="col-sm-2 text-right">
+										<label for="tbElemento" >Elemento</label>
+									</div>
+									<div class="col-sm-10">
 										<input type="text" readonly class="form-control" id="tbElemento">
 									</div>
 								</div>
 								<div class="form-group row">
-									<div class="col-sm-4 text-right">
-										<label for="tbID" class="col-form-label">ID..</label>
+									<div class="col-sm-2 text-right">
+										<label for="tbID" class="col-form-label">C&oacute;digo</label>
 									</div>
-									<div class="col-sm-8">
+									<div class="col-sm-10">
 										<input class="form-control" readonly id="tbID" placeholder="ID del Elemento">
 									</div>
 								</div>
 								<div class="form-group row">
-									<div class="col-sm-4 text-right">
-										<label for="lbForeColor" class="col-form-label">Color Fuente</label>
+									<div class="col-sm-12">
+										<div class="sub-title-modal" role="alert">
+											Colores
+										</div>
+									</div>
+								</div>
+
+								<!-- FUNCIONA INICIO 1 -->
+								<div class="form-group row">
+								<!-- http://develoteca.com/jquery-minicolors-convertir-tus-elementos-input-html-en-pickers-color/ -->	
+								<div class="col-sm-2 text-right">
+										<label for="lbForeColor" class="col-form-label">Fuente</label>
 									</div>									
-									<div class="col-sm-8">
-										<input type="text" class="form-control" id="lbForeColor" placeholder="Color Fuente">
+									<div class="col-sm-4">
+										<input type="hidden" value="#0088cc" name="color1" id="tbForeColor"/>
+									</div>
+
+									<div class="col-sm-2 text-right">
+										<label for="lbBkColor" class="col-form-label">Fondo</label>
+									</div>									
+									<div class="col-sm-4">
+										<input type="hidden" value="#0088cc" name="color1" id="tbBkColor"/>
+									</div>
+
+								</div>
+								<!-- FUNCIONA FIN 1 -->
+
+								<div class="form-group row">
+									<div class="col-sm-12">
+										<div class="sub-title-modal" role="alert">
+											Eventos
+										</div>
 									</div>
 								</div>
 								<div class="form-group row">
 									
-									<div class="col-sm-4 text-right">
+									<div class="col-sm-2 text-right">
 										<label for="lbEvento" class="col-form-label">Evento</label>
 									</div>									
-									<div class="col-sm-8">
-										<input type="text" class="form-control" id="lbEvento" placeholder="Evento">
+									<div class="col-sm-10">
 										<!-- Asignar eventos a un elemento -->
 										<!-- https://openclassrooms.com/en/courses/3693206-introduccion-a-jquery/3693281-eventos-vinculados-a-elementos -->
-										<select class="form-control">
-											<option value="evento">Selecciona un evento</option>
+										<select id="ddlEventos" class="form-control">
+											<option value="0">Selecciona un evento</option>
 											<option value="blur">blur()</option>
 											<option value="change">change()</option>
 											<option value="click">click()</option>
@@ -306,20 +373,63 @@
 										<!-- Saber si un elemento tiene un evento asignado -->
 										<!-- http://rahosudce.blogspot.com/2013/11/re-saber-si-un-elemento-tiene-un-evento.html -->
 									</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 								</div>
+
+								
 								<div class="form-group row">
-									<div class="col-sm-4 text-right">
-										<label for="lbColor" class="col-form-label">Color Fuente</label>
-									</div>	
-									<div class="col-sm-8">
-										<!-- https://github.com/greggman/gradient-editor/blob/master/colorpicker/index.html -->
-										<div id="customWidget">
-											<div id="colorSelector2"><div style="background-color: #00ff00"></div></div>
-											<div id="colorpickerHolder2">
-											</div>
-										</div>
+									<div class="col-sm-2 text-right">
+										
+									
 									</div>
+									<div class="col-sm-12" id="eventContent">
+									<!-- aca debe ir el codigo -->
+									<form>
+										<textarea id="code" name="code">
+(function() {
+"use strict";
+kkk
+var WORD = /[\w$]+/g, RANGE = 500;
+
+CodeMirror.registerHelper("hint", "anyword", function(editor, options) {
+	var word = options && options.word || WORD;
+	var range = options && options.range || RANGE;
+
+	var list = [], seen = {};
+	function scan(dir) {
+	var line = cur.line, end = Math.min(Math.max(line + dir * range, editor.firstLine()), editor.lastLine()) + dir;
+	for (; line != end; line += dir) {
+		var text = editor.getLine(line), m;
+		word.lastIndex = 0;
+	}
+	}
+	scan(-1);
+	scan(1);
+	return {list: list, from: CodeMirror.Pos(cur.line, start), to: CodeMirror.Pos(cur.line, end)};
+});
+})();
+										</textarea>
+									</form>
+</div>
 								</div>
+
 
 									
 
@@ -327,7 +437,7 @@
 							</div>
 							<div class="modal-footer">
 								<button type="button" onclick="guardarDatosModal();" class="btn btn-default" data-dismiss="modal">Guardar</button>
-								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 							</div>
 						</div>
 						<!-- FIN Modal content-->
@@ -338,6 +448,76 @@
 					</div>
 				</div>
 				<!-- FIN Modal -->
+				<!-- Contenedor Eventos -->
+				<div class="contentEvents">
+					<!-- Codigo Base de Eventos -->
+					<textarea id='codigoBase'>
+
+$('idElementoAqui').nombreEvento(function() {
+	// Aquí va el código
+});
+// Otra opción para llamar al evento sin la función.
+//$('idElementoAqui').nombreEvento();
+					</textarea>
+
+
+
+
+					<textarea id='blurEventCode'>
+/**
+* Evento que detecta la pérdida del foco en el 
+* elemento nombreElemento con id:nombreID
+**/
+					</textarea>
+					<textarea id='changeEventCode'>
+/**
+* Evento que detecta el cambio de valor del
+* elemento nombreElemento con id:nombreID
+**/
+					</textarea>
+					<textarea id='clickEventCode'>
+
+					</textarea>
+					<textarea id='fadeInFunctionEventCode'>
+
+					</textarea>
+					<textarea id='fadeInEventCode'>
+
+					</textarea>
+					<textarea id='fadeOutEventCode'>
+				
+					</textarea>
+					<textarea id='focusEventCode'>
+					
+					</textarea>
+					<textarea id='hoverEventCode'>
+					
+					</textarea>
+					<textarea id='keyupEventCode'></textarea>
+					<textarea id='mouseoutEventCode'></textarea>
+					<textarea id='mouseoverEventCode'></textarea>
+					<textarea id='animateEventCode'></textarea>
+					<textarea id='datatablesEventCode'></textarea>
+					<textarea id='dialogEventCode'></textarea>
+					<textarea id='validateEventCode'></textarea>
+					<!-- Aqui se guarda los codigos geberados -->
+					<textarea id='blurEvent'></textarea>
+					<textarea id='changeEvent'></textarea>
+					<textarea id='clickEvent'></textarea>
+					<textarea id='fadeInEvent'></textarea>
+					<textarea id='fadeOutEvent'></textarea>
+					<textarea id='focusEvent'></textarea>
+					<textarea id='hoverEvent'></textarea>
+					<textarea id='keyupEvent'></textarea>
+					<textarea id='mouseoutEvent'></textarea>
+					<textarea id='mouseoverEvent'></textarea>
+					<textarea id='animateEvent'></textarea>
+					<textarea id='datatablesEvent'></textarea>
+					<textarea id='dialogEvent'></textarea>
+					<textarea id='validateEvent'></textarea>
+
+				</div>
+				<!-- FIN Contenedor Eventos -->
 			</div>
 
 
@@ -345,4 +525,39 @@
 
 		</div>
 	</body>
+
+	<script>
+	CodeMirror.commands.autocomplete = function(cm) {
+		cm.showHint({hint: CodeMirror.hint.anyword});
+	}
+	var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+		lineNumbers: true,
+		extraKeys: {"Ctrl-Space": "autocomplete"}
+	});
+	  /*var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+		//lineNumbers: true,
+		readOnly: true,
+		autofocus: true,
+		matchBrackets: true,
+		styleActiveLine: true
+		});
+		setTimeout(function() {
+			editor.refresh();
+		}, 100);*/
+	/*$('.CodeMirror').each(function(i, el){
+		el.CodeMirror.refresh();
+	});*/
+
+
+
+
+
+
+
+	
+					
+
+
+	</script>
+	
 </html>

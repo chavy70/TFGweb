@@ -45,13 +45,54 @@ var anchoDispositivo = 1950
 /*Document ready de la pagina*/	
 $( document ).ready(function() {
 	//$( "#draggable" ).draggable();
+	$("#eventContent").css('display','none');
+	// Pick color
+	$('#tbForeColor').minicolors();
+	$('#tbBkColor').minicolors();
 
 	//$( ".sortable" ).sortable();
 	$( ".sortable" ).sortable({
-		connectWith: ".sortable" // Permite mover elementos dentro de otros elementos
+		connectWith: ".sortable" // Permite mover elementos dentro de otros elementos 
 	});//.disableSelection();
 
+	// Controla cuando cambia valor del select en el popUp de edicion de 
+	$('#ddlEventos').change(function() {
+		var eventoSeleccionado = $("#ddlEventos option:selected").val();
+		var idActualSel = $("#tbID").val();
+		$("#eventContent").css('display','inline');
 
+		// Asigna el codigo al editor
+		editor.setValue("Hola mundo! "+eventoSeleccionado)
+
+
+		if (eventoSeleccionado != '0')  { // si se selecciono algun evento
+			editor.setValue($('#'+eventoSeleccionado+'Event').text());
+			if ($('#'+eventoSeleccionado+'Event').text() == '') {
+				// Reemplazo con los datos y por último agrego la descripción del evento
+				var codigoComentario = $('#'+eventoSeleccionado+'EventCode').text().replace('nombreElemento',$('#tbElemento').val())
+				var codigoBase = $('#codigoBase').text().replace('nombreEvento',eventoSeleccionado);
+				codigoComentario = codigoComentario.replace('nombreID',$('#tbID').val())
+				codigoBase = codigoBase.replace('nombreEvento',eventoSeleccionado);
+				codigoBase = codigoBase.replace('idElementoAqui','#'+$('#tbID').val());				
+				codigoBase = codigoComentario + codigoBase.replace('idElementoAqui','#'+$('#tbID').val());
+				editor.setValue(codigoBase);
+			}
+			setTimeout(function() {
+				editor.refresh();
+			},500);
+			setTimeout(function() {
+				$("#code").css('display','none');
+			},600);
+			existeEvento(idActualSel, eventoSeleccionado, tieneEvent);			
+			if ( tieneEvent == 1 ) {
+				//idActualSel
+			}
+		}else{
+			alert('NO SE SELECCIONO NINGUN EVENTO');
+			alert('CODIGO '+$('#code').val())
+			$("#eventContent").css('display','none');
+		}
+	}); 
 	
 
 
@@ -60,19 +101,19 @@ $( document ).ready(function() {
 
 
 	// FUNCIONAAA -----------------------------------------------------------------------------------------
-	$('#h1_1').on('click', function() {
+	/*$('#h1_1').on('click', function() {
 		alert( 'No me mires no me mires déjalo ya, que hoy no me he puesto maquillaje' );
 	});
 	$('#h1_1').on('mouseover', function() {
 		alert( 'No me mires no me mires déjalo ya, que hoy no me he puesto maquillaje' );
-	});
+	});*/
 	// https://stackoverflow.com/questions/14072042/how-to-check-if-element-has-click-handler/14072162
 	// probar esto 
-	var ev = $._data($("#h1_1")[0], 'events');
+	/*var ev = $._data($("#h1_1")[0], 'events');
 		//if(ev && ev.click) alert('h1_1 tiene evento CLICK');
-		if(ev && ev.mouseover) alert('h1_1 tiene evento MOUSEOVER');
+		if(ev && ev.mouseover) alert('h1_1 tiene evento MOUSEOVER');*/
 	// FUNCIONAAA -----------------------------------------------------------------------------------------
-
+	existeEvento('h1_1', 'mouseover');
 	/*
 	.on( "mouseover", handler )
 	mouseover
@@ -430,6 +471,10 @@ $( document ).ready(function() {
 		var clases = $('#'+elementoIdMouse).attr("class").split(' ');
 		//alert('1* EL ID '+elementoIdMouse+' TIENE LA CLASE '+clases);
 	});*/
+
+	/*$('.CodeMirror').each(function(i, el){
+		el.CodeMirror.refresh();
+	});*/ 
 });
 
 
@@ -440,7 +485,10 @@ $( document ).ready(function() {
 //**************************************************************************************************************************************
 
 
-// Vista previa en 2 dispositivos
+/**
+ * Vista previa en 2 dispositivos
+ * @param {string} device 
+ */
 function verEnDispositivo(device){
 	if (anchoDispositivo > 803) {
 		ocultarTodo();
@@ -466,7 +514,9 @@ function verEnDispositivo(device){
 	}
 }
 
-// Oculta las barras de herramienta y de estado cuando se activa la vista previa de dispositivos
+/**
+ * Oculta las barras de herramienta y de estado cuando se activa la vista previa de dispositivos
+ */
 function ocultarTodo(){
 	$('#standalone').css('display','none');
 	if (anchoDispositivo > 803) {
@@ -475,8 +525,9 @@ function ocultarTodo(){
 	}
 }
 
-/*
+/**
  * Guarda los cambios del archivo editado actualmente
+ * @param {string} codigoEditado 
  */
 function guardarCambios(codigoEditado){
 	var cabecera = "<!DOCTYPE html>\n"+"<html lang=\"es\">\n"
@@ -507,7 +558,7 @@ function guardarCambios(codigoEditado){
     });
 }
 
-/*
+/**
  * Guarda los cambios del archivo editado actualmente
  */
 function generaRar(){
@@ -531,8 +582,9 @@ function generaRar(){
 }
 
 /**
-* Editar texto de elemento
-*/
+ * Editar texto de elemento
+ * @param {string} idSeleccionardo 
+ */
 function editarTexto(idSeleccionardo){
 	$("#"+idSeleccionardo).attr("contentEditable",true); 
 	document.getElementById(idSeleccionardo).focus();
@@ -541,26 +593,103 @@ function editarTexto(idSeleccionardo){
 	$("#"+idContenedor).addClass( "sortable" );
 	$('#'+idSeleccionardo).parent().css({"color": "red", "border": "2px solid red"});*/
 }
+
 /**
  * Rellena el modal con los datos del elemento seleccionado
+ * @param {numeric} idElemento 
  */
 function editarDatosModal(idElemento){
 	var nameElemento = $('#'+idElemento).get(0).nodeName; // $('#'+idElemento).attr('name');
 	$("#tbElemento").val(nameElemento);
 	$("#tbID").val(idElemento);
 	$("#lbIdActual").text(idElemento);
+	$("#code").css('display','inline');
 
+	
+	/*var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+	lineNumbers: true,
+	extraKeys: {"Ctrl-Space": "autocomplete"}
+	});*/
 
-}
-
-function guardarDatosModal(){
-	var nuevoId = $("#tbID").val();
-	var actualId = $("#lbIdActual").text();
-	$("#"+actualId).attr("id",nuevoId);
+	// Aparece el editor dentro del PopUp
+	/*setTimeout(function() {
+		editor.refresh();
+	},500);*/
+	
 }
 
 /**
- * blur(), change(), click(), fadeIn(), fadeOut(), focus(), hover(), keyup(), mouseout(), mouseover(), animate(),datatables(),dialog(), validate(). 
+ * Asigna el nuevo id al elemento actual
  */
+function guardarDatosModal(){
+	//var editor = $('.CodeMirror')[0].CodeMirror;
+	// create an instance
+	//var editor = CodeMirror.fromTextArea('code');
+	//var editor = CodeMirror.fromTextArea(document.getElementById("code"));
+	
+	// store it
+	$('#code').data('CodeMirrorInstance', editor);
+	// get it
+	var myInstance = $('code').data('CodeMirrorInstance');
 
+	alert('editor '+editor.getValue());
+	/*
+	//Descomentar
+	var nuevoId = $("#tbID").val(); // ID ingresado por el user
+	var actualId = $("#lbIdActual").text(); // ID actual del elemento
+	$("#"+actualId).attr("id",nuevoId); // Cambio el ID actual del elemento por el nuevo ID
+	*/
+}
 
+/**
+ * Devuelve valor 1 si el id tiene asignado el nombre evento pasado por parametro
+ * @param {numeric} idEvento 
+ * @param {string} nombreEvento 
+ * @param {string} tieneEvent 
+ */
+function existeEvento(idEvento, nombreEvento, tieneEvent){
+	var ev = $._data($("#"+idEvento)[0], 'events');
+	var tieneEvent = 0;
+	if (nombreEvento == 'blur') { // Evento disparado cuando un elemento ha perdido su foco
+		if(ev && ev.blur) tieneEvent = 1;
+	}
+	if (nombreEvento == 'change') { // Evento disparado cuando el valor de un elemento ha cambiado
+		if(ev && ev.change) tieneEvent = 1;
+	}
+	if (nombreEvento == 'click') { // Evento disparado cuando se produce un click sobre un elemento
+		if(ev && ev.click) tieneEvent = 1;
+	}
+	if (nombreEvento == 'fadeIn') { // Evento que pasa de oculto a visible cambiando gradualmente la opacidad
+		if(ev && ev.fadeIn) tieneEvent = 1;
+	}
+	if (nombreEvento == 'fadeOut') { // Evento que pasa de visible a oculto cambiando gradualmente la opacidad
+		if(ev && ev.fadeOut) tieneEvent = 1;
+	}
+	if (nombreEvento == 'focus') { // Evento disparado cuando un elemento ha obtenido el foco
+		if(ev && ev.focus) tieneEvent = 1;
+	}
+	if (nombreEvento == 'hover') { // Evento disparado cuando el mouse se encuentra sobre un elemento
+		if(ev && ev.hover) tieneEvent = 1;
+	}
+	if (nombreEvento == 'keyup') { // Evento disparado cuando un boton del teclado es presionado
+		if(ev && ev.keyup) tieneEvent = 1;
+	}
+	if (nombreEvento == 'mouseout') { // Evento disparado cuando el puntero del mouse es movido fuera del área de un elemento
+		if(ev && ev.mouseout) tieneEvent = 1;
+	}
+	if (nombreEvento == 'mouseover') { // Evento disparado cuando el puntero del mouse es movido dentro del área de un elemento FUNCIONA
+		if(ev && ev.mouseover) tieneEvent = 1;
+	}
+	if (nombreEvento == 'animate') { // Evento utilizado para mover por cierta cantidad de segundos un elemento dentro de la pagina
+		if(ev && ev.animate) tieneEvent = 1;
+	}
+	if (nombreEvento == 'datatables') { // Evento para tablas dinámicas
+		if(ev && ev.datatables) tieneEvent = 1;
+	}
+	if (nombreEvento == 'dialog') { // Evento para levantar popUps
+		if(ev && ev.dialog) tieneEvent = 1;
+	}
+	if (nombreEvento == 'validate') { // Evento para validar campos
+		if(ev && ev.validate) tieneEvent = 1;
+	}
+}

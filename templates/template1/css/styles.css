@@ -124,6 +124,13 @@ div.dest {
 .elementHTML { position: relative; }
 .configPage { position: absolute; right: 1px;  display: none; z-index: 1000; top: -34px; width: 163px;}
 
+.titulo-modal{color:#b02f2e;}
+.sub-title-modal{
+    border:1px solid #eee;
+    border-left: solid 3px #b02f2e;
+    padding: 10px;
+}
+
 /*Collapse*/
 /*.collapse {
   visibility: hidden;

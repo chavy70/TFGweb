@@ -83,7 +83,7 @@
 
 
 
-
+<button  type='button' onclick="alert($('#blurEvent').text());" class='btn btn-default noSelect'><img class='noSelect' src='img/edicion/editar.png' alt='Editar'></button>
 
 			<!-- ------------------------------------------------- PANEL PRINCIPAL-------------------------------------------------------- -->
 			<!-- Panel con los codigos de la pagina -->
@@ -283,6 +283,7 @@
 							</div>
 							<div class="modal-body">
 							<form>
+							
 								<div class="form-group row">
 									<div class="col-sm-12">
 										<div class="sub-title-modal" role="alert">
@@ -343,7 +344,6 @@
 									</div>
 								</div>
 								<div class="form-group row">
-									
 									<div class="col-sm-2 text-right">
 										<label for="lbEvento" class="col-form-label">Evento</label>
 									</div>									
@@ -373,66 +373,19 @@
 										<!-- Saber si un elemento tiene un evento asignado -->
 										<!-- http://rahosudce.blogspot.com/2013/11/re-saber-si-un-elemento-tiene-un-evento.html -->
 									</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 								</div>
-
 								
 								<div class="form-group row">
 									<div class="col-sm-2 text-right">
-										
-									
 									</div>
 									<div class="col-sm-12" id="eventContent">
-									<!-- aca debe ir el codigo -->
-									<form>
-										<textarea id="code" name="code">
-(function() {
-"use strict";
-kkk
-var WORD = /[\w$]+/g, RANGE = 500;
-
-CodeMirror.registerHelper("hint", "anyword", function(editor, options) {
-	var word = options && options.word || WORD;
-	var range = options && options.range || RANGE;
-
-	var list = [], seen = {};
-	function scan(dir) {
-	var line = cur.line, end = Math.min(Math.max(line + dir * range, editor.firstLine()), editor.lastLine()) + dir;
-	for (; line != end; line += dir) {
-		var text = editor.getLine(line), m;
-		word.lastIndex = 0;
-	}
-	}
-	scan(-1);
-	scan(1);
-	return {list: list, from: CodeMirror.Pos(cur.line, start), to: CodeMirror.Pos(cur.line, end)};
-});
-})();
-										</textarea>
-									</form>
-</div>
+										<!-- aca debe ir el codigo -->
+										<form>
+											<textarea id="code" name="code">
+											</textarea>
+										</form>
+									</div>
 								</div>
-
-
-									
-
 							</form>
 							</div>
 							<div class="modal-footer">
@@ -501,7 +454,20 @@ $('idElementoAqui').nombreEvento(function() {
 					<textarea id='dialogEventCode'></textarea>
 					<textarea id='validateEventCode'></textarea>
 					<!-- Aqui se guarda los codigos geberados -->
-					<textarea id='blurEvent'></textarea>
+					<textarea id='blurEvent'>
+//blurh1_1
+/**
+* AAAAAAEvento que detecta la pérdida del foco en el 
+* elemento H1 con id:h1_1
+**/
+					
+$('#h1_1').blur(function() {
+	// Aquí va el código
+});
+// Otra opción para llamar al evento sin la función.
+//$('#h1_1').blur();
+//finblurh1_1
+					</textarea>
 					<textarea id='changeEvent'></textarea>
 					<textarea id='clickEvent'></textarea>
 					<textarea id='fadeInEvent'></textarea>
@@ -519,6 +485,75 @@ $('idElementoAqui').nombreEvento(function() {
 				</div>
 				<!-- FIN Contenedor Eventos -->
 			</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<button class="btn btn-default" id="btn-confirm">Confirm</button>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="guardaCambios">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">		  
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<h4 class="modal-title" id="myModalLabel">Cambios detectados</h4>
+		<p>Desea guardar los cambios en el c&oacute;digo?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" onclick="guardarCambiosCode();" id="modal-btn-si">Si</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" id="modal-btn-no">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- MODAL PRUEBA - BORRAR -->
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="interno-modal">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Confirmar</h4>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" id="modal-btn-si">Si</button>
+        <button type="button" class="btn btn-primary" id="modal-btn-no">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- FIN MODAL PRUEBA - BORRAR -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

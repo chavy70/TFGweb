@@ -36,6 +36,18 @@ var idTextarea = 0;
 var idAddress = 0;
 var idMap = 0;
 var idCont = 0;
+var eventoSeleccionado = '';
+var idActualSel = 0;
+var codigoComentario = '';
+var codigoBase = '';
+var codigoAnterior = '';
+var codigoNuevo = '';
+var codigoFinal = '';
+var codigoParaGuardar = '';
+var eventoParaGuardar = '';
+var codigoEventoFinalGuardar = '';
+var nombreEventoFinalGuardar = '';
+var codigoExistentePrevio  = '';
 /*
 * elementHTML : Muestra seleccion cuando el mouse esta sobre el objeto
 * sortable : los elementos contenidos dentro de esta clase y todos sus elementos dentro de él pueden moverse libremente, intercambiando lugares con otros elementos
@@ -44,55 +56,107 @@ var idCont = 0;
 var anchoDispositivo = 1950
 /*Document ready de la pagina*/	
 $( document ).ready(function() {
+
+
+	$("#btn-confirm").on("click", function(){
+		$("#mi-modal").modal('show');
+	});
+	$("#btn-interno-confirm").on("click", function(){
+		$("#interno-modal").modal('show');
+	});
+	//
+
+
 	//$( "#draggable" ).draggable();
 	$("#eventContent").css('display','none');
 	// Pick color
 	$('#tbForeColor').minicolors();
 	$('#tbBkColor').minicolors();
-
 	//$( ".sortable" ).sortable();
 	$( ".sortable" ).sortable({
 		connectWith: ".sortable" // Permite mover elementos dentro de otros elementos 
 	});//.disableSelection();
 
+	// Detecta si hubo un cambio en el codigo del evento seleccionado
+	/*$("#code").keypress(function(){
+		
+	});*/
+
 	// Controla cuando cambia valor del select en el popUp de edicion de 
 	$('#ddlEventos').change(function() {
-		var eventoSeleccionado = $("#ddlEventos option:selected").val();
-		var idActualSel = $("#tbID").val();
+		//Guarda el evento seleccionado en el combo
+		eventoSeleccionado = $("#ddlEventos option:selected").val();
+		//ID del elemento al que se va a aplicar el evento
+		idActualSel = $("#tbID").val();
+		// Busca si el evento ya fue agregado previamente y lo guarda en la variable codigoExistentePrevio
+		buscarEventoExiste(eventoSeleccionado, idActualSel, codigoExistentePrevio);
+		// Cambio el editor a modo visible
 		$("#eventContent").css('display','inline');
-
-		// Asigna el codigo al editor
-		editor.setValue("Hola mundo! "+eventoSeleccionado)
-
-
-		if (eventoSeleccionado != '0')  { // si se selecciono algun evento
-			editor.setValue($('#'+eventoSeleccionado+'Event').text());
+		// Si existe codigo anterior
+		if (codigoAnterior != '') {
+			// Si el codigo anterior es igual al actual
+			if (codigoAnterior === editor.getValue()) {
+				// Significa que no hubo cambios y el valor de codigo anterior entonces queda vacio
+				//alert('No hubo cambios');
+				// Seteo el valor a vacio para el proximo cambio en el select de eventos
+				codigoAnterior = '';
+			}else{
+				// Si hubo cambios en el codigo anterior (antes que el select cambie al nuevo evento seleccionado)
+				//alert('Cambios detectados! Guardar cambios!');
+				// Obtengo el codigo con los cambios
+				codigoParaGuardar = editor.getValue();
+				// Llamo al popUp que pregunta si desea guardar los cambios 
+				mostrarModalGuardarCambios(codigoParaGuardar, eventoParaGuardar, comentarioEventAnt);
+				// Seteo el valor a vacio para el proximo cambio en el select de eventos
+				codigoAnterior = '';
+			}
+		}
+		// Pregunta si se selecciono algun elemento
+		if (eventoSeleccionado != '0')  {
+			// Pregunto si el campo donde se guardan los codigos del elemento esta vacio
 			if ($('#'+eventoSeleccionado+'Event').text() == '') {
 				// Reemplazo con los datos y por último agrego la descripción del evento
-				var codigoComentario = $('#'+eventoSeleccionado+'EventCode').text().replace('nombreElemento',$('#tbElemento').val())
-				var codigoBase = $('#codigoBase').text().replace('nombreEvento',eventoSeleccionado);
-				codigoComentario = codigoComentario.replace('nombreID',$('#tbID').val())
-				codigoBase = codigoBase.replace('nombreEvento',eventoSeleccionado);
-				codigoBase = codigoBase.replace('idElementoAqui','#'+$('#tbID').val());				
-				codigoBase = codigoComentario + codigoBase.replace('idElementoAqui','#'+$('#tbID').val());
+				// El codigo para la busqueda del evento de un elemento determinado tiene la nomenglatura:
+				// //nombreEvento+idElemento <aqui va el codigo en question> //fin+nombreEvento+idElemento
+				// A continuacion busco el comentario del evento seleccionado y reemplazo las variables por los datos del elemento seleccionado y lo guardo en una variable
+				codigoComentario 	= $('#'+eventoSeleccionado+'EventCode').text().replace('nombreElemento',$('#tbElemento').val())
+				// A continuacion busco el codigo base del evento seleccionado y reemplazo las variables por los datos del elemento seleccionado y lo guardo en una variable
+				codigoBase 			= $('#codigoBase').text().replace('nombreEvento',eventoSeleccionado);
+//alert('*PRIMER CODIGO BASE '+$('#blurEvent').val());				
+				codigoComentario 	= codigoComentario.replace('nombreID',$('#tbID').val())
+				codigoBase 			= codigoBase.replace('nombreEvento',eventoSeleccionado);
+				codigoBase 			= codigoBase.replace('idElementoAqui','#'+$('#tbID').val());
+				codigoBase 			= codigoComentario + codigoBase.replace('idElementoAqui','#'+$('#tbID').val());
+				// Si la variable codigoAnterior se encuentra vacia, la guardo antes de reemplazar por el codigo del evento seleccionado actual
+				if (codigoAnterior === '') {
+					codigoAnterior = codigoBase
+				}
+				// Seteo el campo de codigo por la variable del codigo base del evento seleccionado
 				editor.setValue(codigoBase);
+			}else{ // Si el campo donde se encuentran los eventos ya tiene el evento seleccionado para el elemento
+				// Seteo la variable codigoBase por el codigo que se encuntra
+				codigoBase = codigoExistentePrevio; //$('#'+eventoSeleccionado+'Event').text()
+				//codigoBase = $('#'+eventoSeleccionado+'Event').text();
 			}
+			editor.setValue(codigoBase);
+//codigoBase = '';			
+codigoAnterior = codigoBase;
+codigoBase = '';
 			setTimeout(function() {
 				editor.refresh();
 			},500);
 			setTimeout(function() {
+				codigoFinal = editor.getValue();
 				$("#code").css('display','none');
 			},600);
-			existeEvento(idActualSel, eventoSeleccionado, tieneEvent);			
-			if ( tieneEvent == 1 ) {
-				//idActualSel
-			}
 		}else{
 			alert('NO SE SELECCIONO NINGUN EVENTO');
-			alert('CODIGO '+$('#code').val())
 			$("#eventContent").css('display','none');
 		}
-	}); 
+		eventoParaGuardar = eventoSeleccionado
+		//Comentario de evento anterior
+		comentarioEventAnt = eventoSeleccionado + idActualSel;
+	}); // Fin evento cambio del valor del select
 	
 
 
@@ -113,7 +177,11 @@ $( document ).ready(function() {
 		//if(ev && ev.click) alert('h1_1 tiene evento CLICK');
 		if(ev && ev.mouseover) alert('h1_1 tiene evento MOUSEOVER');*/
 	// FUNCIONAAA -----------------------------------------------------------------------------------------
-	existeEvento('h1_1', 'mouseover');
+	//existeEvento('h1_1', 'mouseover');
+
+
+
+
 	/*
 	.on( "mouseover", handler )
 	mouseover
@@ -502,12 +570,10 @@ function verEnDispositivo(device){
 		switch (device) {
 	        case 's': {
 	            $('.deviceSmartphone1').css('display','block');
-	            alert('1');
 	            break;
 	        }
 	        case 't': {
 	            $('.deviceTablet1').css('display','block');
-	            alert('2');
 	            break;
 	        }
 	    }
@@ -536,7 +602,6 @@ function guardarCambios(codigoEditado){
 	var codigoHTML =  cabecera+cssDoc+codigoEditado+footer
 	codigoHTML = codigoHTML.toString().replace(/\t/g, '');//.split('\r\n'); // Limpio el texto borrarndo todos los tabs
 	//codigoHTML = cabecera + footer
-	alert(codigoHTML)
 	nombreArchivo = "op.html"
 	var datos = {
             "codigoHTML" : codigoHTML,
@@ -606,6 +671,7 @@ function editarDatosModal(idElemento){
 	$("#code").css('display','inline');
 
 	
+	
 	/*var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
 	lineNumbers: true,
 	extraKeys: {"Ctrl-Space": "autocomplete"}
@@ -619,6 +685,22 @@ function editarDatosModal(idElemento){
 }
 
 /**
+ * Muestra el popUp cuando hay cambios detectados en algún evento
+ * @param {string} codigoCambio 
+ * @param {string} eventoCambio 
+ * @param {string} eventoComent 
+ */
+function mostrarModalGuardarCambios(codigoCambio, eventoCambio, eventoComent){
+	// Se guarda el codigo que tuvo cambios
+	codigoEventoFinalGuardar = codigoCambio;
+	// Se guarda el nombre del evento cuyo codigo tuvo cambios
+	nombreEventoFinalGuardar = eventoCambio;
+	// Se guarda comentario del evento
+	comentEventoFinalGuardar = eventoComent;
+	// Aparece el popUp
+	$("#guardaCambios").modal('show');
+}
+/**
  * Asigna el nuevo id al elemento actual
  */
 function guardarDatosModal(){
@@ -627,12 +709,10 @@ function guardarDatosModal(){
 	//var editor = CodeMirror.fromTextArea('code');
 	//var editor = CodeMirror.fromTextArea(document.getElementById("code"));
 	
-	// store it
+	// Guarda el codigo
 	$('#code').data('CodeMirrorInstance', editor);
-	// get it
-	var myInstance = $('code').data('CodeMirrorInstance');
-
-	alert('editor '+editor.getValue());
+	// obtener
+	//var myInstance = $('code').data('CodeMirrorInstance');
 	/*
 	//Descomentar
 	var nuevoId = $("#tbID").val(); // ID ingresado por el user
@@ -642,11 +722,68 @@ function guardarDatosModal(){
 }
 
 /**
+ * Guarda los ambios realizados al editar el codigo de eventos
+ */
+function guardarCambiosCode(){	
+	// Obtengo el texto actual en el campo donde van todos los eventos de los elementos
+	var textoActual = $('#'+nombreEventoFinalGuardar+'Event').text();
+	textoActual = '';
+	// Dentro del campo donde se guardan los eventos, agrego el evento que fue modificado
+    $('#'+nombreEventoFinalGuardar+'Event').text('//'+comentEventoFinalGuardar+'\n'+(textoActual + codigoEventoFinalGuardar).trim()+'\n//fin'+comentEventoFinalGuardar);
+	// Seteo todos las variables a vacio 
+	codigoParaGuardar = '';
+	eventoParaGuardar = '';
+	nombreEventoFinalGuardar = '';
+	codigoEventoFinalGuardar = '';
+	codigoExistentePrevio = ''; // Setear, codigo anterior
+	$("#guardaCambios").modal('hide');
+}
+
+/**
+ * Devuelve el evento si ya fue creado previamente
+ * @param {string} nomEvento 
+ * @param {string} idElemSel 
+ */
+function buscarEventoExiste(nomEvento, idElemSel, textoEventoMostrar){
+	var lineas = $('#'+nomEvento+'Event').text().split('\n');
+	var comentBuscar = '//'+nomEvento+idElemSel;
+	var comentFinBuscar = '//fin'+nomEvento+idElemSel;
+	var numLn = 0;
+	//$('#'+eventoSeleccionado+'Event')
+	//var textoEventoMostrar = ''
+	var empezarAguardar = 0
+
+	for(var i = 0;i < lineas.length;i++){	
+		if(	$.trim(lineas[i]) == $.trim(comentFinBuscar)){
+			empezarAguardar = 0
+		}
+		// Pregunto si ya encontro el evento para guardar en la variable
+		if (empezarAguardar == 1){
+			textoEventoMostrar = textoEventoMostrar + $.trim(lineas[i]) + '\n'
+			$('#'+nomEvento+'Event').text($('#'+nomEvento+'Event').text().replace($.trim(lineas[i]), ''));
+		}
+		//Busco si existe el evento del elemento seleccionado
+		if(	$.trim(lineas[i]) == $.trim(comentBuscar)){
+			empezarAguardar = 1
+		}
+	}
+	//alert('ELEMENTO DENTRO DEL TEXAREA '+$('#blurEvent').text());
+	codigoExistentePrevio = textoEventoMostrar;
+	textoEventoMostrar = '';
+	
+	//$('#blurEvent').text($('#blurEvent').text().replace('//blurh1_1', ''));
+	
+	$('#'+nomEvento+'Event').text($('#'+nomEvento+'Event').text().replace(comentBuscar, ''));
+	$('#'+nomEvento+'Event').text($('#'+nomEvento+'Event').text().replace(comentFinBuscar, ''));
+	//$('#'+nomEvento+'Event').text().replace('//blurh1_1', '');
+}
+/**
  * Devuelve valor 1 si el id tiene asignado el nombre evento pasado por parametro
  * @param {numeric} idEvento 
  * @param {string} nombreEvento 
  * @param {string} tieneEvent 
  */
+/*
 function existeEvento(idEvento, nombreEvento, tieneEvent){
 	var ev = $._data($("#"+idEvento)[0], 'events');
 	var tieneEvent = 0;
@@ -692,4 +829,4 @@ function existeEvento(idEvento, nombreEvento, tieneEvent){
 	if (nombreEvento == 'validate') { // Evento para validar campos
 		if(ev && ev.validate) tieneEvent = 1;
 	}
-}
+}*/

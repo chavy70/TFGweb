@@ -85,11 +85,11 @@ $( document ).ready(function() {
 	// Controla cuando cambia valor del select en el popUp de edicion de 
 	$('#ddlEventos').change(function() {
 		//Guarda el evento seleccionado en el combo
-		eventoSeleccionado = $("#ddlEventos option:selected").val();
+		eventoSeleccionado = $("#ddlEventos option:selected").val();	
 		//ID del elemento al que se va a aplicar el evento
 		idActualSel = $("#tbID").val();
 		// Busca si el evento ya fue agregado previamente y lo guarda en la variable codigoExistentePrevio
-		buscarEventoExiste(eventoSeleccionado, idActualSel, codigoExistentePrevio);
+		buscarEventoExiste(eventoSeleccionado, idActualSel);	
 		// Cambio el editor a modo visible
 		$("#eventContent").css('display','inline');
 		// Si existe codigo anterior
@@ -97,7 +97,6 @@ $( document ).ready(function() {
 			// Si el codigo anterior es igual al actual
 			if (codigoAnterior === editor.getValue()) {
 				// Significa que no hubo cambios y el valor de codigo anterior entonces queda vacio
-				//alert('No hubo cambios');
 				// Seteo el valor a vacio para el proximo cambio en el select de eventos
 				codigoAnterior = '';
 			}else{
@@ -122,7 +121,6 @@ $( document ).ready(function() {
 				codigoComentario 	= $('#'+eventoSeleccionado+'EventCode').text().replace('nombreElemento',$('#tbElemento').val())
 				// A continuacion busco el codigo base del evento seleccionado y reemplazo las variables por los datos del elemento seleccionado y lo guardo en una variable
 				codigoBase 			= $('#codigoBase').text().replace('nombreEvento',eventoSeleccionado);
-//alert('*PRIMER CODIGO BASE '+$('#blurEvent').val());				
 				codigoComentario 	= codigoComentario.replace('nombreID',$('#tbID').val())
 				codigoBase 			= codigoBase.replace('nombreEvento',eventoSeleccionado);
 				codigoBase 			= codigoBase.replace('idElementoAqui','#'+$('#tbID').val());
@@ -130,18 +128,19 @@ $( document ).ready(function() {
 				// Si la variable codigoAnterior se encuentra vacia, la guardo antes de reemplazar por el codigo del evento seleccionado actual
 				if (codigoAnterior === '') {
 					codigoAnterior = codigoBase
-				}
+				}				
 				// Seteo el campo de codigo por la variable del codigo base del evento seleccionado
 				editor.setValue(codigoBase);
 			}else{ // Si el campo donde se encuentran los eventos ya tiene el evento seleccionado para el elemento
 				// Seteo la variable codigoBase por el codigo que se encuntra
 				codigoBase = codigoExistentePrevio; //$('#'+eventoSeleccionado+'Event').text()
-				//codigoBase = $('#'+eventoSeleccionado+'Event').text();
+				if (codigoExistentePrevio === '') {
+					codigoBase = '//'+comentEventoFinalGuardar+'\n'+$('#'+eventoSeleccionado+'Event').text()+'\n//fin'+comentEventoFinalGuardar
+				}
 			}
-			editor.setValue(codigoBase);
-//codigoBase = '';			
-codigoAnterior = codigoBase;
-codigoBase = '';
+			editor.setValue(codigoBase);	
+			codigoAnterior = codigoBase;
+			codigoBase = '';
 			setTimeout(function() {
 				editor.refresh();
 			},500);
@@ -697,6 +696,7 @@ function mostrarModalGuardarCambios(codigoCambio, eventoCambio, eventoComent){
 	nombreEventoFinalGuardar = eventoCambio;
 	// Se guarda comentario del evento
 	comentEventoFinalGuardar = eventoComent;
+	//alert('nombreEventoFinalGuardar EVENTO '+nombreEventoFinalGuardar+' CODIGO codigoEventoFinalGuardar '+codigoEventoFinalGuardar);
 	// Aparece el popUp
 	$("#guardaCambios").modal('show');
 }
@@ -728,8 +728,15 @@ function guardarCambiosCode(){
 	// Obtengo el texto actual en el campo donde van todos los eventos de los elementos
 	var textoActual = $('#'+nombreEventoFinalGuardar+'Event').text();
 	textoActual = '';
+//alert('GUARDAAA!!! '+'  --#'+nombreEventoFinalGuardar+'Event--  '+nombreEventoFinalGuardar+'   //'+comentEventoFinalGuardar+'\n'+(textoActual + codigoEventoFinalGuardar).trim()+'\n//fin'+comentEventoFinalGuardar)	
+///alert('codigoEventoFinalGuardar \n'+codigoEventoFinalGuardar)
+//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+$('#'+nombreEventoFinalGuardar+'Event').text('//'+comentEventoFinalGuardar+'\n'+(textoActual + codigoEventoFinalGuardar).trim()+'\n//fin'+comentEventoFinalGuardar)
+//alert('1 //'+comentEventoFinalGuardar+'\n'+(textoActual + codigoEventoFinalGuardar).trim()+'\n//fin'+comentEventoFinalGuardar)
 	// Dentro del campo donde se guardan los eventos, agrego el evento que fue modificado
-    $('#'+nombreEventoFinalGuardar+'Event').text('//'+comentEventoFinalGuardar+'\n'+(textoActual + codigoEventoFinalGuardar).trim()+'\n//fin'+comentEventoFinalGuardar);
+    //$('#'+nombreEventoFinalGuardar+'Event').text('//'+comentEventoFinalGuardar+'\n'+(textoActual + codigoEventoFinalGuardar).trim()+'\n//fin'+comentEventoFinalGuardar);
 	// Seteo todos las variables a vacio 
 	codigoParaGuardar = '';
 	eventoParaGuardar = '';
@@ -737,6 +744,9 @@ function guardarCambiosCode(){
 	codigoEventoFinalGuardar = '';
 	codigoExistentePrevio = ''; // Setear, codigo anterior
 	$("#guardaCambios").modal('hide');
+	// El nuevo evento seleccionado
+	eventoSeleccionado = $("#ddlEventos option:selected").val();
+	eventoParaGuardar = eventoSeleccionado 
 }
 
 /**
@@ -744,38 +754,45 @@ function guardarCambiosCode(){
  * @param {string} nomEvento 
  * @param {string} idElemSel 
  */
-function buscarEventoExiste(nomEvento, idElemSel, textoEventoMostrar){
+function buscarEventoExiste(nomEvento, idElemSel){
+//alert('1 DENTRO DE LA FUNCION '+nomEvento+'### \n'+$('#'+nomEvento+'Event').text())	
+	var textoEventoMostrar = '';
 	var lineas = $('#'+nomEvento+'Event').text().split('\n');
 	var comentBuscar = '//'+nomEvento+idElemSel;
 	var comentFinBuscar = '//fin'+nomEvento+idElemSel;
 	var numLn = 0;
-	//$('#'+eventoSeleccionado+'Event')
-	//var textoEventoMostrar = ''
 	var empezarAguardar = 0
-
-	for(var i = 0;i < lineas.length;i++){	
+	// Recorro linea por linea del evento guardado
+	for(var i = 0;i < lineas.length;i++){		
+		// Bandera que controla el final del evento mediante el codigo cierre comentFinBuscar
 		if(	$.trim(lineas[i]) == $.trim(comentFinBuscar)){
-			empezarAguardar = 0
+			empezarAguardar = 0 // el 0 indica que ya finalizo el recorrido del evento
 		}
+		//DESCOMENTAR=============================================================================================================================================================================================
 		// Pregunto si ya encontro el evento para guardar en la variable
-		if (empezarAguardar == 1){
-			textoEventoMostrar = textoEventoMostrar + $.trim(lineas[i]) + '\n'
-			$('#'+nomEvento+'Event').text($('#'+nomEvento+'Event').text().replace($.trim(lineas[i]), ''));
+		if (empezarAguardar == 1 ){ //&& trim($.trim(lineas[i])) != '' 
+			//alert(textoEventoMostrar + $.trim(lineas[i]))
+			textoEventoMostrar = textoEventoMostrar + $.trim(lineas[i]) //+ '\n'
+			if(textoEventoMostrar === '' ){
+				//
+			}else{
+				textoEventoMostrar = textoEventoMostrar + '\n'
+			}
+			//$('#'+nomEvento+'Event').text($('#'+nomEvento+'Event').text().replace($.trim(lineas[i]), ''));
 		}
 		//Busco si existe el evento del elemento seleccionado
 		if(	$.trim(lineas[i]) == $.trim(comentBuscar)){
 			empezarAguardar = 1
 		}
 	}
-	//alert('ELEMENTO DENTRO DEL TEXAREA '+$('#blurEvent').text());
 	codigoExistentePrevio = textoEventoMostrar;
-	textoEventoMostrar = '';
 	
-	//$('#blurEvent').text($('#blurEvent').text().replace('//blurh1_1', ''));
-	
-	$('#'+nomEvento+'Event').text($('#'+nomEvento+'Event').text().replace(comentBuscar, ''));
+	/*$('#'+nomEvento+'Event').text($('#'+nomEvento+'Event').text().replace(comentBuscar, ''));
 	$('#'+nomEvento+'Event').text($('#'+nomEvento+'Event').text().replace(comentFinBuscar, ''));
-	//$('#'+nomEvento+'Event').text().replace('//blurh1_1', '');
+	*/
+	$('#'+nomEvento+'Event').text($('#'+nomEvento+'Event').text());
+	$('#'+nomEvento+'Event').text($('#'+nomEvento+'Event').text());
+//alert('ACA ME QUEDE GUARDA DOBLE 1 '+$('#'+nomEvento+'Event').text())
 }
 /**
  * Devuelve valor 1 si el id tiene asignado el nombre evento pasado por parametro

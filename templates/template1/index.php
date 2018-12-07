@@ -67,24 +67,6 @@
 
 
 
-
-
-<center><display:grid>dsdsdsdsd</center> 
-
-
-
-
-	
-	
-
-
-
-
-
-
-
-<button  type='button' onclick="alert($('#blurEvent').text());" class='btn btn-default noSelect'><img class='noSelect' src='img/edicion/editar.png' alt='Editar'></button>
-
 			<!-- ------------------------------------------------- PANEL PRINCIPAL-------------------------------------------------------- -->
 			<!-- Panel con los codigos de la pagina -->
 			<!-- panel panel-default dest colu2 -->
@@ -282,7 +264,7 @@
 								<h4 class="titulo-modal"><p class="text-center">Configuracion de elemento</p></h4>
 							</div>
 							<div class="modal-body">
-							<form>
+							<form class="modal-configuracion">
 							
 								<div class="form-group row">
 									<div class="col-sm-12">
@@ -296,15 +278,15 @@
 									<div class="col-sm-2 text-right">
 										<label for="tbElemento" >Elemento</label>
 									</div>
-									<div class="col-sm-10">
+									<div class="col-sm-4">
 										<input type="text" readonly class="form-control" id="tbElemento">
 									</div>
-								</div>
-								<div class="form-group row">
+								<!-- </div>
+								<div class="form-group row"> -->
 									<div class="col-sm-2 text-right">
 										<label for="tbID" class="col-form-label">C&oacute;digo</label>
 									</div>
-									<div class="col-sm-10">
+									<div class="col-sm-4">
 										<input class="form-control" readonly id="tbID" placeholder="ID del Elemento">
 									</div>
 								</div>
@@ -405,17 +387,12 @@
 				<div class="contentEvents">
 					<!-- Codigo Base de Eventos -->
 					<textarea id='codigoBase'>
-
 $('idElementoAqui').nombreEvento(function() {
 	// Aquí va el código
 });
 // Otra opción para llamar al evento sin la función.
 //$('idElementoAqui').nombreEvento();
 					</textarea>
-
-
-
-
 					<textarea id='blurEventCode'>
 /**
 * Evento que detecta la pérdida del foco en el 
@@ -429,7 +406,10 @@ $('idElementoAqui').nombreEvento(function() {
 **/
 					</textarea>
 					<textarea id='clickEventCode'>
-
+/**
+* Evento que detecta cuando el usuario hace click sobre un elemento
+* elemento nombreElemento con id:nombreID
+**/
 					</textarea>
 					<textarea id='fadeInFunctionEventCode'>
 
@@ -457,7 +437,7 @@ $('idElementoAqui').nombreEvento(function() {
 					<textarea id='blurEvent'>
 //blurh1_1
 /**
-* AAAAAAEvento que detecta la pérdida del foco en el 
+* Evento que detecta la pérdida del foco en el 
 * elemento H1 con id:h1_1
 **/
 					

@@ -125,12 +125,9 @@ div.dest {
 .configPage { position: absolute; right: 1px;  display: none; z-index: 1000; top: -34px; width: 163px;}
 
 .titulo-modal{color:#b02f2e;}
-.sub-title-modal{
-    border:1px solid #eee;
-    border-left: solid 3px #b02f2e;
-    padding: 10px;
-}
-
+.sub-title-modal{ border:1px solid #eee; border-left: solid 3px #b02f2e; color: #b02f2e; padding: 4px;}
+.modal-configuracion label {font-weight: normal;}
+.modal-configuracion p {margin: 0 0 -10px;;}
 /*Collapse*/
 /*.collapse {
   visibility: hidden;

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <title>Gym Live</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Poppins');
+        body{
+            /*display: flex;*/
+            /*margin:0;
+            padding: 0;            
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;*/
+            font-family: 'Poppins', sans-serif;
+        }
+        #texto-main{
+            margin:0;
+            padding: 0;
+            font-size: 12vw;/*font-size: 10em;*/
+            transition: 0.5s;
+            line-height: 0.8em; /*espaciado ente lineas*/
+            margin:0 auto;
+            display: inline-block;
+            justify-content: center;
+            align-items: center;
+            color: #eeeeee;
+        }
+        #texto-main span{
+            position: relative;
+            text-transform: uppercase;
+            display: block;
+            transition: 0.5s;
+        }
+        #texto-main span:nth-child(1):before { /*El primer span*/
+            content: '';
+            position: absolute;
+            top: 50%; /*calc(50%-15px);*/
+            left: 0;
+            width:30%;
+            height: 30%;
+            background: #d50000;
+            transform-origin: left;
+            transform: scaleX(0);
+            transition: 0.5s;
+            z-index: 1;
+        }
+        #texto-main:hover span:nth-child(1):before { /*El primer span*/
+            transform: scaleX(1);
+            width:100%;
+        }
+
+        #texto-main span:nth-child(3):before { /*El primer span*/
+            content: '';
+            position: absolute;
+            top: 50%; /*calc(50%-15px);*/
+            right: 0;
+            width:10%;
+            height: 30%;/*height: 30px;*/
+            background: #d50000;
+            transform-origin: right;
+            transform: scaleX(0);
+            transition: 0.5s;
+            z-index: 1;
+        }
+        #texto-main:hover span:nth-child(3):before { /*El primer span*/
+            transform: scaleX(1);
+            
+        }
+        
+        #texto-main span hide{
+            transition: 0.5s;
+            transition-delay: 1s;
+        }
+        #texto-main:hover span hide{
+            transition-delay: 1s;
+            color: #d50000;/*el texto tachado queda en rojo*/
+            opacity: 0;
+        }
+
+        #texto-main:hover span:nth-child(1) hide.signo { /*El primer span*/
+            padding-right: 30px;
+            opacity: 0;
+        }
+        #texto-main:hover span:nth-child(3) hide { /*El primer span*/
+            padding-right: 30px;
+        }
+        /*IMAGEN DE FONDO PORTADA*/
+        .container-portada{
+            width: 100%;
+            height: 600px;
+            background-image: url(img/mujer-ejecicio.jpg);
+            background-size: cover;
+        }
+        .contenedor-texto-home{
+            text-align: right;
+        }
+        /*BOXES*/
+        .container-boxes{
+            /*position: absolute;
+            top: 50%;
+            left: 50%;
+            transform:translate(-50%,-50%);*/
+            width: 100%;
+            height: 500px;
+            display: flex;
+        }
+        .container-boxes .box{
+            position: relative;
+            width: 25%;
+            height: 500px;
+            background: #ccc;
+            transition: 0.5s;
+        }
+        .container-boxes .box .thumb{
+            position: absolute;
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+        }
+        .container-boxes .box:nth-child(odd) .thumb{
+            bottom:0;
+            left: 0;
+        }
+        .container-boxes .box .thumb img{
+            width: 100%;
+        }
+        .container-boxes .box .details{
+            position: absolute;
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            background: #262626;
+        }
+        .container-boxes .box:nth-child(even) .details{
+            bottom: 0;
+            left: 0;
+        }
+        .container-boxes .box:nth-child(even) .details{
+            background: #e3ebed;
+        }
+        .container-boxes .box:nth-child(odd) .details{
+            background: #e3ebed;
+        }
+        .container-boxes .box .details .contenido {
+            position: absolute;
+            top: calc(50% - 16px); /*Efecto bajada - 16px*/
+            transform: translateY(-50%);
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+            transition: 0.5s;
+        }
+        .container-boxes .box:hover .details .contenido { /*Efecto bajada*/
+            top:calc(50%);
+        }
+        .container-boxes .box .details .contenido .fa {
+            font-size: 80px;
+            color:#4b5153;
+        }
+        .container-boxes .box .details .contenido h3{
+            margin: 0;
+            padding: 0;
+            padding: 10px 0;
+            color:#4b5153;
+        }
+        .container-boxes .box .details .contenido a{
+            display: inline-block;
+            padding: 5px 20px;
+            color: #4b5153;
+            border: 2px solid #4b5153;
+            text-decoration: none;
+            transition: 0.5s;
+            border-radius: 20px;
+            transform: scale(0);/*oculta los botones*/
+        }
+        .container-boxes .box:hover .details .contenido a{
+            transform: scale(1);/*aparecen los botones*/
+        }
+        .container-boxes .box .details .contenido a:hover{
+            background: #4b5153;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Sector Portada -->
+    <div class="container-portada">
+        <div class="contenedor-texto-home">
+            <h1 id="texto-main">
+                <span><hide>No</hide></span>
+                <span>puedes</span>
+                <span>hacerlo<hide class="signo">?</hide></span>
+            </h1>
+        </div>
+    </div>
+    
+    <!-- Sector Boxes -->
+    <div class="container-boxes">
+        <!-- Box Instalaciones -->
+        <div class="box">
+            <div class="thumb">
+                <img src="img/box1.jpg" alt="Instalaciones">
+            </div>
+            <div class="details">
+                <div class="contenido">
+                    <i class="fa fa-hand-rock-o" aria-hidden="true"></i>
+                    <h3>Instalaciones</h3>
+                    <a href="#">Leer m&aacute;s</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Box Tarifas -->
+        <div class="box">
+            <div class="thumb">
+                <img src="img/box4.jpg" alt="Tarifas">
+            </div>
+            <div class="details">
+                <div class="contenido">
+                    <i class="fa fa-usd" aria-hidden="true"></i>
+                    <h3>Tarifas</h3>
+                    <a href="#">Leer m&aacute;s</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Box Horarios -->
+        <div class="box">
+            <div class="thumb">
+                <img src="img/box3.jpg" alt="Horarios">
+            </div>
+            <div class="details">
+                <div class="contenido">
+                    <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                    <h3>Horarios</h3>
+                    <a href="#">Leer m&aacute;s</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Box Saludable -->
+        <div class="box">
+            <div class="thumb">
+                <img src="img/box4.jpg" alt="Saludable">
+            </div>
+            <div class="details">
+                <div class="contenido">
+                    <i class="fa fa-heartbeat" aria-hidden="true"></i>
+                    <h3>Saludable</h3>
+                    <a href="#">Leer m&aacute;s</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

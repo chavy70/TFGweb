@@ -208,7 +208,7 @@ $( document ).ready(function() {
 	ocultarTodo();
 	// Drop and drag --------------------------------------------------------------------------------------------------
 	$(document).on("mouseup",".soltarEn",function(event){
-		soltarEn = $(this).attr("id")
+		soltarEn = $(this).attr("id")	
 		$("#"+soltarEn).droppable({
 			accept: ".arrastrar",
 			tolerance: 'pointer',

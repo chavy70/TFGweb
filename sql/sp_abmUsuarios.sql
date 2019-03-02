@@ -16,7 +16,7 @@ CREATE PROCEDURE sp_abmUsuarios(
 BEGIN
 /*Guarda*/
 IF _tipo = 'a' THEN
-	INSERT INTO ajapoweb.users 
+	INSERT INTO ajapoweb_db.users 
 				(usuario, 
 				password, 
 				nombre, 
@@ -40,17 +40,17 @@ END IF;
 	/*SELECT SCOPE_IDENTITY()*/
 /*Eliminar*/
 IF _tipo = 'b' THEN
-	UPDATE ajapoweb.users SET  ajapoweb.estado = 'eliminado' WHERE id = _id;
+	UPDATE ajapoweb_db.users SET  ajapoweb_db.estado = 'eliminado' WHERE id = _id;
 	END IF;
 /*Modificar*/	
 IF _tipo = 'm' THEN
-	UPDATE 	ajapoweb.users SET 
+	UPDATE 	ajapoweb_db.users SET 
 				nombre 		= _nombre, 
 				direccion 	= _direccion, 
 				email 		= _email, 
 				fecha_nac 	= _fecha_nac, 
 				type 		= _type, 
 				fecha_crea 	= _fecha_crea 
-	WHERE 	ajapoweb.id 	= _id;
+	WHERE 	ajapoweb_db.id 	= _id;
 END IF;
 END$$

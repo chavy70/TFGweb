@@ -1,7 +1,7 @@
 //Variable global
 var urlPagina = document.domain;// Guarda el dominio de la página
 var ipPcActual;//Se guarda la ip publica
-var urlSql = 'http://localhost/TFGWeb/';
+var urlSql = 'http://ajapoweb.com/';
 /**
   * Inicia el código jQuery después de que el DOM esté ya cargado
   *
@@ -54,9 +54,9 @@ $.getJSON("http://jsonip.com?callback=?", function (dataip) {
  * Copia el template seleccionado a la carpeta del usuario 
  */
 function copiarTemplate(templatex){
-    origen = "/TFGWeb/templates/"+templatex+"/";
-    destino = "/TFGWeb/proyectos/newtemplate-";
-     
+    origen = "http://ajapoweb.com/templates/"+templatex+"/";
+    destino = "http://ajapoweb.com//newtemplate-";
+    
     var datos = {
             "origen" : origen,
             "destino" : destino,
@@ -67,11 +67,12 @@ function copiarTemplate(templatex){
         type: "GET",
         dataType: "json",
         contentType: "application/json; charset=utf-8",
-        url: 'funciones/CopiarTemplate.php',
+        //url: 'funciones/CopiarTemplate.php',
+        url: 'http://ajapoweb.com/funciones/CopiarTemplate.php',
         data: datos,
-        success: function (data) {
+        success: function (data) {      
             //window.location = '/PRUEBA/proyectos/'+data[1].toString()+'/';
-            window.location = '/TFGWeb/proyectos/'+data[1].toString()+'/';
+            window.location = 'http://ajapoweb.com/proyectos/'+data[1].toString()+'/';
         }
     });
 }

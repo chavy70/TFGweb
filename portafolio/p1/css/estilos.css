@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css?family=Bubbler+One');
+
+body{
+    text-align: center;
+    margin-top: 6em;
+    font-family: 'Bubbler One', sans-serif;
+    font-size: 30px;
+}
+h1{
+    font-weight: 100;
+    color:#1889f0;
+    display: inline-block;
+}
+
+.text1{
+    animation: bounce1 .5s alternate infinite ease-in;
+}
+.text2{
+    animation: bounce2 .5s alternate infinite ease-in;
+}
+.text3{
+    animation: bounce3 .5s alternate infinite ease-in;
+}
+@keyframes bounce1{
+    0%{
+        transform:translateX(-40%);
+    }
+    100%{
+        transform:translateX(0%);
+    }
+}
+@keyframes bounce2{
+    0%{
+        transform:translateY(-10%);
+    }
+    100%{
+        transform:translateY(0%);
+    }
+}
+@keyframes bounce3{
+    0%{
+        transform:translateX(40%);
+    }
+    100%{
+        transform:translateX(-10%);
+    }
+}

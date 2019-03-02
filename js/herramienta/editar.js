@@ -143,7 +143,7 @@ return '&lt;li&gt;' + jQueryPopup('&lt;div /&gt;').text(jQueryPopup(this).text()
 			    	idH1++;
 			    	//alert("holaa!")
 			        //ui.item.replaceWith("<h1 class='editable' id='id1' onclick='document.execCommand(\"selectAll\",false,null)'>Inserte texto H1</h1>");
-			        ui.item.replaceWith("<h1 class='editable' contextmenu='hnMenu' id='h1-"+idH1+"'>Inserte texto H1</h1>");
+			        ui.item.replaceWith("<h1 class='editable' contextmenu='hnMenu' id='h1-"+idH1+"'>Insertehh texto H1</h1>");
 			        break;
 			    case 'h2':
 			    	idH2++;

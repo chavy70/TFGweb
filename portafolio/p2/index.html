@@ -1,0 +1,122 @@
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+      <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="js/granim.js"></script>
+
+    <!-- Llamadas jQuery -->
+      <script type="text/javascript">
+        $(document).ready(function(){
+          $('.slider').slider();
+
+          //Al cambiar de tamaño la ventana del navegador se dispare evento
+          $(window).on("resize", function(){                 
+              resize();
+          });
+          resize();
+          var granimInstance = new Granim({
+            element: '#canvas-image-blending',
+            direction: 'top-bottom',
+            isPausedWhenNotInView: true,
+            image : {
+                source: 'img/mapleRed.jpg',
+                blendingMode: 'multiply'
+            },
+            states : {
+                "default-state": {
+                    gradients: [
+                        ['#29323c', '#485563'],
+                        ['#FF6B6B', '#556270'],
+                        ['#80d3fe', '#7ea0c4'],
+                        ['#f0ab51', '#eceba3']
+                    ],
+                    transitionSpeed: 7000
+                }
+            }
+          });
+        /*var canvas = document.getElementById('canvas-image-blending')
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;*/
+        });
+
+
+
+
+        function resize(){    
+          /*$("#canvas-image-blending").outerHeight($(window).height()-$("#canvas-image-blending").offset().top- Math.abs($("#canvas-image-blending").outerHeight(true) - $("#canvas-image-blending").outerHeight())+20);
+          $("#canvas-image-blending").outerHeight("100%");*/
+
+          htmlCanvas = document.getElementById('canvas-image-blending')
+          htmlCanvas.width = window.innerWidth - 17;
+          htmlCanvas.height = window.innerHeight;
+        }
+      </script>
+      <style type="text/css">
+        @import url('https://fonts.googleapis.com/css?family=Advent+Pro');
+        @import url('https://fonts.googleapis.com/css?family=Advent+Pro|Norican');
+        #canvas{
+          border: solid 1px blue;  
+          width: 100%;
+        }
+        .fondo{
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+        .sector1{
+          width: 100%;
+          height: 500px;
+        }
+        .titulo{
+          padding: 14px;
+          font-family: 'Advent Pro', sans-serif;
+          font-family: 'Norican', cursive;
+          font-size: 115px;
+        }
+        .slogan{
+          font-family: 'Advent Pro', sans-serif;
+        }
+        .fondoTitulo{ /*SIN USAR*/
+          transform: skew(10deg); 
+          width: fit-content;
+        }
+        .centrado{
+          margin:0 auto;
+          display: block;
+          justify-content: center;
+          align-items: center;
+        }
+        .slogan{
+          font-size: 30px;
+        }
+      </style>
+    </head>
+
+    <body>
+<div class="container1">
+  <canvas class="fondo" id="canvas-image-blending">
+  </canvas>
+  <div class="sector1 ">    
+      <br/><br/><br/><br/><br/><br/>
+      <div class="titulo white-text center-align">Su logo <span class="purple-text text-darken-3">Aqu&iacute;</span></div>  
+      <div class="slogan white-text center-align">Lorem ipsum dolor sit amet, consectetur adipiscing elit</div>
+  </div>
+</div>
+<!-- Fin de la pagina -->
+      <!--JavaScript at end of body for optimized loading-->
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    </body>
+  </html>

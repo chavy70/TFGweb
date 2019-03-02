@@ -4,9 +4,10 @@
      * Autor: Gabriela Paredes Morínigo
      *
      **/
+    echo 'HOLA';
     //Parametros enviados desde funciones.js
     $carpeta_origen = $_SERVER['DOCUMENT_ROOT'].$_GET['origen'];//carpeta raiz del hosting+origen
-    $carpeta_destino = $_SERVER['DOCUMENT_ROOT'].$_GET['destino'];//carpeta raiz del hosting+destino
+    $carpeta_destino =  $_SERVER['DOCUMENT_ROOT'].$_GET['destino'];//carpeta raiz del hosting+destino
     //$ipPcActual =$_GET['ipPcActual']; //Se comento
     //Nombre de la carpeta: dias mes año- hora minuto segundo - ip publica del dispositivo
     $carpeta_nombre = date('Y-m-d').'-'.time();//.'-'.$ipPcActual;
@@ -16,6 +17,7 @@
     $carpeta_destino = $carpeta_destino.$carpeta_nombre;
     //Guardo la carpeta destino en una variable auxiliar, url completa
     $carpeta_destino_aux = $carpeta_destino;
+    echo 'CHAU';
     //echo '*'.$carpeta_destino1.'*';
     //Nombre completo de la nueva carpeta, solo nombre de la carpeta
     $carpeta_nueva = 'newtemplate-'.$carpeta_nombre;
@@ -55,7 +57,7 @@
         }
         
         // Crea carpetas
-        mkdir($carpeta_destino, 0777); 
+        mkdir($carpeta_destino.'/', 0777,true);
 
 
         if (is_dir($carpeta_origen)) {

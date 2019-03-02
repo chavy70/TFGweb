@@ -15,8 +15,10 @@
 			// Guardo las variables de sesion
 			$_SESSION['idUsuario'] = $idUsuarioSes;
 			$_SESSION['usuario'] = $usuarioSes;
+
+			echo $idUsuarioSes;
 			//header('Location: index.php'); 
-	    }
+		}
 	echo json_encode($arrayDatosUser);
 	$link->close();
 ?>

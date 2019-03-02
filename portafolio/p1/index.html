@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="UTF-8">
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/estilos.css"  media="screen,projection"/>
+      <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <!-- JQuery -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+      <script>
+            $(document).ready(function () {
+                $('.slider').slider();
+                $("#loaderPage").fadeOut(4000, function() {
+                  alert ('Efecto fadeOut terminado!');
+                });
+                /*var loadPage = document.getElementById('loaderPage');
+                loadPage.style.visibility = 'hidden';
+                loadPage.style.opacity = '0';*/
+            });
+        </script>
+    </head>
+    <body>
+
+      <!-- Loader -->
+      <div id="loaderPage" class="container" style="width:40%;">
+          <br/><br/><br/>
+            <h1 class="text1"></h1>
+            <img class="text2" src="http://ajapoweb.com/images/logo-red.png" alt="Footer AjapoWeb">
+            <h1 class="text2"></h1>
+            <h1 class="red-text text-darken-4">ajapoweb.com</h1>
+            <div class="progress grey lighten-3">
+                <div class="indeterminate red"></div>
+            </div>
+      </div>
+      <!-- Fin Loader -->
+
+
+         
+
+
+           
+
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+ </body>
+  </html>

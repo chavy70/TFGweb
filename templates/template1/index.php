@@ -35,12 +35,12 @@
 		
 
 
-<link rel="stylesheet" href="../../css/codemirror/codemirror.css">
-<script type="text/javascript" src="../../js/codemirror/codemirror.js"></script>
-<script type="text/javascript" src="../../js/codemirror/javascript.js"></script>
+		<link rel="stylesheet" href="../../css/codemirror/codemirror.css">
+		<script type="text/javascript" src="../../js/codemirror/codemirror.js"></script>
+		<script type="text/javascript" src="../../js/codemirror/javascript.js"></script>
 
 
-<script src="../../jQueryMinicolors/js/jquery.minicolors.js"></script>
+		<script src="../../jQueryMinicolors/js/jquery.minicolors.js"></script>
 		<link href="../../jQueryMinicolors/css/jquery.minicolors.css" rel="stylesheet" type="text/css" />
 
 	</head>
@@ -412,7 +412,10 @@ $('idElementoAqui').nombreEvento(function() {
 **/
 					</textarea>
 					<textarea id='fadeInFunctionEventCode'>
-
+/**
+* Evento que detecta cuando el usuario hace click sobre un elemento
+* elemento nombreElemento con id:nombreID
+**/
 					</textarea>
 					<textarea id='fadeInEventCode'>
 

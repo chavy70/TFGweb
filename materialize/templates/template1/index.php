@@ -13,13 +13,19 @@
     <!-- Materialize CSS -->
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <link rel="stylesheet" href="http://ajapoweb.com/css/colorpicker/materialize-colorpicker.min.css">
+    <link rel="stylesheet" href="http://ajapoweb.com/css/colorpicker/docs.css">
+
     <!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     <!-- Codemirror -->
     <link rel="stylesheet" href="http://ajapoweb.com/css/codemirror/codemirror.css">
 	<script type="text/javascript" src="http://ajapoweb.com/js/codemirror/codemirror.js"></script>
-	<script type="text/javascript" src="http://ajapoweb.com/js/codemirror/javascript.js"></script>
+    <script type="text/javascript" src="http://ajapoweb.com/js/codemirror/javascript.js"></script>
+    
+    <link href="https://materializecss.com/extras/noUiSlider/nouislider.css" rel="stylesheet">
     
 
     <!-- Parallax -->
@@ -36,11 +42,12 @@
             $(".dropdown-trigger").dropdown();
             // Moda pooUp
             $('.modal-configuracion').modal();
+
+//$('#modalCambiosEventos').modal('open');            
             //Formato Select
             $('select').formSelect();
 
-
-            $('#demo7').colorpicker({
+            $('#txtForeColor, #txtBkColor').colorpicker({
                 color: '#ffaa00',
                 customClass: 'colorpicker-2x',
                 sliders: {
@@ -56,10 +63,105 @@
                     }
                 }
             });
+            // Recorrer lista de Font
+            $("#ddlFont ul li").each(function(){
+                var idFont = $(this).attr('id');
+                var nombreFont = $('#'+idFont).text();
+                switch (nombreFont) { 
+                    case 'Roboto': 
+                        $('#'+idFont).removeClass('Roboto').addClass('Roboto');
+                        break;
+                    case 'Srisakdi': 
+                        $('#'+idFont).removeClass('Srisakdi').addClass('Srisakdi');
+                        break;
+                    case 'Open Sans Condensed': 
+                        $('#'+idFont).removeClass('Open-sans-condensed').addClass('Open-sans-condensed');
+                        break;		
+                    case 'Bitter': 
+                        $('#'+idFont).removeClass('Bitter').addClass('Bitter');
+                        break;
+                    case 'Dancing Script': 
+                        $('#'+idFont).removeClass('Dancing-script').addClass('Dancing-script');
+                        break;
+                    case 'Shadows Into Light': 
+                        $('#'+idFont).removeClass('Shadows-into-light').addClass('Shadows-into-light');
+                        break;
+                    case 'Amatic SC': 
+                        $('#'+idFont).removeClass('Amatic-SC').addClass('Amatic-SC');
+                        break;
+                    case 'Permanent Marker': 
+                        $('#'+idFont).removeClass('Permanent-marker').addClass('Permanent-marker');
+                        break;
+                    case 'Cookie': 
+                        $('#'+idFont).removeClass('Cookie').addClass('Cookie');
+                        break;
+                    case 'Special Elite': 
+                        $('#'+idFont).removeClass('Special-elite').addClass('Special-elite');
+                        break;
+                    default:
+                }
+            });
+            // Selector de tamaño de fuente
+            var slider = document.getElementById('fontTamanho');
+            noUiSlider.create(slider, {
+                start: 80, //[20, 80],
+                connect: true,
+                step: 1,
+                orientation: 'horizontal', // 'horizontal' or 'vertical'
+                range: {
+                    'min': 0,
+                    'max': 100
+                },
+                format: wNumb({
+                    decimals: 0
+                })
+            });
+            // Muestra el tamaño actual seleccionado
+            $('#lbTamFuente span').text($('.noUi-tooltip span').text());
+            $('.noUi-handle, .noUi-handle span, .noUi-base').click(function() {
+                $('#lbTamFuente span').text($('.noUi-tooltip span').text());
+            });
+            $('.noUi-handle,  .noUi-base').mouseup(function(){
+                $('#lbTamFuente span').text($('.noUi-tooltip span').text());
+            });
+
 
         });    
     </script>
     <style>
+        /*10 tipos de famimlia*/
+        @import url('https://fonts.googleapis.com/css?family=Amatic+SC|Bitter|Cookie|Dancing+Script|Open+Sans+Condensed:300|Permanent+Marker|Roboto|Shadows+Into+Light|Special+Elite|Srisakdi');
+        .Roboto{
+            font-family: 'Roboto', sans-serif;
+        }
+        .Srisakdi{
+            font-family: 'Srisakdi', cursive;
+        }
+        .Open-sans-condensed{
+            font-family: 'Open Sans Condensed', sans-serif;
+        }
+        .Bitter{
+            font-family: 'Bitter', serif;
+        }
+        .Dancing-script{
+            font-family: 'Dancing Script', cursive;
+        }
+        .Shadows-into-light{
+            font-family: 'Shadows Into Light', cursive;
+        }
+        .AmaticSC{
+            font-family: 'Amatic SC', cursive;
+        }
+        .Permanent-marker{
+            font-family: 'Permanent Marker', cursive;
+        }
+        .Cookie{
+            font-family: 'Cookie', cursive;
+        }
+        .Special-elite{
+            font-family: 'Special Elite', cursive;
+        }
+        
         /*
         * Cambia el color del efecto onda
         */
@@ -155,6 +257,14 @@
         .colorpicker-2x .colorpicker-color,
         .colorpicker-2x .colorpicker-color div{
             height: 30px;
+        }
+        .datosElem label, .datosElem span{
+            position:relative;
+            color:black;
+        }
+        #modalCambiosEventos {
+            max-height: 45%;
+            width: 23%;
         }
    </style>
    <!--
@@ -401,220 +511,156 @@
         </div>
         <!-- ----------------------------------------------------------------------------------------------------------- FIN PÁGINAS EDITABLES ----------------------------------------------------------------------------------------------------------- -->
     </div>
-        <!-- Materialize Javascript -->
-        <!-- Compiled and minified JavaScript -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Materialize Javascript -->
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Color picker de Materialize - http://wittsparks.com/materialize-colorpicker/ -->
+    <script src="http://ajapoweb.com/js/materialize-colorpicker.min.js"></script>
 
-        <!-- Editor de pagina -->
-        <script src="http://ajapoweb.com/js/herramienta/editar-page.js"></script>
+    <!-- Editor de pagina -->
+    <script src="http://ajapoweb.com/js/herramienta/editar-page.js"></script>
 
+    <script src="https://materializecss.com/extras/noUiSlider/nouislider.js"></script>
 
-<!-- PopUp de configuración0 -->
-<!-- <div id="modal1" class="modal modal-fixed-footer modal-configuracion">
-    <div class="modal-content">
-        <h4>Configurar Elemento</h4>
-        <p>A bunch of text</p>
-    </div>
-    <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Aceptar</a>
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
-    </div>
-</div> -->
-<!-- Modal Trigger -->
-
-
-<a id="abrirModal2" class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+    
 
 
 
-<!-- BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR -->
 
-<!-- Modal content-->
-<div id="modal1" class="modal-content modal modal-fixed-footer modal-configuracion">
-    <div class="modal-content">
-        <h4>Configurar Elemento</h4>
-        <div class="row">
-            <form class="col s12">
-                <!-- Informe del elemento -->
-                <div class="row">
-                    <div class="input-field col s6 datosElem">
-                        <input id="txtElementoNombre" type="text" class="validate" value="0">
-                        <label for="txtElementoNombre">Elemento</label>
+    <!-- ------------------------------------------------------------------------------------ Modal PooUp ------------------------------------------------------------------------------------ -->
+    <!-- Configurar Elemento -->
+    <div id="modalConfigElement" class="modal-content modal modal-fixed-footer modal-configuracion">
+        <div class="modal-content">
+            <h4>Configurar Elemento</h4>
+<a id="abrirModal2" class="waves-effect waves-light btn modal-trigger" href="#modalCambiosEventos">Modal</a>            
+            <div class="row">
+                <form class="col s12">
+                    <!-- Informe del elemento -->
+                    <div class="row">
+                        <div class="input-field col s2 right-align">
+                            Elemento:
+                        </div>
+                        <div class="input-field col s4 datosElem">
+                            <input disabled id="txtElementoNombre" type="text" class="validate" value="0">
+                        </div>
+
+                        <div class="input-field col s2 right-align">
+                            C&oacute;digo:
+                        </div>
+                        <div class="input-field col s4 datosElem">
+                            <input disabled id="txtElementoCodigo" type="text" class="validate" value="0">
+                        </div>
                     </div>
-                    <div class="input-field col s6 datosElem">
-                        <input id="txtElementoCodigo" type="text" class="validate" value="0">
-                        <label for="txtElementoCodigo">C&oacute;digo</label>
+                    <!-- Color -->
+                    <div class="row">
+                        <div class="input-field col s2 right-align">
+                            Color fuente:
+                        </div>
+                        <div class="input-field col s4 datosElem">
+                            <input id="txtForeColor" type="text" class="validate"> 
+                        </div>
+
+                        <div class="input-field col s2 right-align">
+                            Color Fondo:
+                        </div>
+                        <div class="input-field col s4 datosElem">
+                            <input id="txtBkColor" type="text" class="validate">
+                        </div>
                     </div>
-                </div>
-                <!-- Color -->
-                <div class="row">
-                    <div class="input-field col s6 datosElem">                    
-                        <!-- <input id="txtForeColor" type="text" class="validate"> -->
-                        <input type="text" id="demo7" />
-                        <label for="txtForeColor">Color de Fuente</label>
-                    </div>
-                    <div class="input-field col s6 datosElem">
-                        <input id="txtBkColor" type="text" class="validate">
-                        <label for="txtBkColor">Color de Fondo</label>
-                    </div>
-                </div>
-                <!-- Eventos -->
-                <div class="row">
-                    <div id="ddlEventos" class="input-field col s12 form-control">
-                        <select id="ddlListaEventos">
-                            <option id="item0" value="0">Selecciona un evento</option>
-                            <option value="blur">blur()</option>
-                            <option value="change">change()</option>
-                            <option value="click">click()</option>
-                            <option value="fadeIn">fadeIn()</option>
-                            <option value="fadeOut">fadeOut()</option>
-                            <option value="focus">focus()</option>
-                            <option value="hover">hover()</option>
-                            <option value="keyup">keyup()</option>
-                            <option value="mouseout">mouseout()</option>
-                            <option value="mouseover">mouseover()</option>
-                            <option value="animate">animate()</option>
-                            <option value="datatables">datatables()</option>
-                            <option value="dialog">dialog()</option>
-                            <option value="validate">validate()</option>
-                        </select>
-                        <!-- <label>Lista de Eventos para ser aplicados al elemento seleccionado</label> -->
+                    <div class="row">
+                        <div class="input-field col s2 right-align">
+                            Fuente:
+                        </div>
+                        <div id="ddlFont" class="input-field col s4 datosElem">
+                            <select id="ddlListaFont">
+                                <option id="itemFont" value="0">Selecciona un font</option>
+                                <option class="Roboto" value="Roboto">Roboto</option>
+                                <option class="Srisakdi" value="Srisakdi">Srisakdi</option>
+                                <option class="Open-sans-condensed" value="Open-sans-condensed">Open Sans Condensed</option>
+                                <option class="Bitter" value="Bitter">Bitter</option>
+                                <option class="Dancing-script" value="Dancing-script">Dancing Script</option>
+                                <option class="Shadows-into-light" value="Shadows-into-light">Shadows Into Light</option>
+                                <option class="AmaticSC" value="AmaticSC">Amatic SC</option>
+                                <option class="Permanent-marker" value="Permanent-marker">Permanent Marker</option>
+                                <option class="Cookie" value="Cookie">Cookie</option>
+                                <option class="Special-elite" value="Special-elite">Special Elite</option>
+                            </select>
+                        </div>
+
+                        <div class="input-field col s2 right-align datosElem">
+                            Tama&ntilde;o: <label id="lbTamFuente"><span></span></label>
+                        </div>
+                        <div class="input-field col s4">
+                            <br />
+                            <div id="fontTamanho"></div>
+                        </div>
                     </div>
 
-                    <div class="col s12" id="eventContent"> 
-                        <form>
-                            <textarea id="code" name="code">
-                                aca debe ir el codigo
-                            </textarea>
-                        </form>
+                    <!-- Seleccionar Eventos -->
+                    <div class="row">
+                        <div class="input-field col s2 right-align">
+                            Evento:
+                        </div>
+                        <div  id="ddlEventos" class="input-field col s10 datosElem">
+                            <select id="ddlListaEventos">
+                                <option id="item0" value="0">Selecciona un evento</option>
+                                <option value="blur">blur()</option>
+                                <option value="change">change()</option>
+                                <option value="click">click()</option>
+                                <option value="fadeIn">fadeIn()</option>
+                                <option value="fadeOut">fadeOut()</option>
+                                <option value="focus">focus()</option>
+                                <option value="hover">hover()</option>
+                                <option value="keyup">keyup()</option>
+                                <option value="mouseout">mouseout()</option>
+                                <option value="mouseover">mouseover()</option>
+                                <option value="animate">animate()</option>
+                                <option value="datatables">datatables()</option>
+                                <option value="dialog">dialog()</option>
+                                <option value="validate">validate()</option>
+                            </select> 
+                        </div>
                     </div>
-                </div>
-            </form>
+                    <!-- Editor de Eventos -->
+                    <div class="row">
+                        <div class="col s12" id="eventContent"> 
+                            <form>
+                                <textarea id="code" name="code">
+                                    aca debe ir el codigo
+                                </textarea>
+                            </form>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
-
-
-
-        <!--<div class="modal-body">
-            <form class="modal-configuracion">
-                <div class="form-group row">
-                    <div class="col-sm-12">
-                        <div class="sub-title-modal" role="alert">
-                            Informaci&oacute;n
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-2 text-right">
-                        <label for="tbElemento" >Elemento</label>
-                    </div>
-                    <div class="col-sm-4">
-                        <input type="text" readonly class="form-control" id="tbElemento">
-                    </div>
-                    <div class="col-sm-2 text-right">
-                        <label for="tbID" class="col-form-label">C&oacute;digo</label>
-                    </div>
-                    <div class="col-sm-4">
-                        <input class="form-control" readonly id="tbID" placeholder="ID del Elemento">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-12">
-                        <div class="sub-title-modal" role="alert">
-                            Colores
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                <div class="col-sm-2 text-right">
-                        <label for="lbForeColor" class="col-form-label">Fuente</label>
-                    </div>									
-                    <div class="col-sm-4">
-                        <input type="hidden" value="#0088cc" name="color1" id="tbForeColor"/>
-                    </div>
-
-                    <div class="col-sm-2 text-right">
-                        <label for="lbBkColor" class="col-form-label">Fondo</label>
-                    </div>									
-                    <div class="col-sm-4">
-                        <input type="hidden" value="#0088cc" name="color1" id="tbBkColor"/>
-                    </div>
-
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-sm-12">
-                        <div class="sub-title-modal" role="alert">
-                            Eventos
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-2 text-right">
-                        <label for="lbEvento" class="col-form-label">Evento</label>
-                    </div>									
-                    <div class="col-sm-10">
-                        
-                        <select id="ddlEventos" class="form-control">
-                            <option value="0">Selecciona un evento</option>
-                            <option value="blur">blur()</option>
-                            <option value="change">change()</option>
-                            <option value="click">click()</option>
-                            <option value="fadeIn">fadeIn()</option>
-                            <option value="fadeOut">fadeOut()</option>
-                            <option value="focus">focus()</option>
-                            <option value="hover">hover()</option>
-                            <option value="keyup">keyup()</option>
-                            <option value="mouseout">mouseout()</option>
-                            <option value="mouseover">mouseover()</option>
-                            <option value="animate">animate()</option>
-                            <option value="datatables">datatables()</option>
-                            <option value="dialog">dialog()</option>
-                            <option value="validate">validate()</option>
-                        </select>
-                       
-                    </div>
-                </div>
+        <div class="modal-footer">
+            <a href="#!"  onclick="guardarDatosModal();" class="modal-close waves-effect waves-green btn-flat">Aceptar</a>
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
+        </div>
+    </div>
+    <!-- Guardar Cambios en evento -->
+    <div id="modalCambiosEventos" class="modal-content modal modal-fixed-footer modal-configuracion">
+        <div class="modal-content">
+            <h4>Guardar Cambios?</h4>
+            <div>Desea guardar los cambios realizados en el evento <span id="modalNomEvento"></span> del elemento <span id="modalNomElem"></span> ID <span id="modalIdElem"></span> ?</div>
+            <div class="row">
+                <form class="col s12"> 
                 
-                <div class="form-group row">
-                    <div class="col-sm-2 text-right">
-                    </div>
-                    <div class="col-sm-12" id="eventContent">
-                       
-                        <form>
-                            <textarea id="code" name="code">
-                            aca debe ir el codigo
-                            </textarea>
-                        </form>
-                    </div>
-                </div>
-            </form>
-        </div> -->
-
-        <!-- Asignar eventos a un elemento -->
-                        <!-- https://openclassrooms.com/en/courses/3693206-introduccion-a-jquery/3693281-eventos-vinculados-a-elementos -->
-                        <!-- VERY IMPORTANTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE -->
-                        <!-- Eventos asociados a elemento -->
-                        <!-- http://panicoenlaxbox.blogspot.com/2011/11/hace-poco-he-tenido-la-necesidad-de.html -->
-                        <!-- Saber si un elemento tiene un evento asignado -->
-                        <!-- http://rahosudce.blogspot.com/2013/11/re-saber-si-un-elemento-tiene-un-evento.html -->
-
+                </form>               
+            </div>
+        </div>
+        <div class="modal-footer"> 
+            <a href="#!"  onclick="guardarCambiosCode();" class="modal-close waves-effect waves-green btn-flat">Aceptar</a>
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
+        </div>
     </div>
-
-    <div class="modal-footer">
-        <a href="#!"  onclick="guardarDatosModal();" class="modal-close waves-effect waves-green btn-flat">Aceptar</a>
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
-    </div>
-
-</div>
-<!-- FIN Modal content-->
-                        
-<!-- BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR BORRAR  -->
+    <!-- ------------------------------------------------------------------------------------ FIN Modal PooUp ------------------------------------------------------------------------------------ -->
 
 
 
 
-    <!-- Contenedor Eventos -->
+    <!-- ------------------------------------------------------------------------------------ Contenedor Eventos ------------------------------------------------------------------------------------ -->
     <div class="contentEvents">
         <!-- Codigo Base de Eventos -->
         <textarea id='codigoBase'>
@@ -697,11 +743,11 @@ $('#h1_1').blur(function() {
         <textarea id='validateEvent'></textarea>
 
     </div>
-    <!-- FIN Contenedor Eventos -->
+    <!-- ------------------------------------------------------------------------------------ FIN Contenedor Eventos ------------------------------------------------------------------------------------ -->
 
-<!-- Campos ocultos -->
-<span id="spanIDoculto"></span>
-<!-- Fin Campos ocultos -->
+    <!-- ------------------------------------------------------------------------------------ Campos ocultos ------------------------------------------------------------------------------------ -->
+    <span id="spanIDoculto"></span>
+    <!-- ------------------------------------------------------------------------------------ Fin Campos ocultos ------------------------------------------------------------------------------------ -->
 
     <script>
         CodeMirror.commands.autocomplete = function(cm) {
@@ -712,5 +758,15 @@ $('#h1_1').blur(function() {
             extraKeys: {"Ctrl-Space": "autocomplete"}
         });    
     </script>
+
+    <!-- BIOGRAFÍA -->
+    <!-- Asignar eventos a un elemento -->
+    <!-- https://openclassrooms.com/en/courses/3693206-introduccion-a-jquery/3693281-eventos-vinculados-a-elementos -->
+    <!-- VERY IMPORTANTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE -->
+    <!-- Eventos asociados a elemento -->
+    <!-- http://panicoenlaxbox.blogspot.com/2011/11/hace-poco-he-tenido-la-necesidad-de.html -->
+    <!-- Saber si un elemento tiene un evento asignado -->
+    <!-- http://rahosudce.blogspot.com/2013/11/re-saber-si-un-elemento-tiene-un-evento.html -->
+    
 </body>
 </html>

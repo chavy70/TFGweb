@@ -37,6 +37,7 @@ var idAddress = 0;
 var idMap = 0;
 var idCont = 0;
 var eventoSeleccionado = '';
+var eventoAnteriorSeleccionado = '';
 var idActualSel = 0;
 var codigoComentario = '';
 var codigoBase = '';
@@ -81,16 +82,35 @@ $( document ).ready(function() {
 	/*$("#code").keypress(function(){
 		
 	});*/
+	/*$("#txtForeColor").change(function(){
+		alert('CHANGE '+$("#txtForeColor").val());
+	});*/
+
+	$("#mytext").trigger("change", function(){
+		alert('***CHANGE '+$("#txtForeColor").val());
+	});
+
+
+	$(".colorpicker-saturation").click(function(){
+		//alert($("#txtForeColor").text() + ' ------------ '+$("#txtForeColor").val())
+		$("#txtForeColor").css('border-bottom','1px solid '+$("#txtForeColor").val());
+		$("#txtForeColor").css('box-shadow','0 1px 0 0 '+$("#txtForeColor").val());
+
+		$("#txtBkColor").css('border-bottom','1px solid '+$("#txtBkColor").val());
+		$("#txtBkColor").css('box-shadow','0 1px 0 0 '+$("#txtBkColor").val());
+	});
 	
 	// Controla cuando cambia valor del select en el popUp de edicion de 
 	//$('#ddlEventos').change(function() {
 	$('#ddlEventos .dropdown-content li').click(function() {
 		var eventoSeleccionadoDdl = $(this).attr('id');
+//alert('1 eventoSeleccionadoDdl '+eventoSeleccionadoDdl);		
+		//Guarda el Evento anterior en caso de que exista
+		eventoAnteriorSeleccionado = eventoSeleccionado;
 		//Guarda el evento seleccionado en el combo
 		eventoSeleccionado = ($('#'+eventoSeleccionadoDdl+' span').text()).replace("()", "") //$("#ddlEventos option:selected").val();			
 		//ID del elemento al que se va a aplicar el evento
-		idActualSel = $("#spanIDoculto").text(); // $("#tbID").text();
-//alert('eventoSeleccionado '+eventoSeleccionado+' idActualSel '+idActualSel);		
+		idActualSel = $("#spanIDoculto").text(); // $("#tbID").text();	
 		// Busca si el evento ya fue agregado previamente y lo guarda en la variable codigoExistentePrevio
 		buscarEventoExiste(eventoSeleccionado, idActualSel);	
 		// Cambio el editor a modo visible
@@ -103,44 +123,56 @@ $( document ).ready(function() {
 				// Seteo el valor a vacio para el proximo cambio en el select de eventos
 				codigoAnterior = '';
 			}else{
+			
 				// Si hubo cambios en el codigo anterior (antes que el select cambie al nuevo evento seleccionado)
 				//alert('Cambios detectados! Guardar cambios!');
 				// Obtengo el codigo con los cambios
 				codigoParaGuardar = editor.getValue();
+
+$("#modalNomEvento").text(eventoAnteriorSeleccionado);//(eventoSeleccionado);
+$("#modalNomElem").text($('#txtElementoNombre').val());
+$("#modalIdElem").text($('#txtElementoCodigo').val());
+
+$('#modalCambiosEventos').modal('open');  		
+//alert('GUARDAR CAMBIOS DE EVENTOS ');				
 				// Llamo al popUp que pregunta si desea guardar los cambios 
 				mostrarModalGuardarCambios(codigoParaGuardar, eventoParaGuardar, comentarioEventAnt);
 				// Seteo el valor a vacio para el proximo cambio en el select de eventos
 				codigoAnterior = '';
+//alert('PASOOO')				
 			}
 		}
+//alert('DATOS eventoSeleccionado '+eventoSeleccionado+' eventoAnteriorSeleccionado '+eventoAnteriorSeleccionado);		
 		// Pregunta si se selecciono algun elemento
 		if (eventoSeleccionado != '0')  {
+//alert('SIN CAMBIOS ');				
 			// Pregunto si el campo donde se guardan los codigos del elemento esta vacio
 			if ($('#'+eventoSeleccionado+'Event').text() == '') {
 				// Reemplazo con los datos y por último agrego la descripción del evento
 				// El codigo para la busqueda del evento de un elemento determinado tiene la nomenglatura:
 				// //nombreEvento+idElemento <aqui va el codigo en question> //fin+nombreEvento+idElemento
-				// A continuacion busco el comentario del evento seleccionado y reemplazo las variables por los datos del elemento seleccionado y lo guardo en una variable
-				codigoComentario 	= $('#'+eventoSeleccionado+'EventCode').text().replace('nombreElemento',$('#tbElemento').val())
+				// A continuacion busco el comentario del evento seleccionado y reemplazo las variables por los datos del elemento seleccionado y lo guardo en una variable		
+				codigoComentario 	= $('#'+eventoSeleccionado+'EventCode').text().replace('nombreElemento',$('#txtElementoNombre').val())//$('#tbElemento').val())				
 				// A continuacion busco el codigo base del evento seleccionado y reemplazo las variables por los datos del elemento seleccionado y lo guardo en una variable
 				codigoBase 			= $('#codigoBase').text().replace('nombreEvento',eventoSeleccionado);
-				codigoComentario 	= codigoComentario.replace('nombreID',$('#spanIDoculto').val())
+				codigoComentario 	= codigoComentario.replace('nombreID',$('#spanIDoculto').text())
 				codigoBase 			= codigoBase.replace('nombreEvento',eventoSeleccionado);
-				codigoBase 			= codigoBase.replace('idElementoAqui','#'+$('#spanIDoculto').val());
-				codigoBase 			= codigoComentario + codigoBase.replace('idElementoAqui','#'+$('#spanIDoculto').val()); //$('#tbID').val());
+				codigoBase 			= codigoBase.replace('idElementoAqui','#'+$('#spanIDoculto').text());
+				codigoBase 			= codigoComentario + codigoBase.replace('idElementoAqui','#'+$('#spanIDoculto').text()); //$('#tbID').val());
 				// Si la variable codigoAnterior se encuentra vacia, la guardo antes de reemplazar por el codigo del evento seleccionado actual
 				if (codigoAnterior === '') {
 					codigoAnterior = codigoBase
 				}				
 				// Seteo el campo de codigo por la variable del codigo base del evento seleccionado
 				editor.setValue(codigoBase);
-			}else{ // Si el campo donde se encuentran los eventos ya tiene el evento seleccionado para el elemento
+			}else{ // Si el campo donde se encuentran los eventos ya tiene el evento seleccionado para el elemento					
 				// Seteo la variable codigoBase por el codigo que se encuntra
 				codigoBase = codigoExistentePrevio; //$('#'+eventoSeleccionado+'Event').text()
 				if (codigoExistentePrevio === '') {
 					codigoBase = '//'+comentEventoFinalGuardar+'\n'+$('#'+eventoSeleccionado+'Event').text()+'\n//fin'+comentEventoFinalGuardar
-				}
+				}			
 			}
+			//Agregar el texto en el campo Editor -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 			editor.setValue(codigoBase);	
 			codigoAnterior = codigoBase;
 			codigoBase = '';
@@ -166,7 +198,6 @@ $( document ).ready(function() {
 	// Drop and drag --------------------------------------------------------------------------------------------------
 	$(document).on("mouseup",".soltarEn",function(event){
 		soltarEn = $(this).attr("id")
-//alert('HOLA '+soltarEn)		
 		$("#"+soltarEn).droppable({
 			accept: ".arrastrar",
 			tolerance: 'pointer',
@@ -214,15 +245,14 @@ $( document ).ready(function() {
 			//"<button type='button' contentEditable='false' class=' blue-grey lighten-5 btn btn-default noSelect'><img class='noSelect' src='http://ajapoweb.com/images/edicion/mover.png' alt='Mover'></button>"+
 			"<a class='waves-effect waves-light btn btn-configuracion modal-trigger blue-grey lighten-5' href='#'><i class='Small material-icons grey-text text-darken-3'>open_with</i></a>"+
 			//"<button type='button' contentEditable='false' onclick='configuracion($(\"#"+nuevoIdElemento+"\").attr(\"id\"));' class='blue-grey lighten-5 btn btn-default noSelect'><img class='noSelect' src='http://ajapoweb.com/images/edicion/configurar.png'></button></div>"
-			"<a id='abrirModal' class='waves-effect waves-light btn btn-configuracion modal-trigger blue-grey lighten-5' onclick='editarDatosModal(\""+nuevoIdElemento+"\");' href='#modal1'><i class='Small material-icons grey-text text-darken-3'>settings</i></a></div>";
+			"<a id='abrirModal' class='waves-effect waves-light btn btn-configuracion modal-trigger blue-grey lighten-5' onclick='editarDatosModal(\""+nuevoIdElemento+"\");' href='#modalConfigElement'><i class='Small material-icons grey-text text-darken-3'>settings</i></a></div>";
 
 			//elementoActual
 			var htmlSecundario = "";
 			switch (elementoActual) {
                 case 'h1':
                     htmlSecundario = "<h1 class='textoSecundario'>Elemento H1</h1>"; // Texto que se muestra mientras se arrastra
-					htmlSoltar = "<h1 id='"+nuevoIdElemento+"' contenteditable='true' class='elementHTML sortable elementoEditable'>Lorem ipsum "+botonEdit+"</h1>"; // HTML generado con su id correspondiente
-//alert(htmlSoltar)					
+					htmlSoltar = "<h1 id='"+nuevoIdElemento+"' contenteditable='true' class='elementHTML sortable elementoEditable'>Lorem ipsum "+botonEdit+"</h1>"; // HTML generado con su id correspondiente				
                     break;
                 case 'h2':
                     htmlSecundario = "<h2 class='textoSecundario'>Elemento H2</h2>";
@@ -524,6 +554,9 @@ $( document ).ready(function() {
 		elementoActual =  $(this).attr('id');
 		$('#text').text('Se selecciono elemento '+elementoActual);
 	});
+
+
+	//$('#changeEvent').text('//'+'comentEventoFinalGuardar'+'\n'+'(textoActual + codigoEventoFinalGuardar).trim()'+'\n//fin'+'comentEventoFinalGuardar)');
 });
 
 
@@ -713,6 +746,7 @@ function editarDatosModal(idElemento){
 function mostrarModalGuardarCambios(codigoCambio, eventoCambio, eventoComent){
 	// Se guarda el codigo que tuvo cambios
 	codigoEventoFinalGuardar = codigoCambio;
+	//alert("CODIGO A GUARDARRRRRRRRRRRRRRR "+codigoEventoFinalGuardar);
 	// Se guarda el nombre del evento cuyo codigo tuvo cambios
 	nombreEventoFinalGuardar = eventoCambio;
 	// Se guarda comentario del evento
@@ -720,6 +754,8 @@ function mostrarModalGuardarCambios(codigoCambio, eventoCambio, eventoComent){
 	//alert('nombreEventoFinalGuardar EVENTO '+nombreEventoFinalGuardar+' CODIGO codigoEventoFinalGuardar '+codigoEventoFinalGuardar);
 	// Aparece el popUp
 	$("#guardaCambios").modal('show');
+
+	//alert('1 nombreEventoFinalGuardar '+nombreEventoFinalGuardar+' eventoCambio '+eventoCambio);
 }
 /**
  * Asigna el nuevo id al elemento actual
@@ -746,25 +782,33 @@ function guardarDatosModal(){
  * Guarda los ambios realizados al editar el codigo de eventos
  */
 function guardarCambiosCode(){	
+	nombreEventoFinalGuardar = eventoSeleccionado;
 	// Obtengo el texto actual en el campo donde van todos los eventos de los elementos
 	var textoActual = $('#'+nombreEventoFinalGuardar+'Event').text();
 	textoActual = '';
-//alert('GUARDAAA!!! '+'  --#'+nombreEventoFinalGuardar+'Event--  '+nombreEventoFinalGuardar+'   //'+comentEventoFinalGuardar+'\n'+(textoActual + codigoEventoFinalGuardar).trim()+'\n//fin'+comentEventoFinalGuardar)	
-///alert('codigoEventoFinalGuardar \n'+codigoEventoFinalGuardar)
-//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-$('#'+nombreEventoFinalGuardar+'Event').text('//'+comentEventoFinalGuardar+'\n'+(textoActual + codigoEventoFinalGuardar).trim()+'\n//fin'+comentEventoFinalGuardar)
-//alert('1 //'+comentEventoFinalGuardar+'\n'+(textoActual + codigoEventoFinalGuardar).trim()+'\n//fin'+comentEventoFinalGuardar)
+	//alert('GUARDAAA!!! '+'  --#'+nombreEventoFinalGuardar+'Event--  '+nombreEventoFinalGuardar+'   //'+comentEventoFinalGuardar+'\n'+(textoActual + codigoEventoFinalGuardar).trim()+'\n//fin'+comentEventoFinalGuardar)	
+	///alert('codigoEventoFinalGuardar \n'+codigoEventoFinalGuardar)
+	//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+	//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+	//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+	alert('CAMBIO DETECTADO #'+eventoAnteriorSeleccionado+'Event '+textoActual+"  "+codigoEventoFinalGuardar);
+	alert('#'+eventoAnteriorSeleccionado+' FINALLLLLLLL     '+'//'+comentEventoFinalGuardar+'\n'+(textoActual + codigoEventoFinalGuardar).trim()+'\n//fin'+comentEventoFinalGuardar);
+	//$('#'+nombreEventoFinalGuardar+'Event').text('//'+comentEventoFinalGuardar+'\n'+(textoActual + codigoEventoFinalGuardar).trim()+'\n//fin'+comentEventoFinalGuardar)
+	$('#'+eventoAnteriorSeleccionado+"Event").text('//'+comentEventoFinalGuardar+'\n'+(textoActual + codigoEventoFinalGuardar).trim()+'\n//fin'+comentEventoFinalGuardar);
+	/*$('#'+eventoAnteriorSeleccionado).text("kkkkkkkkkkkkkkkkkkkkkkkkk");
+	$('#changeEvent').text('.#'+eventoAnteriorSeleccionado+'. 22222  //'+'comentEventoFinalGuardar'+'\n'+'(textoActual + codigoEventoFinalGuardar).trim()'+'\n//fin'+'comentEventoFinalGuardar)');
+	return false;
+	alert('AGREGADO YA!!!')*/
+	//alert('1 //'+comentEventoFinalGuardar+'\n'+(textoActual + codigoEventoFinalGuardar).trim()+'\n//fin'+comentEventoFinalGuardar)
 	// Dentro del campo donde se guardan los eventos, agrego el evento que fue modificado
     //$('#'+nombreEventoFinalGuardar+'Event').text('//'+comentEventoFinalGuardar+'\n'+(textoActual + codigoEventoFinalGuardar).trim()+'\n//fin'+comentEventoFinalGuardar);
 	// Seteo todos las variables a vacio 
 	codigoParaGuardar = '';
 	eventoParaGuardar = '';
-	nombreEventoFinalGuardar = '';
+	//nombreEventoFinalGuardar = '';
 	codigoEventoFinalGuardar = '';
 	codigoExistentePrevio = ''; // Setear, codigo anterior
-	$("#guardaCambios").modal('hide');
+	//$("#guardaCambios").modal('hide');
 	// El nuevo evento seleccionado
 	eventoSeleccionado = $("#ddlEventos option:selected").val();
 	eventoParaGuardar = eventoSeleccionado 

@@ -1,443 +1,764 @@
 <!DOCTYPE html>
-<html lang="es">
-	<!-- Cabecera -->
-	<head>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title id="tituloPagina">Parallax</title>
+    <!-- Iconos y fuente de Google -->
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Materialize CSS -->
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <link rel="stylesheet" href="http://ajapoweb.com/css/colorpicker/materialize-colorpicker.min.css">
+    <link rel="stylesheet" href="http://ajapoweb.com/css/colorpicker/docs.css">
+
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <!-- Codemirror -->
+    <link rel="stylesheet" href="http://ajapoweb.com/css/codemirror/codemirror.css">
+	<script type="text/javascript" src="http://ajapoweb.com/js/codemirror/codemirror.js"></script>
+    <script type="text/javascript" src="http://ajapoweb.com/js/codemirror/javascript.js"></script>
+    
+    <link href="https://materializecss.com/extras/noUiSlider/nouislider.css" rel="stylesheet">
+
+    <?php
+        session_start();
+        if (!isset($_SESSION['idUsuario'])) {
+            $_SESSION['usuario'] = '';
+            $_SESSION['idUsuario'] = 0;
+            $_SESSION['nombre'] = 0;
+            /*header('Location: login.php'); 
+            exit();*/
+        } /*else {
+            $user = $_SESSION['usuario'];
+            $idUser =  $_SESSION['idUsuario'];
+        }*/
+        $nombre = $_SESSION['nombre'];
+        //echo $idUser;
+        //echo $user;
+    ?>
+    <!-- Parallax -->
+    <script>
+        $(document).ready(function () {
+            //Parallax de la pagina
+            $('.parallax').parallax();
+            //Efecto collapsible en menu de herramintas
+            $('.collapsible').collapsible();
+            //Tabs
+            $('ul.tabs').tabs();
+            //$('ul.tabs').tabs('select_tab', 'tab_id');
+            //DropDownList
+            $(".dropdown-trigger").dropdown();
+            // Moda pooUp
+            $('.modal-configuracion').modal();
+
+//$('#modalCambiosEventos').modal('open');            
+            //Formato Select
+            $('select').formSelect();
+
+            $('#txtForeColor, #txtBkColor').colorpicker({
+                color: '#ffaa00',
+                customClass: 'colorpicker-2x',
+                sliders: {
+                    saturation: {
+                        maxLeft: 200,
+                        maxTop: 200
+                    },
+                    hue: {
+                        
+                    },
+                    alpha: {
+                        maxTop: 200
+                    }
+                }
+            });
+            // Recorrer lista de Font
+            $("#ddlFont ul li").each(function(){
+                var idFont = $(this).attr('id');
+                var nombreFont = $('#'+idFont).text();
+                switch (nombreFont) { 
+                    case 'Roboto': 
+                        $('#'+idFont).removeClass('Roboto').addClass('Roboto');
+                        break;
+                    case 'Srisakdi': 
+                        $('#'+idFont).removeClass('Srisakdi').addClass('Srisakdi');
+                        break;
+                    case 'Open Sans Condensed': 
+                        $('#'+idFont).removeClass('Open-sans-condensed').addClass('Open-sans-condensed');
+                        break;		
+                    case 'Bitter': 
+                        $('#'+idFont).removeClass('Bitter').addClass('Bitter');
+                        break;
+                    case 'Dancing Script': 
+                        $('#'+idFont).removeClass('Dancing-script').addClass('Dancing-script');
+                        break;
+                    case 'Shadows Into Light': 
+                        $('#'+idFont).removeClass('Shadows-into-light').addClass('Shadows-into-light');
+                        break;
+                    case 'Amatic SC': 
+                        $('#'+idFont).removeClass('Amatic-SC').addClass('Amatic-SC');
+                        break;
+                    case 'Permanent Marker': 
+                        $('#'+idFont).removeClass('Permanent-marker').addClass('Permanent-marker');
+                        break;
+                    case 'Cookie': 
+                        $('#'+idFont).removeClass('Cookie').addClass('Cookie');
+                        break;
+                    case 'Special Elite': 
+                        $('#'+idFont).removeClass('Special-elite').addClass('Special-elite');
+                        break;
+                    default:
+                }
+            });
+            // Selector de tamaño de fuente
+            var slider = document.getElementById('fontTamanho');
+            noUiSlider.create(slider, {
+                start: 80, //[20, 80],
+                connect: true,
+                step: 1,
+                orientation: 'horizontal', // 'horizontal' or 'vertical'
+                range: {
+                    'min': 0,
+                    'max': 100
+                },
+                format: wNumb({
+                    decimals: 0
+                })
+            });
+            // Muestra el tamaño actual seleccionado
+            $('#lbTamFuente span').text($('.noUi-tooltip span').text());
+            $('.noUi-handle, .noUi-handle span, .noUi-base').click(function() {
+                $('#lbTamFuente span').text($('.noUi-tooltip span').text());
+            });
+            $('.noUi-handle,  .noUi-base').mouseup(function(){
+                $('#lbTamFuente span').text($('.noUi-tooltip span').text());
+            });
+
+
+        });    
 
 
 
 
+        function logout(){
+            var urlAjax = "http://localhost/tesis/TFGweb/";
+            $.ajax({
+                type: "GET",
+                data: '{}',
+                url: urlAjax+"consultas/logout.php", //'http://ajapoweb.com/consultas/logout.php',
+                success: function(data) {
+                    location.reload();
+                },
+                error: function(e){ 
+                    location.reload();
+                    //mensajeError("Error en el servidor, por favor, intentalo de nuevo mas tarde!");
+                }
+            });
+        }
+
+    </script>
+    <style>
+        /*10 tipos de famimlia*/
+        @import url('https://fonts.googleapis.com/css?family=Amatic+SC|Bitter|Cookie|Dancing+Script|Open+Sans+Condensed:300|Permanent+Marker|Roboto|Shadows+Into+Light|Special+Elite|Srisakdi');
+        .Roboto{
+            font-family: 'Roboto', sans-serif;
+        }
+        .Srisakdi{
+            font-family: 'Srisakdi', cursive;
+        }
+        .Open-sans-condensed{
+            font-family: 'Open Sans Condensed', sans-serif;
+        }
+        .Bitter{
+            font-family: 'Bitter', serif;
+        }
+        .Dancing-script{
+            font-family: 'Dancing Script', cursive;
+        }
+        .Shadows-into-light{
+            font-family: 'Shadows Into Light', cursive;
+        }
+        .AmaticSC{
+            font-family: 'Amatic SC', cursive;
+        }
+        .Permanent-marker{
+            font-family: 'Permanent Marker', cursive;
+        }
+        .Cookie{
+            font-family: 'Cookie', cursive;
+        }
+        .Special-elite{
+            font-family: 'Special Elite', cursive;
+        }
+        
+        /*
+        * Cambia el color del efecto onda
+        */
+        .waves-effect.waves-redlighten4 .waves-ripple {
+            background-color: #ffcdd2;
+        }
+
+        .tituloElement .hElem{
+            margin-top:0px;
+            margin-bottom:0px;
+            padding-top:4px;
+            padding-bottom:4px;
+        }
+
+        .sidenav li > a{
+            height: auto;
+        }
+
+        .sidenav {
+            width: 292px;
+        }
+
+        .collapsible-detalle {
+            display: flex;
+            padding: 5px;
+        }
+
+        .detalle-menu-izq{
+            margin:-14px;
+            margin-left: 5px;
+            font-size: 12px;
+        }
+
+        .detalle-menu-izq .material-icons{
+            width: 34px;
+            text-align: left;
+        }
+
+        .configPage {
+            position: absolute;
+            right: -45px;
+            display: none;
+            z-index: 1000;
+            top: -28px;
+            width: 180px;
+        }
+
+        .configPage img {
+            width: 13px;
+        }
+        .elementoEditable:hover .configPage { 
+            display: inline; 
+        }
+
+        .elementHTML:hover{
+            border: dashed 1px red!important;
+            position: relative;
+        }
+
+        .nueva-pagina {
+            width: 67px !important;
+        }
+
+        .nueva-pagina i {
+            padding-top: 11px;
+        }
+
+        .btn-configuracion{
+            padding: 0 7px;
+        }
+        .datosElem label {
+            position: absolute;
+            top: 2px;
+            left: 0;
+        }
+        .input-field {
+            margin-top: 0rem;
+            margin-bottom: -1rem;
+        }
+        .datosElem input {
+            height: 20px!important;
+        }
+        /*PAleta de Colores*/
+        .colorpicker-2x .colorpicker-saturation {
+            width: 200px;
+            height: 200px;
+        }
+        .colorpicker-2x .colorpicker-hue,
+        .colorpicker-2x .colorpicker-alpha {
+            width: 30px;
+            height: 200px;
+        }
+        .colorpicker-2x .colorpicker-color,
+        .colorpicker-2x .colorpicker-color div{
+            height: 30px;
+        }
+        .datosElem label, .datosElem span{
+            position:relative;
+            color:black;
+        }
+        #modalCambiosEventos {
+            max-height: 45%;
+            width: 23%;
+        }
+   </style>
+   <!--
+        nav, *
+        article, *
+        aside, 
+        section, 
+        header, *
+        footer,*
+        hgroup,
+        h1, *
+        h2, *
+        h3, *
+        h4, *
+        h5, *
+        h6, *
+        p, *
+        hr, 
+        ol, *
+        ul, *
+        li, *
+        div, 
+        sup, 
+        sub,
+        i,
+        u, 
+        a, *
+        img, 
+        map, 
+        area,
+        address,
+        blockquote, *
+        fieldset, * y legend, *
+        strong,  
+        table, 
+        tr, 
+        td, 
+        th, 
+        form, *
+        input,*
+        button, *
+        select, *  optgroup,
+        textarea.*
+    -->
+</head>
+
+<body>
+    <!-- Opciones del perfil -->
+    <ul id="dropdown1" class="dropdown-content">
+        <li>
+            <a class="red-text text-lighten-2" href="#!">Perfil</a>
+        </li>
+        <li>
+            <a class="red-text text-lighten-2" href="#!">Guardar</a>
+        </li>
+        <li>
+            <a class="red-text text-lighten-2" href="#!">Convertir a RAR</a>
+        </li>
+        <li>
+            <a class="red-text text-lighten-2" href="#!">Eliminar</a>
+        </li>
+        <li class="divider"></li>
+        <li>
+            <a class="red-text text-lighten-2" onclick="logout();" href="#!">Salir</a>
+        </li>
+    </ul>
+    <!-- Fin opciones del perfil -->
+
+    <!-- Menu top -->
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#!" class="brand-logo">
+                <img src="http://ajapoweb.com/images/logo-completo.png" width="180"></img>
+            </a>
+            <ul class="right hide-on-med-and-down">
+                <li>
+                    <a href="sass.html">
+                        <i class="material-icons">phone_android</i>
+                    </a>
+                </li>
+                <li>
+                    <a href="badges.html">
+                        <i class="material-icons">tablet_mac</i>
+                    </a>
+                </li>
+                <li>
+                    <?php If ($nombre != "")
+                    {
+                    ?>
+                    <i class="material-icons">account_circle</i>
+                    <?php } ?>
+                </li>
+                <li>
+                   
+                    <?php If ($nombre != "")
+                    {
+                    ?>
+                    <a class="dropdown-trigger" href="#!" data-target="dropdown1"><?php echo $nombre; ?>
+                        <i class="material-icons right">arrow_drop_down</i>
+                    </a>
+                    <?php } ?>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Fin Menu top -->
+
+    <!-- Menu izquierdo -->
+    <div class="row">
+        <!-- Menu de herramientas izquierda -->
+        <div class="col s2 hide-on-small-only">
+            <ul id="nav-mobile" class="sidenavNO sidenav-fixed">
+                <li class="no-padding">
+                    <ul class="collapsible collapsible-accordion">
+                        <!-- Paginas -->
+                        <li class="bold"><a class="collapsible-header waves-effect waves-redlighten4 red-text text-lighten-2" tabindex="0"><i class="material-icons red-text text-lighten-2">description</i>Páginas</a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li><a href="#!">Pagina1.html</a></li>
+                                    <li><a href="#!">Pagina2.html</a></li>
+                                    <li><a href="#!">Pagina3.html</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <!-- Titulo -->
+                        <li class="bold tituloElement"><a class="collapsible-header waves-effect waves-redlighten4 red-text text-lighten-2" tabindex="0"><i class="material-icons red-text text-lighten-2">text_format</i>T&iacute;tulos</a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li><a id="h1" class="arrastrar ui-draggable ui-draggable-handle collapsible-detalle waves-effect waves-redlighten4 red-text text-lighten-2" tabindex="0"><h1 class="hElem">T&iacute;tulo</h1></a></li>
+                                    <li><a id="h2" class="arrastrar ui-draggable ui-draggable-handle collapsible-detalle waves-effect waves-redlighten4 red-text text-lighten-2"><h2 class="hElem">T&iacute;tulo</h2></a></li>
+                                    <li><a id="h3" class="arrastrar ui-draggable ui-draggable-handle collapsible-detalle waves-effect waves-redlighten4 red-text text-lighten-2"><h3 class="hElem">T&iacute;tulo</h3></a></li>
+                                    <li><a id="h4" class="arrastrar ui-draggable ui-draggable-handle collapsible-detalle waves-effect waves-redlighten4 red-text text-lighten-2"><h4 class="hElem">T&iacute;tulo</h4></a></li>
+                                    <li><a id="h5" class="arrastrar ui-draggable ui-draggable-handle collapsible-detalle waves-effect waves-redlighten4 red-text text-lighten-2"><h5 class="hElem">T&iacute;tulo</h5></a></li>
+                                    <li><a id="h6" class="arrastrar ui-draggable ui-draggable-handle collapsible-detalle waves-effect waves-redlighten4 red-text text-lighten-2"><h6 class="hElem">T&iacute;tulo</h6></a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <!-- Texto -->
+                        <li class="bold"><a class="collapsible-header waves-effect waves-redlighten4 red-text text-lighten-2" tabindex="0"><i class="material-icons red-text text-lighten-2">text_fields</i>Texto</a>
+                            <div class="collapsible-body">
+                                <ul class="detalle-menu-izq">
+                                    <li><a id="nav" class="arrastrar ui-draggable ui-draggable-handle collapsible-detalle waves-effect waves-redlighten4 red-text text-lighten-2" tabindex="0"><i class="material-icons red-text text-lighten-2">dehaze</i> P&aacute;rrafo</a></li>
+                                    <li><a class="collapsible-detalle waves-effect waves-redlighten4 red-text text-lighten-2" tabindex="0"><i class="material-icons red-text text-lighten-2">format_list_bulleted</i> Lista</a></li>
+                                    <li><a class="collapsible-detalle waves-effect waves-redlighten4 red-text text-lighten-2" tabindex="0"><i class="material-icons red-text text-lighten-2">format_list_numbered</i> Lista Numerada</a></li>
+                                    <li><a class="collapsible-detalle waves-effect waves-redlighten4 red-text text-lighten-2" tabindex="0"><i class="material-icons red-text text-lighten-2">insert_link</i> Hiperv&iacute;nculo</a></li>
+                                    <li><a class="collapsible-detalle waves-effect waves-redlighten4 red-text text-lighten-2" tabindex="0"><i class="material-icons red-text text-lighten-2">format_quote</i> Cita</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <!-- Formulario -->
+                        <li class="bold"><a class="collapsible-header waves-effect waves-redlighten4 red-text text-lighten-2" tabindex="0"><i class="material-icons red-text text-lighten-2">assignment</i>Formularios</a>
+                            <div class="collapsible-body">
+                                <ul class="detalle-menu-izq">
+                                    <li><a class="collapsible-detalle waves-effect waves-redlighten4 red-text text-lighten-2" tabindex="0"><i class="material-icons red-text text-lighten-2">crop_square</i> Formulario</a></li>
+                                    <li><a class="collapsible-detalle waves-effect waves-redlighten4 red-text text-lighten-2" tabindex="0"><i class="material-icons red-text text-lighten-2">filter_none</i> Formulario Agrupado</a></li>
+                                    <li><a class="collapsible-detalle waves-effect waves-redlighten4 red-text text-lighten-2" tabindex="0"> <b>Campos para Formulario</b></a></li>
+                                    <li><a class="collapsible-detalle waves-effect waves-redlighten4 red-text text-lighten-2" tabindex="0"><i class="material-icons red-text text-lighten-2"><img src="http://ajapoweb.com/images/icon/textBoxAlph.png" alt="Input" width="30"></i> Texto</a></li>
+                                    <li><a class="collapsible-detalle waves-effect waves-redlighten4 red-text text-lighten-2" tabindex="0"><i class="material-icons red-text text-lighten-2"><img src="http://ajapoweb.com/images/icon/textBoxNum.png" alt="Input" width="30"></i> Num&eacute;rico</a></li>
+                                    <li><a class="collapsible-detalle waves-effect waves-redlighten4 red-text text-lighten-2" tabindex="0"><i class="material-icons red-text text-lighten-2"><img src="http://ajapoweb.com/images/icon/textBoxAlphNum.png" alt="Input" width="30"></i> Alfanum&eacute;rico</a></li>
+                                    <li><a class="collapsible-detalle waves-effect waves-redlighten4 red-text text-lighten-2" tabindex="0"><i class="material-icons red-text text-lighten-2"><img src="http://ajapoweb.com/images/icon/textArea.png" alt="Input" width="30"></i> Multilinea</a></li>
+                                    <li><a class="collapsible-detalle waves-effect waves-redlighten4 red-text text-lighten-2" tabindex="0"><i class="material-icons red-text text-lighten-2"><img src="http://ajapoweb.com/images/icon/dropDownList.png" alt="Input" width="30"></i> Deplegable</a></li>
+                                    <li><a class="collapsible-detalle waves-effect waves-redlighten4 red-text text-lighten-2" tabindex="0"><i class="material-icons red-text text-lighten-2"><img src="http://ajapoweb.com/images/icon/calendar.png" alt="Input" width="30"></i> Calendario</a></li>
+                                    <li><a class="collapsible-detalle waves-effect waves-redlighten4 red-text text-lighten-2" tabindex="0"><i class="material-icons red-text text-lighten-2"><img src="http://ajapoweb.com/images/icon/checkBox.png" alt="Input" width="20"></i> Check Box</a></li>
+                                    <li><a class="collapsible-detalle waves-effect waves-redlighten4 red-text text-lighten-2" tabindex="0"><i class="material-icons red-text text-lighten-2"><img src="http://ajapoweb.com/images/icon/radioButton.png" alt="Input" width="20"></i> RadioButton</a></li>
+                                    <li><a class="collapsible-detalle waves-effect waves-redlighten4 red-text text-lighten-2" tabindex="0"><i class="material-icons red-text text-lighten-2"><img src="http://ajapoweb.com/images/icon/boton.png" alt="Input" width="20"></i> Bot&oacute;n</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <!-- Partes de una página -->
+                        <li class="bold"><a class="collapsible-header waves-effect waves-redlighten4 red-text text-lighten-2" tabindex="0"><i class="material-icons red-text text-lighten-2">dashboard</i>Sectores</a>
+                            <div class="collapsible-body">
+                                <ul class="detalle-menu-izq">
+                                    <li><a class="collapsible-detalle waves-effect waves-redlighten4 red-text text-lighten-2" tabindex="0"><i class="material-icons red-text text-lighten-2"><img src="http://ajapoweb.com/images/icon/header.png" alt="Input" width="20"></i> Header</a></li>
+                                    <li><a class="collapsible-detalle waves-effect waves-redlighten4 red-text text-lighten-2" tabindex="0"><i class="material-icons red-text text-lighten-2"><img src="http://ajapoweb.com/images/icon/footer.png" alt="Input" width="20"></i> Footer</a></li>
+                                    <li><a class="collapsible-detalle waves-effect waves-redlighten4 red-text text-lighten-2" tabindex="0"><i class="material-icons red-text text-lighten-2">menu</i> Menu</a></li>
+                                    <li><a class="collapsible-detalle waves-effect waves-redlighten4 red-text text-lighten-2" tabindex="0"><i class="material-icons red-text text-lighten-2">art_track</i> Art&iacute;culo</a></li>
+                                    <li><a class="collapsible-detalle waves-effect waves-redlighten4 red-text text-lighten-2" tabindex="0"><i class="material-icons red-text text-lighten-2"><img src="http://ajapoweb.com/images/icon/textBoxAlphNum.png" alt="Input" width="30"></i> Alfanum&eacute;rico</a></li>
+                                    <li><a class="collapsible-detalle waves-effect waves-redlighten4 red-text text-lighten-2" tabindex="0"><i class="material-icons red-text text-lighten-2"><img src="http://ajapoweb.com/images/icon/textArea.png" alt="Input" width="30"></i> Multilinea</a></li>
+                                    <li><a class="collapsible-detalle waves-effect waves-redlighten4 red-text text-lighten-2" tabindex="0"><i class="material-icons red-text text-lighten-2"><img src="http://ajapoweb.com/images/icon/dropDownList.png" alt="Input" width="30"></i> Deplegable</a></li>
+                                    <li><a class="collapsible-detalle waves-effect waves-redlighten4 red-text text-lighten-2" tabindex="0"><i class="material-icons red-text text-lighten-2"><img src="http://ajapoweb.com/images/icon/calendar.png" alt="Input" width="30"></i> Calendario</a></li>
+                                    <li><a class="collapsible-detalle waves-effect waves-redlighten4 red-text text-lighten-2" tabindex="0"><i class="material-icons red-text text-lighten-2"><img src="http://ajapoweb.com/images/icon/checkBox.png" alt="Input" width="20"></i> Check Box</a></li>
+                                    <li><a class="collapsible-detalle waves-effect waves-redlighten4 red-text text-lighten-2" tabindex="0"><i class="material-icons red-text text-lighten-2"><img src="http://ajapoweb.com/images/icon/radioButton.png" alt="Input" width="20"></i> RadioButton</a></li>
+                                    <li><a class="collapsible-detalle waves-effect waves-redlighten4 red-text text-lighten-2" tabindex="0"><i class="material-icons red-text text-lighten-2"><img src="http://ajapoweb.com/images/icon/boton.png" alt="Input" width="20"></i> Bot&oacute;n</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- Fin Menu de herramientas izquierda -->
+
+        <!-- ----------------------------------------------------------------------------------------------------------- PÁGINAS EDITABLES ----------------------------------------------------------------------------------------------------------- -->
+        <div class="col s10">
+            <!-- Contenedor tabs y su contenido -->
+            <div class="row contenedorTabs">
+                <!-- Scripts utilizados en la/s página/s -->
+                <!-- 
+                <script>
+                    $(document).ready(function () { // Llamadas jQuery
+                        $("#dropdown_nav_1").dropdown();
+                    });
+                </script>
+                -->
+                <!-- Fin Scripts utilizados en la/s página/s -->
+
+                <!-- Pestañas -->
+                <div class="col s12">
+                    <ul class="tabs tabsPages">
+                        <li id="_pagina_1_" class="tab col s3 l2">
+                            <a class="active tabPorPagina" href="#pagina1">Pagina 1</a>
+                        </li>
+                        <li class="tab col s3 nueva-pagina grey lighten-3">
+                            <a href="#" onclick="agregarPagina();" class="agregar-pagina"><i class="Small material-icons">add</i></a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Fin Pestañas -->
+
+                <!-- Paginas contenidas por pestaña -->
+                <div id="pagina1" class="col s12 contenidoTab">
+                    <!-- Pagina a editar -->
+                    <div class="pagina-contenedor">
+                        <div id="div_1" class="parallax-container rotator soltarEn sortable elementHTML ui-sortable-handle ui-sortable">
+                            <div class="parallax">
+                                <img src="images/parallax1.jpg">
+                            </div>
+                        </div>
+                        <div class="section white">
+                            <div class="row container">
+                                <h2 class="header">Parallax</h2>
+                                <p class="grey-text text-darken-3 lighten-3">Parallax is an effect where the background content or image in this case, is moved at a different
+                                    speed than the foreground content while scrolling.</p>
+                            </div>
+                        </div>
+                        <div class="parallax-container">
+                            <div class="parallax">
+                                <img src="images/parallax2.jpg">
+                            </div>
+                        </div>
+                        <div class="parallax-container">
+                            <div class="parallax">
+                                <img src="images/parallax1.jpg">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Fin Pagina a editar -->
+                </div>
+                <!-- Fin Paginas contenidas por pestaña -->
+
+            </div>
+            <!-- Fin Contenedor tabs y su contenido -->
+        </div>
+        <!-- ----------------------------------------------------------------------------------------------------------- FIN PÁGINAS EDITABLES ----------------------------------------------------------------------------------------------------------- -->
+    </div>
+    <!-- Materialize Javascript -->
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Color picker de Materialize - http://wittsparks.com/materialize-colorpicker/ -->
+    <script src="http://ajapoweb.com/js/materialize-colorpicker.min.js"></script>
+
+    <!-- Editor de pagina -->
+    <script src="http://ajapoweb.com/js/herramienta/editar-page.js"></script>
+
+    <script src="https://materializecss.com/extras/noUiSlider/nouislider.js"></script>
+
+    
 
 
 
 
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<!-- http://getbootstrap.com/2.3.2/components.html -->
-		<script src="js/jquery-3.3.1.min.js" ></script>
-		<script src="js/jquery-ui.min.js" ></script>
-		<script src="js/jquery.validate.js" ></script>
-		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="css/bootstrap.min.css" >
-		<!-- CSS Personal -->
-		<link rel="stylesheet" href="css/styles.css" >
-		<!-- Jquery JS -->
-		<!-- <script src="js/jquery-3.2.1.js" ></script> -->
-		<!-- Bootstrap JS -->
-		<script src="js/bootstrap.js" ></script>	
-		<!-- jQuery Popup Overlay -->
-    	<script src="js/jquery.popupoverlay.js"></script>
-    	<script src="js/editar-page.js"></script>
-    	<!-- Resize -->
-    	<script src="js/smartit.js" type="text/javascript"></script>
-    	<script src="../../js/util.js" type="text/javascript"></script>
-		<script src="../../js/abm/login.js" type="text/javascript"></script>
-		
-		
-		
+    <!-- ------------------------------------------------------------------------------------ Modal PooUp ------------------------------------------------------------------------------------ -->
+    <!-- Configurar Elemento -->
+    <div id="modalConfigElement" class="modal-content modal modal-fixed-footer modal-configuracion">
+        <div class="modal-content">
+            <h4>Configurar Elemento</h4>
+<a id="abrirModal2" class="waves-effect waves-light btn modal-trigger" href="#modalCambiosEventos">Modal</a>            
+            <div class="row">
+                <form class="col s12">
+                    <!-- Informe del elemento -->
+                    <div class="row">
+                        <div class="input-field col s2 right-align">
+                            Elemento:
+                        </div>
+                        <div class="input-field col s4 datosElem">
+                            <input disabled id="txtElementoNombre" type="text" class="validate" value="0">
+                        </div>
 
+                        <div class="input-field col s2 right-align">
+                            C&oacute;digo:
+                        </div>
+                        <div class="input-field col s4 datosElem">
+                            <input disabled id="txtElementoCodigo" type="text" class="validate" value="0">
+                        </div>
+                    </div>
+                    <!-- Color -->
+                    <div class="row">
+                        <div class="input-field col s2 right-align">
+                            Color fuente:
+                        </div>
+                        <div class="input-field col s4 datosElem">
+                            <input id="txtForeColor" type="text" class="validate"> 
+                        </div>
 
-		<link rel="stylesheet" href="../../css/codemirror/codemirror.css">
-		<script type="text/javascript" src="../../js/codemirror/codemirror.js"></script>
-		<script type="text/javascript" src="../../js/codemirror/javascript.js"></script>
+                        <div class="input-field col s2 right-align">
+                            Color Fondo:
+                        </div>
+                        <div class="input-field col s4 datosElem">
+                            <input id="txtBkColor" type="text" class="validate">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s2 right-align">
+                            Fuente:
+                        </div>
+                        <div id="ddlFont" class="input-field col s4 datosElem">
+                            <select id="ddlListaFont">
+                                <option id="itemFont" value="0">Selecciona un font</option>
+                                <option class="Roboto" value="Roboto">Roboto</option>
+                                <option class="Srisakdi" value="Srisakdi">Srisakdi</option>
+                                <option class="Open-sans-condensed" value="Open-sans-condensed">Open Sans Condensed</option>
+                                <option class="Bitter" value="Bitter">Bitter</option>
+                                <option class="Dancing-script" value="Dancing-script">Dancing Script</option>
+                                <option class="Shadows-into-light" value="Shadows-into-light">Shadows Into Light</option>
+                                <option class="AmaticSC" value="AmaticSC">Amatic SC</option>
+                                <option class="Permanent-marker" value="Permanent-marker">Permanent Marker</option>
+                                <option class="Cookie" value="Cookie">Cookie</option>
+                                <option class="Special-elite" value="Special-elite">Special Elite</option>
+                            </select>
+                        </div>
 
+                        <div class="input-field col s2 right-align datosElem">
+                            Tama&ntilde;o: <label id="lbTamFuente"><span></span></label>
+                        </div>
+                        <div class="input-field col s4">
+                            <br />
+                            <div id="fontTamanho"></div>
+                        </div>
+                    </div>
 
-		<script src="../../jQueryMinicolors/js/jquery.minicolors.js"></script>
-		<link href="../../jQueryMinicolors/css/jquery.minicolors.css" rel="stylesheet" type="text/css" />
-
-	</head>
-	<!-- Cuerpo -->
-	<body>
-		<?php 
-			include("../../barra/barraLoginHerramienta.php");
-		?> 
-		<!-- Barra de herramientas -->
-		<div class="row">
-			<?php 
-				include("../../barra/barraHerramienta.php");
-			?>
-			<!-- FIN -->	
-			<div>
-				<div id="id" class="btn-group configPage elementHTML" role="group" aria-label="...">
-					<button type="button" class="btn btn-default"><img src="img/edicion/editar.png" alt="Editar"></button>
-					<button type="button" class="btn btn-default"><img src="img/edicion/eliminar.png" alt="Eliminar"></button>
-					<button type="button" class="btn btn-default"><img src="img/edicion/mover.png" alt="Mover"></button>
-					<button type="button" class="btn btn-default"><img src="img/edicion/configurar.png"></button>
-				</div>
-			</div>
-
-
-
-
-			<!-- ------------------------------------------------- PANEL PRINCIPAL-------------------------------------------------------- -->
-			<!-- Panel con los codigos de la pagina -->
-			<!-- panel panel-default dest colu2 -->
-			<div class="dest col-md-11 sortable">
-				<div class="panel-body sortable">
-					<nav id="menuPrincipal" class="navbar navbar-default rotator elementHTML sortable">
-						<div class="container-fluid sortable">
-							<div class="navbar-header sortable">
-								<button type="button" class="navbar-toggle collapsed sortable" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-									<span class="sr-only elementHTML">Toggle navigation</span>
-									<span class="icon-bar elementHTML"></span>
-									<span class="icon-bar elementHTML"></span>
-									<span class="icon-bar elementHTML"></span>
-								</button>
-								<a class="navbar-brand elementHTML sortable" href="#">Brand</a>
-							</div>
-							<div class="collapse navbar-collapse sortable" id="bs-example-navbar-collapse-1">
-								<ul class="nav navbar-nav elementHTML sortable">
-									<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-									<li><a href="#">Link</a></li>
-									<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-										<ul class="dropdown-menu sortable">
-											<li><a href="#">Action</a></li>
-											<li><a href="#">Another action</a></li>
-											<li><a href="#">Something else here</a></li>
-											<li role="separator" class="divider"></li>
-											<li><a href="#">Separated link</a></li>
-											<li role="separator" class="divider"></li>
-											<li><a href="#">One more separated link</a></li>
-										</ul>
-									</li>
-								</ul>
-								<form class="navbar-form navbar-left elementHTML sortable">
-
-
-
-
-
-
-
-								
-
-
-
-
-
-									<div class="form-group elementHTML sortable">
-										<input type="text" class="form-control" placeholder="Search">
-									</div>
-									<button type="submit" class="btn btn-default">Submit</button>
-								</form>
-								<ul class="nav navbar-nav navbar-right elementHTML sortable">
-									<li><a href="#">Link</a></li>
-									<li class="dropdown elementHTML sortable">
-										<a href="#" class="dropdown-toggle elementHTML sortable" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-										<ul class="dropdown-menu elementHTML sortable">
-											<li><a href="#">Action</a></li>
-											<li><a href="#">Another action</a></li>
-											<li><a href="#">Something else here</a></li>
-											<li role="separator" class="divider"></li>
-											<li><a href="#">Separated link</a></li>
-										</ul>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</nav>
-					<!-- Cabecera -->
-					<div id="div_1" class="jumbotron rotator soltarEn ui-droppable sortable elementHTML">
-						<h1 id='h1_1' class="elementHTML elementoEditable" onfocus="document.execCommand('selectAll', false, null);">Hello, world!
-							<div class='btn-group configPage noSelect' role='group'>
-								<button contentEditable='false' type='button' onclick="editarTexto('h1_1');" class='btn btn-default noSelect'><img class='noSelect' src='img/edicion/editar.png' alt='Editar'></button>
-								<button type='button' contentEditable='false' onclick="$('#h1_1').remove();" class='btn btn-default noSelect'><img class='noSelect' src='img/edicion/eliminar.png' alt='Eliminar'></button>
-								<button type='button' contentEditable='false' class='btn btn-default noSelect'><img class='noSelect' src='img/edicion/mover.png' alt='Mover'></button>
-								<button type='button' contentEditable='false' onclick="editarDatosModal('h1_1')" class='btn btn-default noSelect' data-toggle="modal" data-target="#configElement"><img class='noSelect' src='img/edicion/configurar.png'></button>
-							</div>
-						</h1>
-
-
-						<div id="p_1" class="elementHTML elementoEditable" onfocus="document.execCommand('selectAll', false, null);">
-							<div class='btn-group configPage noSelect' role='group'>
-								<button contentEditable='false' type='button' onclick="editarTexto('p_1');" class='btn btn-default noSelect'><img class='noSelect' src='img/edicion/editar.png' alt='Editar'></button>
-								<button type='button' contentEditable='false' onclick="$('#p_1').remove();" class='btn btn-default noSelect'><img class='noSelect' src='img/edicion/eliminar.png' alt='Eliminar'></button>
-								<button type='button' contentEditable='false' class='btn btn-default noSelect'><img class='noSelect' src='img/edicion/mover.png' alt='Mover'></button>
-								<button type='button' contentEditable='false' class='btn btn-default noSelect'><img class='noSelect' src='img/edicion/configurar.png'></button>
-							</div>
-							<p>
-								
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc consequat tristique egestas. Integer aliquam diam leo, in aliquet neque luctus at. Praesent sit amet urna tortor. 
-								Aliquam eros lorem, fermentum vel justo quis, iaculis dignissim enim. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec hendrerit 
-								dolor non nisl porttitor pretium. Nullam rhoncus accumsan metus nec egestas. Mauris vel pellentesque dolor. Ut venenatis aliquam ex, et faucibus mi efficitur ut. 
-								Cras a porta purus, sed luctus velit. Aenean viverra finibus ultricies. Cras id arcu odio.
-							</p>
-							</div>
-							<a id="btn_1" class="btn btn-primary btn-lg elementHTML elementoEditable" href="#" role="button" onfocus="document.execCommand('selectAll', false, null);">
-								<div class='btn-group configPage noSelect' role='group'>
-									<button contentEditable='false' type='button' onclick="editarTexto('btn_1');" class='btn btn-default noSelect'><img class='noSelect' src='img/edicion/editar.png' alt='Editar'></button>
-									<button type='button' contentEditable='false' onclick="$('#btn_1').remove();" class='btn btn-default noSelect'><img class='noSelect' src='img/edicion/eliminar.png' alt='Eliminar'></button>
-									<button type='button' contentEditable='false' class='btn btn-default noSelect'><img class='noSelect' src='img/edicion/mover.png' alt='Mover'></button>
-									<button type='button' contentEditable='false' class='btn btn-default noSelect'><img class='noSelect' src='img/edicion/configurar.png'></button>
-								</div>
-								Learn more
-							</a>
-						
-
-					</div>
-					<!-- Cuerpo -->
-					<div class="row sortable">
-						<div class="col-sm-6 col-md-4 sortable">
-							<div class="thumbnail sortable">
-								<img src="#" alt="...">
-								<div class="caption">
-									<h3 class="elementHTML elementoEditable">Thumbnail label</h3>
-									<p>...</p>
-									<p class="elementoEditable"><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-sm-6 col-md-4 sortable">
-							<div class="thumbnail sortable">
-								<img src="#" alt="...">
-								<div class="caption sortable">
-									<h3 class="elementHTML elementoEditable">Thumbnail label</h3>
-									<p class="elementHTML elementoEditable sortable">...</p>
-									<p class="elementHTML elementoEditable sortable"><a href="#" class="btn btn-primary elementHTML elementoEditable" role="button">Button</a> <a href="#" class="btn btn-default elementHTML" role="button">Button</a></p>
-								</div>
-							</div>
-						</div>	
-					</div>
-
-					<div class="row">
-						<div class="col-sm-6 col-md-4">
-							<div class="list-group">
-								<button type="button" class="list-group-item elementoEditable">Cras justo odio</button>
-								<button type="button" class="list-group-item elementoEditable">Dapibus ac facilisis in</button>
-								<button type="button" class="list-group-item elementoEditable">Morbi leo risus</button>
-								<button type="button" class="list-group-item elementoEditable">Porta ac consectetur ac</button>
-								<button type="button" class="list-group-item elementoEditable">Vestibulum at eros</button>
-							</div>
-						</div>
-
-						<div class="col-sm-6 col-md-8">
-							<ul class="media-list">
-								<li class="media">
-									<div class="media-left">
-										<a href="#">
-										<img class="media-object elementoEditable" src="img/thumbl_1.jpg" alt="Lorem ipsum">
-										</a>
-									</div>
-									<div class="media-body">
-										<h4 class="media-heading elementHTML elementoEditable">Media heading</h4>
-										Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat.
-									</div>
-								</li>
-
-								<li class="media">
-									<div class="media-left ">
-										<a href="#">
-											<img class="media-object" src="img/thumbl_1.jpg" alt="Lorem ipsum">
-										</a>
-									</div>
-									<div class="media-body">
-										<h4 class="media-heading elementHTML elementoEditable">Media heading</h4>
-										<p class="elementoEditable">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat.
-										</p>
-									</div>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-
-
-
-				
-
-
-
-				<div class="panel-footer elementHTML elementoEditable">Powered by AjapoWeb - 2017</div>
-			</div> 
-			<!-- ------------------------------------------------- FIN PANEL PRINCIPAL-------------------------------------------------------- -->
-			
-			<!-- ------------------------------------------------ POPUP CONFIGURACION ------------------------------------------------ -->
-			<div class="container">
-				<!-- Modal -->
-				<div class="modal fade" id="configElement" role="dialog">
-					<div class="modal-dialog">
-
-						<!-- Modal content-->
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								
-								<h4 class="titulo-modal"><p class="text-center">Configuracion de elemento</p></h4>
-							</div>
-							<div class="modal-body">
-							<form class="modal-configuracion">
-							
-								<div class="form-group row">
-									<div class="col-sm-12">
-										<div class="sub-title-modal" role="alert">
-											Informaci&oacute;n
-										</div>
-									</div>
-								</div>
-								<div class="form-group row">
-									
-									<div class="col-sm-2 text-right">
-										<label for="tbElemento" >Elemento</label>
-									</div>
-									<div class="col-sm-4">
-										<input type="text" readonly class="form-control" id="tbElemento">
-									</div>
-								<!-- </div>
-								<div class="form-group row"> -->
-									<div class="col-sm-2 text-right">
-										<label for="tbID" class="col-form-label">C&oacute;digo</label>
-									</div>
-									<div class="col-sm-4">
-										<input class="form-control" readonly id="tbID" placeholder="ID del Elemento">
-									</div>
-								</div>
-								<div class="form-group row">
-									<div class="col-sm-12">
-										<div class="sub-title-modal" role="alert">
-											Colores
-										</div>
-									</div>
-								</div>
-
-								<!-- FUNCIONA INICIO 1 -->
-								<div class="form-group row">
-								<!-- http://develoteca.com/jquery-minicolors-convertir-tus-elementos-input-html-en-pickers-color/ -->	
-								<div class="col-sm-2 text-right">
-										<label for="lbForeColor" class="col-form-label">Fuente</label>
-									</div>									
-									<div class="col-sm-4">
-										<input type="hidden" value="#0088cc" name="color1" id="tbForeColor"/>
-									</div>
-
-									<div class="col-sm-2 text-right">
-										<label for="lbBkColor" class="col-form-label">Fondo</label>
-									</div>									
-									<div class="col-sm-4">
-										<input type="hidden" value="#0088cc" name="color1" id="tbBkColor"/>
-									</div>
-
-								</div>
-								<!-- FUNCIONA FIN 1 -->
-
-								<div class="form-group row">
-									<div class="col-sm-12">
-										<div class="sub-title-modal" role="alert">
-											Eventos
-										</div>
-									</div>
-								</div>
-								<div class="form-group row">
-									<div class="col-sm-2 text-right">
-										<label for="lbEvento" class="col-form-label">Evento</label>
-									</div>									
-									<div class="col-sm-10">
-										<!-- Asignar eventos a un elemento -->
-										<!-- https://openclassrooms.com/en/courses/3693206-introduccion-a-jquery/3693281-eventos-vinculados-a-elementos -->
-										<select id="ddlEventos" class="form-control">
-											<option value="0">Selecciona un evento</option>
-											<option value="blur">blur()</option>
-											<option value="change">change()</option>
-											<option value="click">click()</option>
-											<option value="fadeIn">fadeIn()</option>
-											<option value="fadeOut">fadeOut()</option>
-											<option value="focus">focus()</option>
-											<option value="hover">hover()</option>
-											<option value="keyup">keyup()</option>
-											<option value="mouseout">mouseout()</option>
-											<option value="mouseover">mouseover()</option>
-											<option value="animate">animate()</option>
-											<option value="datatables">datatables()</option>
-											<option value="dialog">dialog()</option>
-											<option value="validate">validate()</option>
-										</select>
-										<!-- VERY IMPORTANTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE -->
-										<!-- Eventos asociados a elemento -->
-										<!-- http://panicoenlaxbox.blogspot.com/2011/11/hace-poco-he-tenido-la-necesidad-de.html -->
-										<!-- Saber si un elemento tiene un evento asignado -->
-										<!-- http://rahosudce.blogspot.com/2013/11/re-saber-si-un-elemento-tiene-un-evento.html -->
-									</div>
-								</div>
-								
-								<div class="form-group row">
-									<div class="col-sm-2 text-right">
-									</div>
-									<div class="col-sm-12" id="eventContent">
-										<!-- aca debe ir el codigo -->
-										<form>
-											<textarea id="code" name="code">
-											</textarea>
-										</form>
-									</div>
-								</div>
-							</form>
-							</div>
-							<div class="modal-footer">
-								<button type="button" onclick="guardarDatosModal();" class="btn btn-default" data-dismiss="modal">Guardar</button>
-								<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-							</div>
-						</div>
-						<!-- FIN Modal content-->
+                    <!-- Seleccionar Eventos -->
+                    <div class="row">
+                        <div class="input-field col s2 right-align">
+                            Evento:
+                        </div>
+                        <div  id="ddlEventos" class="input-field col s10 datosElem">
+                            <select id="ddlListaEventos">
+                                <option id="item0" value="0">Selecciona un evento</option>
+                                <option value="blur">blur()</option>
+                                <option value="change">change()</option>
+                                <option value="click">click()</option>
+                                <option value="fadeIn">fadeIn()</option>
+                                <option value="fadeOut">fadeOut()</option>
+                                <option value="focus">focus()</option>
+                                <option value="hover">hover()</option>
+                                <option value="keyup">keyup()</option>
+                                <option value="mouseout">mouseout()</option>
+                                <option value="mouseover">mouseover()</option>
+                                <option value="animate">animate()</option>
+                                <option value="datatables">datatables()</option>
+                                <option value="dialog">dialog()</option>
+                                <option value="validate">validate()</option>
+                            </select> 
+                        </div>
+                    </div>
+                    <!-- Editor de Eventos -->
+                    <div class="row">
+                        <div class="col s12" id="eventContent"> 
+                            <form>
+                                <textarea id="code" name="code">
+                                    aca debe ir el codigo
+                                </textarea>
+                            </form>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#!"  onclick="guardarDatosModal();" class="modal-close waves-effect waves-green btn-flat">Aceptar</a>
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
+        </div>
+    </div>
+    <!-- Guardar Cambios en evento -->
+    <div id="modalCambiosEventos" class="modal-content modal modal-fixed-footer modal-configuracion">
+        <div class="modal-content">
+            <h4>Guardar Cambios?</h4>
+            <div>Desea guardar los cambios realizados en el evento <span id="modalNomEvento"></span> del elemento <span id="modalNomElem"></span> ID <span id="modalIdElem"></span> ?</div>
+            <div class="row">
+                <form class="col s12"> 
+                
+                </form>               
+            </div>
+        </div>
+        <div class="modal-footer"> 
+            <a href="#!"  onclick="guardarCambiosCode();" class="modal-close waves-effect waves-green btn-flat">Aceptar</a>
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
+        </div>
+    </div>
+    <!-- ------------------------------------------------------------------------------------ FIN Modal PooUp ------------------------------------------------------------------------------------ -->
 
 
 
 
-					</div>
-				</div>
-				<!-- FIN Modal -->
-				<!-- Contenedor Eventos -->
-				<div class="contentEvents">
-					<!-- Codigo Base de Eventos -->
-					<textarea id='codigoBase'>
+    <!-- ------------------------------------------------------------------------------------ Contenedor Eventos ------------------------------------------------------------------------------------ -->
+    <div class="contentEvents">
+        <!-- Codigo Base de Eventos -->
+        <textarea id='codigoBase'>
 $('idElementoAqui').nombreEvento(function() {
 	// Aquí va el código
 });
 // Otra opción para llamar al evento sin la función.
 //$('idElementoAqui').nombreEvento();
-					</textarea>
-					<textarea id='blurEventCode'>
+        </textarea>
+        <textarea id='blurEventCode'>
 /**
 * Evento que detecta la pérdida del foco en el 
 * elemento nombreElemento con id:nombreID
 **/
-					</textarea>
-					<textarea id='changeEventCode'>
+        </textarea>
+        <textarea id='changeEventCode'>
 /**
 * Evento que detecta el cambio de valor del
 * elemento nombreElemento con id:nombreID
 **/
-					</textarea>
-					<textarea id='clickEventCode'>
+        </textarea>
+        <textarea id='clickEventCode'>
 /**
 * Evento que detecta cuando el usuario hace click sobre un elemento
 * elemento nombreElemento con id:nombreID
 **/
-					</textarea>
-					<textarea id='fadeInFunctionEventCode'>
+        </textarea>
+        <textarea id='fadeInFunctionEventCode'>
 /**
 * Evento que detecta cuando el usuario hace click sobre un elemento
 * elemento nombreElemento con id:nombreID
 **/
-					</textarea>
-					<textarea id='fadeInEventCode'>
+        </textarea>
+        <textarea id='fadeInEventCode'>
 
-					</textarea>
-					<textarea id='fadeOutEventCode'>
-				
-					</textarea>
-					<textarea id='focusEventCode'>
-					
-					</textarea>
-					<textarea id='hoverEventCode'>
-					
-					</textarea>
-					<textarea id='keyupEventCode'></textarea>
-					<textarea id='mouseoutEventCode'></textarea>
-					<textarea id='mouseoverEventCode'></textarea>
-					<textarea id='animateEventCode'></textarea>
-					<textarea id='datatablesEventCode'></textarea>
-					<textarea id='dialogEventCode'></textarea>
-					<textarea id='validateEventCode'></textarea>
-					<!-- Aqui se guarda los codigos geberados -->
-					<textarea id='blurEvent'>
+        </textarea>
+        <textarea id='fadeOutEventCode'>
+    
+        </textarea>
+        <textarea id='focusEventCode'>
+        
+        </textarea>
+        <textarea id='hoverEventCode'>
+        
+        </textarea>
+        <textarea id='keyupEventCode'></textarea>
+        <textarea id='mouseoutEventCode'></textarea>
+        <textarea id='mouseoverEventCode'></textarea>
+        <textarea id='animateEventCode'></textarea>
+        <textarea id='datatablesEventCode'></textarea>
+        <textarea id='dialogEventCode'></textarea>
+        <textarea id='validateEventCode'></textarea>
+        <!-- Aqui se guarda los codigos geberados -->
+        <textarea id='blurEvent'>                                           
 //blurh1_1
 /**
 * Evento que detecta la pérdida del foco en el 
@@ -450,132 +771,46 @@ $('#h1_1').blur(function() {
 // Otra opción para llamar al evento sin la función.
 //$('#h1_1').blur();
 //finblurh1_1
-					</textarea>
-					<textarea id='changeEvent'></textarea>
-					<textarea id='clickEvent'></textarea>
-					<textarea id='fadeInEvent'></textarea>
-					<textarea id='fadeOutEvent'></textarea>
-					<textarea id='focusEvent'></textarea>
-					<textarea id='hoverEvent'></textarea>
-					<textarea id='keyupEvent'></textarea>
-					<textarea id='mouseoutEvent'></textarea>
-					<textarea id='mouseoverEvent'></textarea>
-					<textarea id='animateEvent'></textarea>
-					<textarea id='datatablesEvent'></textarea>
-					<textarea id='dialogEvent'></textarea>
-					<textarea id='validateEvent'></textarea>
+        </textarea>
+        <textarea id='changeEvent'></textarea>
+        <textarea id='clickEvent'></textarea>
+        <textarea id='fadeInEvent'></textarea>
+        <textarea id='fadeOutEvent'></textarea>
+        <textarea id='focusEvent'></textarea>
+        <textarea id='hoverEvent'></textarea>
+        <textarea id='keyupEvent'></textarea>
+        <textarea id='mouseoutEvent'></textarea>
+        <textarea id='mouseoverEvent'></textarea>
+        <textarea id='animateEvent'></textarea>
+        <textarea id='datatablesEvent'></textarea>
+        <textarea id='dialogEvent'></textarea>
+        <textarea id='validateEvent'></textarea>
 
-				</div>
-				<!-- FIN Contenedor Eventos -->
-			</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<button class="btn btn-default" id="btn-confirm">Confirm</button>
-
-<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="guardaCambios">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-header">		  
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		<h4 class="modal-title" id="myModalLabel">Cambios detectados</h4>
-		<p>Desea guardar los cambios en el c&oacute;digo?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" onclick="guardarCambiosCode();" id="modal-btn-si">Si</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" id="modal-btn-no">No</button>
-      </div>
     </div>
-  </div>
-</div>
+    <!-- ------------------------------------------------------------------------------------ FIN Contenedor Eventos ------------------------------------------------------------------------------------ -->
 
+    <!-- ------------------------------------------------------------------------------------ Campos ocultos ------------------------------------------------------------------------------------ -->
+    <span id="spanIDoculto"></span>
+    <!-- ------------------------------------------------------------------------------------ Fin Campos ocultos ------------------------------------------------------------------------------------ -->
 
+    <script>
+        CodeMirror.commands.autocomplete = function(cm) {
+            cm.showHint({hint: CodeMirror.hint.anyword});
+        }
+        var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+            lineNumbers: true,
+            extraKeys: {"Ctrl-Space": "autocomplete"}
+        });    
+    </script>
 
-<!-- MODAL PRUEBA - BORRAR -->
-<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="interno-modal">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Confirmar</h4>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" id="modal-btn-si">Si</button>
-        <button type="button" class="btn btn-primary" id="modal-btn-no">No</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- FIN MODAL PRUEBA - BORRAR -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		</div>
-	</body>
-
-	<script>
-	CodeMirror.commands.autocomplete = function(cm) {
-		cm.showHint({hint: CodeMirror.hint.anyword});
-	}
-	var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-		lineNumbers: true,
-		extraKeys: {"Ctrl-Space": "autocomplete"}
-	});
-	  /*var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-		//lineNumbers: true,
-		readOnly: true,
-		autofocus: true,
-		matchBrackets: true,
-		styleActiveLine: true
-		});
-		setTimeout(function() {
-			editor.refresh();
-		}, 100);*/
-	/*$('.CodeMirror').each(function(i, el){
-		el.CodeMirror.refresh();
-	});*/
-
-
-
-
-
-
-
-	
-					
-
-
-	</script>
-	
+    <!-- BIOGRAFÍA -->
+    <!-- Asignar eventos a un elemento -->
+    <!-- https://openclassrooms.com/en/courses/3693206-introduccion-a-jquery/3693281-eventos-vinculados-a-elementos -->
+    <!-- VERY IMPORTANTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE -->
+    <!-- Eventos asociados a elemento -->
+    <!-- http://panicoenlaxbox.blogspot.com/2011/11/hace-poco-he-tenido-la-necesidad-de.html -->
+    <!-- Saber si un elemento tiene un evento asignado -->
+    <!-- http://rahosudce.blogspot.com/2013/11/re-saber-si-un-elemento-tiene-un-evento.html -->
+    
+</body>
 </html>

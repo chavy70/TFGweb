@@ -1,83 +1,126 @@
 <!DOCTYPE html>
-<?php include('./funciones/Funciones.php');?>
-<html lang="">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Generador de C&oacute;digo</title>
-		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
-		<link rel="stylesheet" href="css/jquery.popup.css" type="text/css">
+<html lang="en">
 
-		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-		<script type="text/javascript" src="js/jquery.popup.js"></script>
-		<script type="text/javascript" src="js/herramienta/funciones.js"></script>
-		<script type="text/javascript">
-			$(document).ready(function () {
-				//Muestra el PopUp para seleccionar el template
-				$(".js__p_start, .js__p_another_start").simplePopup();
-				//Abre el popUp
-				$('.js__p_start').click();
-			});
-			window.onbeforeunload = confirmaSalida;
-			function confirmaSalida()  
-			{   //onbeforeunload="event.returnValue = 'Si cierras la ventana no se guardaran los cambios.'"
-			    return "Vas a abandonar esta pagina. Si has hecho algun cambio sin grabar vas a perder todos los datos.";  
-			}
-		</script>
-	</head>
-	<body>
-		<form id="formGenerador" accept-charset="utf-8"> 
-			<!-- http://www.jqueryscript.net/lightbox/Simple-jQuery-Plugin-for-Popup-Window.html -->
-			<div class="p_anch"> 
-				<!-- Boton abrir popUp -->
-				<a href="#" class="js__p_start"></a> Herramienta online 
-			</div>
-			<div class="p_body js__p_body js__fadeout"></div>
-			<div class="popup js__popup js__slide_top"> <a href="#" class="p_close js__p_close" title="Close"></a>
-				<div class="p_content">
-					
-					
-					<h1 class="animated fadeInDown">Seleccione una Plantilla</h1>
-					<h3>Elija el dise&ntilde;o de la plantilla que prefiera presionando en el boton ubicado debajo de cada imagen </h3>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title id="tituloPagina">AjapoWeb | Templates</title>
+    <!-- Iconos y fuente de Google -->
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-					<div class="card-group">
-					<!-- https://foundation.zurb.com/templates.html -->
-						<div class="card templateList tmp1">
-							<img class="card-img-top" src="img/templates/template1.jpg" alt="Card image cap">
-							<div class="card-block">								
-								<button id="btnTempl1" onclick="copiarTemplate('template1');" type="button" class="btn btnTranspRojo">Plantilla 1</button>									
-							</div>
-						</div>
-						<div class="card templateList tmp2">
-							<img class="card-img-top" src="img/templates/template2.jpg" alt="Card image cap">
-							<div class="card-block">								
-								<button id="btnTempl1" onclick="copiarTemplate('template2');" type="button" class="btn btnTranspRojo">Plantilla 2</button>									
-							</div>
-						</div>
-						<div class="card templateList tmp3">
-							<img class="card-img-top" src="img/templates/template3.jpg" alt="Card image cap">
-							<div class="card-block">								
-								<button id="btnTempl1" onclick="copiarTemplate('template3');" type="button" class="btn btnTranspRojo">Plantilla 3</button>									
-							</div>
-						</div>
-					</div>
-					<br>
-				</div>
-			</div>
-		</form>
-	</body>
+    <!-- Materialize CSS -->
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-	<!-- Google analytics -->
-	<script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-36251023-1']);
-		_gaq.push(['_trackPageview']);
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
+    <!-- Llamadas jQuery -->
+    <script>
+        $(document).ready(function () {
+            $('.menu-top').css('display','none');
+        });
+    </script>
+    <!-- CSS -->
+    <style>
+        .pinned{
+            z-index: 2;
+        }
+    </style>
+</head>
+
+<body>
+     <!-- Nav -->
+     <nav class="pushpin-demo-nav pinned"> 
+      <?php 
+        include("barra/barraLogin.php");
+      ?> 
+    </nav>
+    <!-- Fin Nav -->
+
+    <!-- Los 3 templates -->
+    <div class="templates-container">
+        <br>
+        <br>
+        <br>
+        <div class="row">
+            <div class="center">
+                <h3 class="animated fadeInDown">Seleccione una Plantilla</h3>
+                <h5>Elija el dise&ntilde;o de la plantilla que prefiera presionando en el boton ubicado debajo de cada imagen </h5>
+            </div>
+            <!-- Página en blanco -->
+            <div class="col s12 m6 l3">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="images/templates/template4.jpg">
+                    </div>
+                    <div class="card-action center">
+                        <a href="#" class="red-text" onclick="copiarTemplate('template4');">P&aacute;gina en blanco</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Template 1 -->
+            <div class="col s12 m6 l3">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="images/templates/template1.jpg">
+                    </div>
+                    <div class="card-action center">
+                        <a href="#" class="red-text" onclick="copiarTemplate('template1');">Template #1</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Template 2 -->
+            <div class="col s12 m6 l3">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="images/templates/template2.jpg">
+                    </div>
+                    <div class="card-action center">
+                        <a href="#" class="red-text" onclick="copiarTemplate('template2');">Template #2</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Template 3 -->
+            <div class="col s12 m6 l3">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="images/templates/template3.jpg">
+                    </div>
+                    <div class="card-action center">
+                        <a href="#" class="red-text" onclick="copiarTemplate('template3');">Template #3</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fin Los 3 templates -->
+    <!-- Footer -->
+    <footer class="page-footer white">
+        <div class="footer-copyright">
+            <div class="container grey-text text-lighten-1 center-align">
+                © 2019 - Diseñado &amp; Desarrollado por
+                <a class="red-text" href="#">Gabriela Paredes</a>
+            </div>
+        </div>
+    </footer>
+    <!-- Fin Footer -->
+
+    <!-- Materialize Javascript -->
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Validacion -->
+    <script src='http://ajax.aspnetcdn.com/ajax/jquery.validate/1.12.0/jquery.validate.min.js' type='text/javascript'></script>
+    <!-- Encriptacion MD5 -->
+    <script src="js/jquery-md5.js"></script>
+    <!-- Funciones utiles a utilizarse en la herramienta -->
+    <script src="js/util.js"></script>
+    <!-- Funcionalidad para copiar template en carpeta proyecto -->
+    <script src="js/herramienta/funciones.js"></script>
+    <!-- js para registro y log --> 
+    <script src="js/abm/login.js"></script>
+    <script src="js/abm/usuarios.js"></script>
+</body>
+
 </html>

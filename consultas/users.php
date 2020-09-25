@@ -13,9 +13,12 @@
 	$type =$_GET['type'];
 	$fecha_crea =$_GET['fecha_crea'];
 	
+	//echo '7';
 
 	/*Llamada a procedimiento*/
 	$resultado=mysqli_query($link,"CALL sp_abmUsuarios ('$tipo','$id','$usuario','$password','$nombre','$direccion','$email','$fecha_nac','$type','$fecha_crea')");
+	
+	//echo '8';
 	
 	if(!$resultado){
 		$id = 0;

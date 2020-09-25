@@ -1,3 +1,4 @@
+var urlAjax = "http://localhost/tesis/TFGweb/";
 $(document).ready(function () {
     $('.mensaje').css('display','none');
     $("#lbErrorLog").css("display","none");
@@ -37,7 +38,7 @@ function login(){
     $.ajax({
         type: "GET",
         data: datos,
-        url: 'http://ajapoweb.com/consultas/login.php', 
+        url: urlAjax+"consultas/login.php", //'http://ajapoweb.com/consultas/login.php', 
         success: function(data) {               
             var res = jQuery.parseJSON(data); 
             
@@ -69,7 +70,7 @@ function logout(){
     $.ajax({
         type: "GET",
         data: '{}',
-        url: 'http://ajapoweb.com/consultas/logout.php',
+        url: urlAjax+"consultas/logout.php", //'http://ajapoweb.com/consultas/logout.php',
         success: function(data) {
             location.reload();
         },

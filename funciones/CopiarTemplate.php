@@ -4,7 +4,6 @@
      * Autor: Gabriela Paredes Morínigo
      *
      **/
-    echo 'HOLA';
     //Parametros enviados desde funciones.js
     $carpeta_origen = $_SERVER['DOCUMENT_ROOT'].$_GET['origen'];//carpeta raiz del hosting+origen
     $carpeta_destino =  $_SERVER['DOCUMENT_ROOT'].$_GET['destino'];//carpeta raiz del hosting+destino
@@ -17,8 +16,7 @@
     $carpeta_destino = $carpeta_destino.$carpeta_nombre;
     //Guardo la carpeta destino en una variable auxiliar, url completa
     $carpeta_destino_aux = $carpeta_destino;
-    echo 'CHAU';
-    //echo '*'.$carpeta_destino1.'*';
+    //echo '*'.$carpeta_destino.'*'; // nombre de la carpeta destino
     //Nombre completo de la nueva carpeta, solo nombre de la carpeta
     $carpeta_nueva = 'newtemplate-'.$carpeta_nombre;
 
@@ -82,4 +80,5 @@
     
     //Llamo a la funcion copiar y paso los parametros ingresados desde el cliente (funciones.js)
     echo copiar ($carpeta_origen, $carpeta_destino, 0);
+    //echo json_encode(array("Oso", "Perro", "Gato"));
 ?>

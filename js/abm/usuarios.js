@@ -1,4 +1,5 @@
 var _idUsuarioAuto = "0";
+var urlAjax = "http://localhost/tesis/TFGweb/";
 $(document).ready(function () {
     $('.mensaje').css('display','none');
 
@@ -73,10 +74,11 @@ function guardarUsuario(){
         $.ajax({ 
             type: "GET",//dataType: 'json', //type: "POST", //type: "GET" // Choosing a JSON datatype
             data: datos,
-            url: 'http://localhost/TFGweb/consultas/users.php',
+            url: urlAjax+"consultas/users.php", //'http://localhost/TFGweb/consultas/users.php',
             success: function(data) {
-                
+                alert("data "+data);
                 var res = jQuery.parseJSON(data);
+                alert("res "+res);
                 idActual = parseInt(res);
                 if (idActual = 0) {
                     mensajeError('mensaje');

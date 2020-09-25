@@ -27,12 +27,12 @@
 		<?php 
 		include("popUps/registro-login.php");
 		?> 
-		<script src="js/JSON.js" ></script>
+		<!--<script src="js/JSON.js" ></script>
 		<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'
 		type='text/javascript'></script>
 		<script src="js/JSON.js" ></script>
 		<script src='http://ajax.aspnetcdn.com/ajax/jquery.validate/1.12.0/jquery.validate.min.js'
-		type='text/javascript'></script>
+		type='text/javascript'></script>-->
 		<script src="js/jquery-md5.js"></script>
 		<script src="js/util.js"></script>
 		<script src="js/abm/login.js"></script>
@@ -40,6 +40,7 @@
 		<script type="text/javascript">
 		//
 		$(document).ready(function () {
+			alert("sdsdsd");
 			$(".abrePopUp").click();
 			$(".abrePopUp").css('display','none');
 		});

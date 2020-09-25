@@ -12,6 +12,8 @@
 	}*/
 	$user = $_SESSION['usuario'];
 	$idUser =  $_SESSION['idUsuario'];
+	//echo $idUser;
+	//echo $user;
 ?>
 
 <div id='barraMenu' class="row navbar navbar-inverse menu-logueo">
@@ -20,7 +22,7 @@
 	<div class="col-lg-6">
 		<div class="top-content">
 			<div class="bienvenida text-right"><br>
-				Hola <label name="lbIdUser" id="lbIdUser" style="display:none;"  value="<?php echo @$idUser; ?>"> <?php echo $user; ?></label><b><?php $user; ?></b> | <a class="salirA" onclick="logout();">Salir      .</a>
+				Hola <label name="lbIdUser" id="lbIdUser" value="<?php echo $idUser; ?>"> <?php echo $user; ?></label><b><?php $user; ?></b> | <a class="salirA" onclick="logout();">Salir      .</a>
 			</div>
 		</div>
 	</div>

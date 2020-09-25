@@ -37,7 +37,8 @@
 		<script src="js/herramienta/funciones.js"></script>
 	    <script src="js/jquery.validate.js" type="text/javascript"></script>
 	    <script src="js/jquery.blockUI.js" type="text/javascript"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>-->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
 	</head>
 	<body>
@@ -237,14 +238,14 @@
 	}
 </style>
 
-<script src="js/JSON.js" ></script>
+<!--script src="js/JSON.js" ></script>
 
 
-		<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'
+<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'
 type='text/javascript'></script>
- 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
- <script src="js/JSON.js" ></script>
+ <script src="js/JSON.js" ></script>!-->
 
  
 <script src='http://ajax.aspnetcdn.com/ajax/jquery.validate/1.12.0/jquery.validate.min.js'

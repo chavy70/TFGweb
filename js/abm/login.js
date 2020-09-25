@@ -1,3 +1,4 @@
+var urlAjax = "http://localhost/tesis/TFGweb/";
 $(document).ready(function () {
     $('.mensaje').css('display','none');
     $("#lbErrorLog").css("display","none");
@@ -27,7 +28,7 @@ $(document).ready(function () {
  * Loguea al user
  */
 function login(){
-
+//alert($("input[id*=userLog]").val() +"  ***  "+$("input[id*=passLog]").val());
     //obtener datos
     var datos = {
         "usuario" : $("input[id*=userLog]").val(),
@@ -36,9 +37,11 @@ function login(){
     $.ajax({
         type: "GET",//dataType: 'json', //type: "POST", //type: "GET" // Choosing a JSON datatype
         data: datos,
-        url: 'http://tfgweb.com.devel/consultas/login.php', //'http://localhost/TFGweb/consultas/login.php',
+        url: urlAjax+"consultas/login.php", //'http://tfgweb.com.devel/consultas/login.php', //'http://localhost/TFGweb/consultas/login.php',
         success: function(data) {               
-            var res = jQuery.parseJSON(data); 
+            var res = jQuery.parseJSON(data);
+            //var obj = JSON.parse(data); // convierte a array
+            //alert("obj id "+obj[0].id+" usuario "+obj[0].usuario);
             try {
                 idActual = parseInt(res[0]['id']);
             }
@@ -67,10 +70,12 @@ function logout(){
     $.ajax({
         type: "GET",//dataType: 'json', //type: "POST", //type: "GET" // Choosing a JSON datatype
         data: '{}',
-        url: 'http://tfgweb.com.devel/consultas/logout.php',//'http://localhost/TFGweb/consultas/logout.php',
+        url: urlAjax+"consultas/logout.php", //'http://tfgweb.com.devel/consultas/logout.php',//'http://localhost/TFGweb/consultas/logout.php',
         success: function(data) {
-            var res = jQuery.parseJSON(data);           
-                idActual = parseInt(res);
+            var res = jQuery.parseJSON(data); 
+            if(res == "ok") location. reload();
+                      
+            //idActual = parseInt(res);
         },
         error: function(e){ 
             mensajeError("Error en el servidor, por favor, intentalo de nuevo mas tarde");
